@@ -5,7 +5,7 @@ A cleaning services management for the administrators.
 This project is a class acessment that is shaped in two parts. 
 
 The first is the requisite elicitation part, done by interviewing the teacher.
-This first half os the acessment is made by other group and have the objecitve to produce a document with the system design.
+This first half of the acessment is made by other group and have the objecitve to produce a document with the system design.
 
 The second part is the implementation, where different groups exchange documents, to code somebody else's system.
 
