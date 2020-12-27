@@ -1,5 +1,6 @@
 package org.kaelbastos.persistance.DAOs;
 
+<<<<<<< refs/remotes/origin/in_development
 import java.util.List;
 
 public interface DAO <K,T>{
@@ -9,4 +10,12 @@ public interface DAO <K,T>{
     List<T> getAll();
     boolean delete(K k);
 
+=======
+public interface DAO <K,T>{
+    int save(T t);
+    int update(K k, T t);
+    int getOne(K k);
+    int getAll();
+    int delete(K k);
+>>>>>>> Deleted controller package and included first test scope
 }
