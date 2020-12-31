@@ -8,5 +8,4 @@ public interface DAO <K,T>{
     T getOne(K k);
     List<T> getAll();
     boolean delete(K k);
-
 }

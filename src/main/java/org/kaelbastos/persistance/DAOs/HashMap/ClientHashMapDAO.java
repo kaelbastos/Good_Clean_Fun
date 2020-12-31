@@ -1,6 +1,6 @@
-package org.kaelbastos.persistance.DAOs.clientDAO;
+package org.kaelbastos.persistance.DAOs.HashMap;
 
-import org.kaelbastos.Domain.entities.Client;
+import org.kaelbastos.Domain.entities.Client.Client;
 import org.kaelbastos.persistance.DAOs.DAO;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,11 +22,11 @@ public class ClientHashMapDAO implements DAO<String, Client> {
 
     @Override
     public boolean save(Client client) {
-        if (client == null || map.containsKey(client.getCpf()))
-            return false;
-        else
+        if (client != null && !map.containsKey(client.getCpf())){
             map.put(client.getCpf(), client);
             return true;
+        } else
+            return false;
     }
 
     @Override
