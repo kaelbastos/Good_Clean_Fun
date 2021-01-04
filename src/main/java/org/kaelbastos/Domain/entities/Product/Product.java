@@ -12,13 +12,6 @@ public class Product {
         this.price = price;
         this.category = category;
     }
-    
-    protected Product(int id, String name, String category) {
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.price = 0;
-    }
 
     public int getId() {
         return id;
