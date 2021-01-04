@@ -5,9 +5,9 @@ public enum ServiceStatus {
     Done("Done"),
     Canceled("Canceled");
 
-    public String valor;
+    public String value;
 
-    ServiceStatus(String valorOpcao) {
-        this.valor = valorOpcao;
+    ServiceStatus(String value) {
+        this.value = value;
     }
 }
