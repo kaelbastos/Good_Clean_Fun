@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 public class Notification {
     private List<Error> errors = new ArrayList<>();
+    private static String delimiter = ";";
 
     public void addError(String message){
         addError(message, null);
@@ -18,7 +19,7 @@ public class Notification {
     public String getMessage(){
         return errors.stream()
                 .map(error -> error.message)
-                .collect(Collectors.joining(";"));
+                .collect(Collectors.joining(delimiter));
     }
 
     public boolean isCorrect(){
@@ -27,6 +28,10 @@ public class Notification {
 
     public boolean hasErrors(){
         return errors.size() > 0;
+    }
+
+    public static String getDelimiter() {
+        return delimiter;
     }
 
     private class Error{

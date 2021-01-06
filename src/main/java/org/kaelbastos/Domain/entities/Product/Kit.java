@@ -35,3 +35,4 @@ public class Kit extends Product {
         return sum.isPresent() ? sum.get() : 0;
     }
 }
+

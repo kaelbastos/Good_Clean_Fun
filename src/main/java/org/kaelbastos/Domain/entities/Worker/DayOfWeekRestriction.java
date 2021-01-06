@@ -25,4 +25,5 @@ public class DayOfWeekRestriction {
     public void setMotive(String motive) {
         this.motive = motive;
     }
+
 }

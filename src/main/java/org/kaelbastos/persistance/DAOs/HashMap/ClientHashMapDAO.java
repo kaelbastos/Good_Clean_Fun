@@ -5,6 +5,7 @@ import org.kaelbastos.persistance.DAOs.DAO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class ClientHashMapDAO implements DAO<String, Client> {
     private static ClientHashMapDAO dao = null;
@@ -39,13 +40,13 @@ public class ClientHashMapDAO implements DAO<String, Client> {
     }
 
     @Override
-    public Client getOne(String s) {
-        return map.get(s);
+    public Optional<Client> getOne(String s) {
+        return Optional.ofNullable(map.get(s));
     }
 
     @Override
-    public List<Client> getAll() {
-        return new ArrayList<>(map.values());
+    public Optional<List<Client>> getAll() {
+        return Optional.of(new ArrayList<>(map.values()));
     }
 
     @Override

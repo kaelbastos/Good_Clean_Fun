@@ -3,10 +3,7 @@ package org.kaelbastos.Domain.entities.utils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
-
-import java.util.ArrayList;
 import java.util.stream.Stream;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonValidatorTest {
@@ -96,7 +93,7 @@ class PersonValidatorTest {
         Person person = new Person(cpf, name, telephone, email, address);
         Notification notification = personValidator.validate(person);
         assertTrue(notification.hasErrors());
-        assertTrue(notification.getMessage().split(";").length > 1);
+        assertTrue(notification.getMessage().split(Notification.getDelimiter()).length > 1);
     }
     private static Stream<Arguments> provideStringsForMultipleErrorsTest() {
         return Stream.of(
