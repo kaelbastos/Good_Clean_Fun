@@ -34,7 +34,7 @@ class ClientValidatorTest {
     ClientValidator clientValidator = new ClientValidator();
 
     @Test
-    void validateNullPerson() {
+    void validateNullClient() {
         Notification notification = clientValidator.validate(null);
         assertTrue(notification.hasErrors());
     }
@@ -45,55 +45,8 @@ class ClientValidatorTest {
         assertTrue(notification.isCorrect());
     }
 
-    @ParameterizedTest
-    @NullAndEmptySource
-    @ValueSource(strings = {
-            "000.000.000/00",
-            "000000000000",
-            "000-000-000/00",
-            "a0000000000",
-            "0000000000",
-            "",
-            " "})
-    void validateWithCPFError(String cpfTest) {
-        Client client = new Client(cpfTest, name, telephone, email, address, residenceType);
-        Notification notification = clientValidator.validate(client);
-        assertTrue(notification.hasErrors());
-        assertTrue(notification.getMessage().contains("CPF"));
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    @ValueSource(strings = {
-            "",
-            " "})
-    void validateWithNameError(String nameTest) {
-        Client client = new Client(cpf, nameTest, telephone, email, address, residenceType);
-        Notification notification = clientValidator.validate(client);
-        assertTrue(notification.hasErrors());
-        assertTrue(notification.getMessage().contains("Name"));
-    }
-
-    @ParameterizedTest
-    @NullAndEmptySource
-    @ValueSource(strings = {
-            "test",
-            "test@test",
-            "test@test",
-            "@test.com",
-            "test@.com",
-            "@.",
-            "",
-            " "})
-    void validateWithEmailError(String emailTest) {
-        client.setEmail(emailTest);
-        Notification notification = clientValidator.validate(client);
-        assertTrue(notification.hasErrors());
-        assertTrue(notification.getMessage().contains("Email"));
-    }
-
     @Test
-    void validateNullResidenceType() {
+    void validateWithResidenceTypeError() {
         client.setResidenceType(null);
         Notification notification = clientValidator.validate(client);
         assertTrue(notification.hasErrors());
@@ -112,6 +65,7 @@ class ClientValidatorTest {
         Client client = new Client(cpf, name, telephone, email, address, residenceType);
         Notification notification = clientValidator.validate(client);
         assertTrue(notification.hasErrors());
+        System.out.println(notification.getMessage());
         assertTrue(notification.getMessage().split(";").length > 1);
     }
 
