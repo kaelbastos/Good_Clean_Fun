@@ -7,13 +7,13 @@ import java.util.Optional;
 public class Kit extends Product {
     private List<Product> products = new ArrayList<>();
 
-    public Kit(int id, String name, String category) {
+    public Kit(int id, String name, ProductCategory category) {
         super(id, name,0, category);
     }
 
     public boolean addProduct(Product product){
         products.add(product);
-        super.setPrice(super.getPrice() + product.getPrice());
+        super.setSalePrice(super.getSalePrice() + product.getSalePrice());
         return true;
     }
 
@@ -21,16 +21,16 @@ public class Kit extends Product {
         for (Product product:products) {
             if (product.getId() == id) {
                 products.remove(product);
-                super.setPrice(super.getPrice() - product.getPrice());
+                super.setSalePrice(super.getSalePrice() - product.getSalePrice());
             }
         }
         return true;
     }
 
     @Override
-    public float getPrice() {
+    public float getSalePrice() {
         Optional<Float> sum = products.stream()
-                .map(Product::getPrice)
+                .map(Product::getSalePrice)
                 .reduce(Float::sum);
         return sum.isPresent() ? sum.get() : 0;
     }
