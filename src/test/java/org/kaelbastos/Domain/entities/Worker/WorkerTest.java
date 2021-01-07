@@ -11,6 +11,7 @@ import org.kaelbastos.Domain.entities.utils.Observation;
 import org.kaelbastos.Domain.entities.utils.ObservationType;
 
 import java.time.DayOfWeek;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -69,7 +70,7 @@ class WorkerTest {
     @Order(6)
     @Test
     void addDayOfWeekRestrictions() {
-        DayOfWeekRestriction dayOfWeekRestriction = new DayOfWeekRestriction(DayOfWeek.MONDAY, " ");
+        DayOfWeekRestriction dayOfWeekRestriction = new DayOfWeekRestriction(null, null, " ");
         worker.addDayOfWeekRestrictions(dayOfWeekRestriction);
         assertTrue(worker.getDayOfWeekRestrictions().contains(dayOfWeekRestriction));
     }
@@ -77,7 +78,7 @@ class WorkerTest {
     @Order(7)
     @Test
     void removeDayOfWeekRestriction() {
-        DayOfWeekRestriction dayOfWeekRestriction = new DayOfWeekRestriction(DayOfWeek.MONDAY, " ");
+        DayOfWeekRestriction dayOfWeekRestriction = new DayOfWeekRestriction(null, null, " ");
         worker.addDayOfWeekRestrictions(dayOfWeekRestriction);
         assertTrue(worker.removeDayOfWeekRestriction(dayOfWeekRestriction));
         assertFalse(worker.getDayOfWeekRestrictions().contains(dayOfWeekRestriction));
@@ -92,7 +93,7 @@ class WorkerTest {
     @Order(9)
     @Test
     void addObservation() {
-        Observation observation = new Observation(ObservationType.Comment, "A coment", 5F, null);
+        Observation observation = new Observation(ObservationType.Comment, "A comment",  null);
         worker.addObservation(observation);
         assertTrue(worker.getObservations().contains(observation));
     }
@@ -100,7 +101,7 @@ class WorkerTest {
     @Order(10)
     @Test
     void removeObservation() {
-        Observation observation = new Observation(ObservationType.Comment, "A coment", 5F, null);
+        Observation observation = new Observation(ObservationType.Comment, "A comment", null);
         worker.addObservation(observation);
         assertTrue(worker.removeObservation(observation));
         assertFalse(worker.getObservations().contains(observation));
