@@ -10,4 +10,8 @@ public enum ServiceStatus {
     ServiceStatus(String value) {
         this.value = value;
     }
+
+    public String getValue() {
+        return value;
+    }
 }

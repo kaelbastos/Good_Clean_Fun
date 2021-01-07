@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ServiceEvaluationTest {
     String comment = "An comment";
-    float rating = 5F;
+    int rating = 5;
     Person author = new Person("00000000000", "Person",
             "00000000000", "person@person.com",
             new Address("rua dos bobos", "neighborhood",
@@ -26,13 +26,13 @@ class ServiceEvaluationTest {
         return Arrays.stream(ObservationType.values()).map(Arguments::of);
     }
 
-    @Order(3)
+    @Order(1)
     @Test
     void getObservation() {
         assertEquals(comment, serviceEvaluation.getComment());
     }
 
-    @Order(4)
+    @Order(2)
     @ParameterizedTest
     @NullAndEmptySource
     @ValueSource(strings = {"an Observation", "A different observation", "    "})
@@ -41,29 +41,21 @@ class ServiceEvaluationTest {
         assertEquals(newObservation, serviceEvaluation.getComment());
     }
 
-    @Order(5)
+    @Order(3)
     @Test
     void getRating() {
         assertEquals(rating, serviceEvaluation.getRating());
     }
 
-    @Order(6)
+    @Order(4)
     @ParameterizedTest
-    @ValueSource(floats = {1F, 2F,2.5F, 5F})
-    void setValidRating(Float validRating) {
+    @ValueSource(ints = {-1, 0,1,2,3,4,5,6,7,8,9,10,11, 100})
+    void setRating(int validRating) {
         serviceEvaluation.setRating(validRating);
         assertEquals(validRating, serviceEvaluation.getRating());
     }
 
-    @Order(7)
-    @ParameterizedTest
-    @NullSource
-    @ValueSource(floats = {0F, 6F, 10F})
-    void setInvalidRating(Float invalidRating) {
-        serviceEvaluation.setRating(invalidRating);
-        assertNotEquals(invalidRating, serviceEvaluation.getRating());
-    }
-
+    @Order(5)
     @Test
     void getAuthor() {
         assertEquals(author, serviceEvaluation.getAuthor());

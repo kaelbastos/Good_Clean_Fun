@@ -4,18 +4,15 @@ import org.kaelbastos.Domain.entities.utils.Person;
 
 public class ServiceEvaluation {
     private String comment;
-    private float rating;
+    private int rating;
     private final Person author;
 
     public ServiceEvaluation(
             String comment,
-            Float OneToFiveRating,
+            int rating,
             Person author) {
         this.comment = comment;
-        if(OneToFiveRating != null && OneToFiveRating >= 1F && OneToFiveRating <= 5F)
-            this.rating = OneToFiveRating;
-        else
-            this.rating = 1F;
+        this.rating = rating;
         this.author = author;
     }
 
@@ -27,13 +24,12 @@ public class ServiceEvaluation {
         this.comment = comment;
     }
 
-    public float getRating() {
+    public int getRating() {
         return rating;
     }
 
-    public void setRating(Float OneToFiveRating) {
-        if (OneToFiveRating != null && OneToFiveRating >= 1F && OneToFiveRating <= 5F)
-            this.rating = OneToFiveRating;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public Person getAuthor() {
