@@ -23,6 +23,6 @@ public class WorkerValidator extends Validator<Worker> {
         } else {
             notification.addError("Worker is null.");
         }
-        return null;
+        return notification;
     }
 }
