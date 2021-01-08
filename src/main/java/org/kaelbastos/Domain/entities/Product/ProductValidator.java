@@ -8,11 +8,17 @@ public class ProductValidator extends Validator<Product> {
     public Notification validate(Product product) {
         Notification notification = new Notification();
         if(product != null){
+            if(product.getId() < 0)
+                notification.addError("ID is invalid.");
+
             if(isNullOrEmpty(product.getName()))
                 notification.addError("Name is null or empty.");
 
+            if(product.getPurchasePrice() < 0)
+                notification.addError("Product purchase price is negative.");
+
             if(product.getSalePrice() < 0)
-                notification.addError("Product price is negative.");
+                notification.addError("Product sale price is negative.");
 
             if(isNull(product.getCategory()))
                 notification.addError("Category is null.");
