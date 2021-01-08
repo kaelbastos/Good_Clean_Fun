@@ -65,7 +65,6 @@ class ClientValidatorTest {
         Client client = new Client(cpf, name, telephone, email, address, residenceType);
         Notification notification = clientValidator.validate(client);
         assertTrue(notification.hasErrors());
-        System.out.println(notification.getMessage());
         assertTrue(notification.getMessage().split(";").length > 1);
     }
 
