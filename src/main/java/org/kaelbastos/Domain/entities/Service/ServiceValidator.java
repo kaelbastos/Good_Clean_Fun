@@ -11,12 +11,18 @@ import org.kaelbastos.Domain.entities.utils.Validator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Function;
 
 public class ServiceValidator extends Validator<Service> {
     @Override
     public Notification validate(Service service) {
         Notification notification = new Notification();
-        if(service != null){
+        if(isNotNull(service)){
+            int serviceId = service.getId();
+            if(serviceId < 0)
+                notification.addError("ID is invalid.");
+
             LocalDateTime serviceStart = service.getStart();
             if (isNull(serviceStart))
                 notification.addError("Start is null.");
@@ -27,6 +33,13 @@ public class ServiceValidator extends Validator<Service> {
 
             if(serviceStart.isAfter(serviceEnd))
                 notification.addError("Start is after End.");
+
+            if(serviceStart.equals(serviceEnd))
+                notification.addError("Start and end are at the same time.");
+
+            float servicePrice = service.getServicePrice();
+            if(servicePrice < 0)
+                notification.addError("Service Price is invalid.");
 
             int workerPercentage = service.getWorkerPercentage();
             if(workerPercentage < 0 || workerPercentage > 100)
