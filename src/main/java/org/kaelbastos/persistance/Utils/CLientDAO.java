@@ -4,7 +4,6 @@ import org.kaelbastos.Domain.entities.Client.Client;
 import org.kaelbastos.Domain.entities.utils.Observation;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 public abstract class CLientDAO implements DAO<String, Client> {
