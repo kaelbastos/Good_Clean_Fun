@@ -55,4 +55,13 @@ public class DayOfWeekRestriction {
     public int hashCode() {
         return Objects.hash(getStart(), getEnd());
     }
+
+    @Override
+    public String toString() {
+        return "DayOfWeekRestriction{" +
+                "start=" + start.toString() +
+                ", end=" + end.toString() +
+                ", motive='" + motive + '\'' +
+                '}';
+    }
 }
