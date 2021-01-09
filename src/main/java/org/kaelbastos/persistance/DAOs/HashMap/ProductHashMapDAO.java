@@ -1,18 +1,16 @@
 package org.kaelbastos.persistance.DAOs.HashMap;
 
 import org.kaelbastos.Domain.entities.Product.Product;
-import org.kaelbastos.persistance.DAOs.DAO;
+import org.kaelbastos.persistance.Utils.DAO;
+import org.kaelbastos.persistance.Utils.ProductDAO;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-public class ProductHashMapDAO implements DAO<String, Product> {
-    private static ProductHashMapDAO dao = null;
-    private final HashMap<String, Product> map;
+public class ProductHashMapDAO extends ProductDAO {
+    private final HashMap<String, Product> map = new  HashMap<String, Product>();
 
-    public ProductHashMapDAO(HashMap<String, Product> map) {
-        this.map = map;
-    }
 
     @Override
     public boolean save(Product product) {
@@ -25,7 +23,7 @@ public class ProductHashMapDAO implements DAO<String, Product> {
     }
 
     @Override
-    public Optional<Product> getOne(String s) {
+    public Optional<Product> getOne(Integer productId) {
         return Optional.empty();
     }
 
@@ -35,7 +33,7 @@ public class ProductHashMapDAO implements DAO<String, Product> {
     }
 
     @Override
-    public boolean delete(String s) {
+    public boolean delete(Integer productId) {
         return false;
     }
 }
