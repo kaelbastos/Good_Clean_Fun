@@ -89,7 +89,7 @@ public class Service {
         this.workers.add(worker);
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

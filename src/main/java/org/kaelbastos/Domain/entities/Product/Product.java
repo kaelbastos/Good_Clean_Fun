@@ -22,7 +22,7 @@ public class Product {
         this.category = category;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
