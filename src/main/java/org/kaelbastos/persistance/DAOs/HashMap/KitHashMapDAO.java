@@ -1,7 +1,7 @@
 package org.kaelbastos.persistance.DAOs.HashMap;
 
 import org.kaelbastos.Domain.entities.Product.Kit;
-import org.kaelbastos.persistance.DAOs.DAO;
+import org.kaelbastos.persistance.Utils.DAO;
 
 import java.util.HashMap;
 import java.util.List;
