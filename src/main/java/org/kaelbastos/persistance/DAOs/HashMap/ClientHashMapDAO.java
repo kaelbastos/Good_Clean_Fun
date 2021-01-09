@@ -46,7 +46,7 @@ public class ClientHashMapDAO extends CLientDAO {
     }
 
     @Override
-    public Optional<Collection<Observation>> getObservationsFromClient(String clientId) {
+    public Optional<ArrayList<Observation>> getObservationsFromClient(String clientId) {
         return Optional.ofNullable(map.get(clientId).getObservations());
     }
 }

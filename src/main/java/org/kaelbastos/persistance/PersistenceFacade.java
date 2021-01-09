@@ -1,14 +1,20 @@
 package org.kaelbastos.persistance;
 
+import org.kaelbastos.Domain.entities.Client.Client;
 import org.kaelbastos.Domain.entities.Product.Kit;
 import org.kaelbastos.Domain.entities.Product.Product;
 import org.kaelbastos.Domain.entities.Service.Service;
+import org.kaelbastos.Domain.entities.Worker.DayOfWeekRestriction;
+import org.kaelbastos.Domain.entities.Worker.Worker;
+import org.kaelbastos.Domain.entities.utils.Observation;
 import org.kaelbastos.persistance.DAOs.HashMap.ClientHashMapDAO;
 import org.kaelbastos.persistance.DAOs.HashMap.ProductHashMapDAO;
 import org.kaelbastos.persistance.DAOs.HashMap.ServiceHashMapDAO;
+import org.kaelbastos.persistance.DAOs.HashMap.WorkerHashMapDAO;
 import org.kaelbastos.persistance.Utils.CLientDAO;
 import org.kaelbastos.persistance.Utils.ProductDAO;
 import org.kaelbastos.persistance.Utils.ServiceDAO;
+import org.kaelbastos.persistance.Utils.WorkerDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +27,7 @@ public class PersistenceFacade {
     CLientDAO clientDAO = new ClientHashMapDAO();
     ProductDAO productDAO = new ProductHashMapDAO();
     ServiceDAO serviceDAO = new ServiceHashMapDAO();
+    WorkerDAO workerDAO = new WorkerHashMapDAO();
 
     private PersistenceFacade() {}
 
@@ -71,8 +78,57 @@ public class PersistenceFacade {
         return null;
     }
 
+    public boolean saveWorker(Worker worker){
+        return workerDAO.save(worker);
+    }
 
+    public boolean updateWorker(Worker worker){
+        return workerDAO.update(worker);
+    }
 
+    public boolean deleteWorker(String workerId){
+        return workerDAO.delete(workerId);
+    }
 
+    public Optional<Worker> getOneWorker(String worker){
+        return workerDAO.getOne(worker);
+    }
 
+    public Optional<List<Worker>> getAllWorkers(){
+        return workerDAO.getAll();
+    }
+
+    public Optional<ArrayList<Observation>> getObservationsFromWorker(String workerId){
+        return workerDAO.getObservationsFromWorker(workerId);
+    }
+
+    public Optional<ArrayList<DayOfWeekRestriction>> getDayOfWeekRestrictionFromWorker(String workerId){
+        return workerDAO.getDayOfWeekRestrictionFromWorker(workerId);
+    }
+
+    public boolean saveClient(Client worker){
+        return clientDAO.save(worker);
+    }
+
+    public boolean updateClient(Client worker){
+        return clientDAO.update(worker);
+    }
+
+    public boolean deleteClient(String clientId){
+        return clientDAO.delete(clientId);
+    }
+
+    public Optional<Client> getOneClient(String client){
+        return clientDAO.getOne(client);
+    }
+
+    public Optional<List<Client>> getAllClient(){
+        return clientDAO.getAll();
+    }
+
+    public Optional<ArrayList<Observation>> getObservationsFromClient(String clientId){
+        return clientDAO.getObservationsFromClient(clientId);
+    }
 }
+
+
