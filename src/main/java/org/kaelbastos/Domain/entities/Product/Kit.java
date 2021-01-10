@@ -18,13 +18,20 @@ public class Kit extends Product {
     }
 
     public boolean removeProduct(int id){
-        for (Product product:products) {
-            if (product.getId() == id) {
-                products.remove(product);
-                super.setSalePrice(super.getSalePrice() - product.getSalePrice());
+        if(!products.isEmpty()){
+            for (Product product:products) {
+                if (product.getId() == id) {
+                    products.remove(product);
+                    return true;
+                }
             }
+
         }
-        return true;
+        return false;
+    }
+
+    public List<Product> getProducts(){
+        return products;
     }
 
     @Override

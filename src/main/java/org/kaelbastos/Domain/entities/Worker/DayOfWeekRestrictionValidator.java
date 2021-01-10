@@ -18,6 +18,8 @@ public class DayOfWeekRestrictionValidator extends Validator<DayOfWeekRestrictio
             if(isNotNull(dayOfWeekRestrictionStart) && isNotNull(dayOfWeekRestrictionEnd)){
                 if(dayOfWeekRestrictionStart.isAfter(dayOfWeekRestrictionEnd))
                     notification.addError("Start is after end.");
+                if(dayOfWeekRestrictionStart.equals(dayOfWeekRestrictionEnd))
+                    notification.addError("Start and end are at the same time.");
             } else {
                 notification.addError("Start and/or end are null.");
             }
