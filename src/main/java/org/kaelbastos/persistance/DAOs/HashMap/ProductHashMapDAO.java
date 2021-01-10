@@ -24,11 +24,11 @@ public class ProductHashMapDAO extends ProductDAO {
 
     @Override
     public boolean update(Product updateProduct) {
-        if(updateProduct == null || map.containsKey(updateProduct.getId()))
-            return false;
-        else
+        if(updateProduct != null && map.containsKey(updateProduct.getId())){
             map.replace(updateProduct.getId(), updateProduct);
             return true;
+        }else
+            return false;
     }
 
     @Override

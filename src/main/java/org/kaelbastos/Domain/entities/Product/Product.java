@@ -4,7 +4,7 @@ public class Product {
     private int id;
     private String name;
     private float salePrice;
-    private float purchasePrice;
+    private float purchasePrice = 0;
     private ProductCategory category;
 
     public Product(int id, String name, float salePrice, ProductCategory category) {
@@ -34,11 +34,15 @@ public class Product {
         return category;
     }
 
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
     public float getSalePrice() {
         return salePrice;
     }
 
-    protected void setSalePrice(float salePrice) {
+    public void setSalePrice(float salePrice) {
         this.salePrice = salePrice;
     }
 
