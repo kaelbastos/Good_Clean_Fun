@@ -1,29 +1,21 @@
 package org.kaelbastos.persistance.DAOs.HashMap;
 
 import org.kaelbastos.Domain.entities.Client.Client;
-import org.kaelbastos.persistance.DAOs.DAO;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import org.kaelbastos.Domain.entities.utils.Observation;
+import org.kaelbastos.persistance.PersistenceFacade;
+import org.kaelbastos.persistance.Utils.CLientDAO;
 
-public class ClientHashMapDAO implements DAO<String, Client> {
-    private static ClientHashMapDAO dao = null;
-    private final HashMap<String, Client> map;
+import java.util.*;
 
-    private ClientHashMapDAO() {
-        map = new HashMap<>();
-    }
-
-    public static ClientHashMapDAO getInstance(){
-        if (dao == null)
-            dao = new ClientHashMapDAO();
-        return dao;
-    }
+public class ClientHashMapDAO extends CLientDAO {
+    private final HashMap<String, Client> map = new HashMap<>();
 
     @Override
     public boolean save(Client client) {
+
         if (client != null && !map.containsKey(client.getCpf())){
+            if(PersistenceFacade.getInstance().getOneWorker(client.getCpf()).isPresent())
+                return false;
             map.put(client.getCpf(), client);
             return true;
         } else
@@ -52,5 +44,12 @@ public class ClientHashMapDAO implements DAO<String, Client> {
     @Override
     public boolean delete(String s) {
         return map.remove(s) != null;
+    }
+
+    @Override
+    public Optional<ArrayList<Observation>> getObservationsFromClient(String clientId) {
+        if(map.get(clientId) == null)
+            return Optional.empty();
+        return Optional.ofNullable(map.get(clientId).getObservations());
     }
 }

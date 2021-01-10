@@ -1,4 +1,4 @@
-package org.kaelbastos.persistance.DAOs;
+package org.kaelbastos.persistance.Utils;
 
 import java.util.List;
 import java.util.Optional;
