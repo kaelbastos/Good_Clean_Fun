@@ -15,7 +15,7 @@ public class Service {
     private int workerPercentage;
     private ServiceStatus status;
     private ServiceCategory category;
-    private boolean hasFeedback = false;
+    private ServiceEvaluation serviceEvaluation;
     private final Client client;
     private final ArrayList<Worker> workers = new ArrayList<>();
     private final ArrayList<Product> products = new ArrayList<>();
@@ -151,11 +151,17 @@ public class Service {
     }
 
     public boolean hasFeedback() {
-        return hasFeedback;
+        return serviceEvaluation != null;
     }
 
-    public void setHasFeedback(boolean hasFeedback) {
-        this.hasFeedback = hasFeedback;
+    public void setServiceEvaluation(ServiceEvaluation serviceEvaluation){
+        if(!this.hasFeedback()){
+            this.serviceEvaluation = serviceEvaluation;
+        }
+    }
+
+    public ServiceEvaluation getServiceEvaluation(){
+        return serviceEvaluation;
     }
 
     public Client getClient() {

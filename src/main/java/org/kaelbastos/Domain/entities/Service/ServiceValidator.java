@@ -11,8 +11,6 @@ import org.kaelbastos.Domain.entities.utils.Validator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Function;
 
 public class ServiceValidator extends Validator<Service> {
     @Override
@@ -52,6 +50,13 @@ public class ServiceValidator extends Validator<Service> {
             ServiceStatus serviceStatus = service.getStatus();
             if(isNull(serviceStatus))
                 notification.addError("Status is null.");
+
+            ServiceEvaluation serviceEvaluation = service.getServiceEvaluation();
+            if(isNotNull(serviceEvaluation)){
+                Notification serviceEvaluationNotification = new ServiceEvaluationValidator().validate(serviceEvaluation);
+                if(serviceEvaluationNotification.hasErrors())
+                    notification.addError(serviceEvaluationNotification.getMessage());
+            }
 
             ArrayList<Product> serviceProducts = service.getProducts();
             if(serviceProducts.isEmpty()) {

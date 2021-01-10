@@ -22,6 +22,7 @@ class ServiceTest {
     Worker worker = new Worker("00000000000", "Name", "00000000000", "11111111111","client@client.com", null);
 
     Service service = new Service(id, start, end, servicePrice, workerPercentage, status , category, client, product, worker);
+    ServiceEvaluation serviceEvaluation = new ServiceEvaluation("comment", 5, client);
 
     @Test
     void getId() {
@@ -111,9 +112,15 @@ class ServiceTest {
     }
 
     @Test
-    void setHasFeedback() {
-        service.setHasFeedback(true);
+    void setServiceEvaluation() {
+        service.setServiceEvaluation(serviceEvaluation);
         assertTrue(service.hasFeedback());
+    }
+
+    @Test
+    void getServiceEvaluation() {
+        service.setServiceEvaluation(serviceEvaluation);
+        assertEquals(serviceEvaluation, service.getServiceEvaluation());
     }
 
     @Test

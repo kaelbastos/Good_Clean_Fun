@@ -20,8 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ServiceValidatorTest {
 
-
-
     ServiceValidator serviceValidator = new ServiceValidator();
 
     @ParameterizedTest
@@ -357,5 +355,33 @@ class ServiceValidatorTest {
                         new Product(1, "broom", 10F, ProductCategory.Utensil),
                         new Worker("00000000000", "Name", "00000000000", "11111111111","client@client.com", new Address(" ", "neighborhood", "city", "state", "0", "2", null))))
                 );
+    }
+
+    @ParameterizedTest
+    @MethodSource("serviceEvaluationWithErrorProvider")
+    void validateWithServiceEvaluationError(ServiceEvaluation serviceEvaluation) {
+        Service service = new Service(
+                01,
+                LocalDateTime.of(1999, 1, 6, 22 , 14),
+                LocalDateTime.of(2021, 1, 6, 22 , 24),
+                100F,
+                50,
+                ServiceStatus.Scheduled ,
+                ServiceCategory.kitchenCleansing,
+                new Client("11111111111", "Name", "00000000000", "client@client.com", new Address("rua dos bobos", "neighborhood", "city", "state", "0", "2", null), ResidenceType.House),
+                new Product(1, "broom", 10F, ProductCategory.Utensil),
+                new Worker("00000000000", "Name", "00000000000", "111111-11111","client@client.com", new Address("rua dos bobos", "neighborhood", "city", "state", "0", "2", null)));
+
+        service.setServiceEvaluation(serviceEvaluation);
+        Notification notification = serviceValidator.validate(service);
+        assertTrue(notification.hasErrors());
+    }
+
+    private static Stream<Arguments> serviceEvaluationWithErrorProvider(){
+        Client client = new Client("00000000000", "Name", "00000000000", "client@client.com", null, ResidenceType.House);
+        return Stream.of(
+                Arguments.of(new ServiceEvaluation("comment", 5, null)),
+                Arguments.of(new ServiceEvaluation("comment", -1, client))
+        );
     }
 }
