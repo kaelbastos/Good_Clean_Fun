@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ProductHashMapDAO extends ProductDAO {
     private final HashMap<Integer, Product> map = new HashMap<>();
@@ -45,13 +46,11 @@ public class ProductHashMapDAO extends ProductDAO {
         return map.remove(productId) != null;
     }
 
-    //REVER
     @Override
-    public Optional<ArrayList<Kit>> getKitsFromProducts() {
-        //Optional<ArrayList<Kit>> kits = (Optional<ArrayList<Kit>>)map.values().stream()
-                //.filter(value -> value instanceof Kit)
-                //.map(value -> (Kit) value)
-                //.collect(Collectors.toList());
-        return Optional.empty();
+    public Optional<List<Kit>> getKitsFromProducts() {
+        return Optional.of(map.values().stream()
+                .filter(value -> value instanceof Kit)
+                .map(value -> (Kit) value)
+                .collect(Collectors.toList()));
     }
 }
