@@ -138,18 +138,27 @@ class ServiceHashMapDAOTest {
     }
 
     @Test
-    void getOneService() {
+    void getOneServiceWithNullKey() {
+        assertFalse(serviceHashMapDAO.getOne(null).isPresent());
     }
 
     @Test
-    void getNullService() {
+    void getNonExistingService() {
+        assertFalse(serviceHashMapDAO.getOne(-1).isPresent());
     }
 
     @Test
-    void getAllService() {
+    void getAllServicesWithoutServicesSaved() {
+        assertTrue(serviceHashMapDAO.getAll().get().isEmpty());
     }
 
     @Test
-    void getProductsFromService() {
+    void getNoServicesFromAllServices() {
+        assertFalse(serviceHashMapDAO.getAll().isEmpty());
+    }
+
+    @Test
+    void getProductsFromNotExistService() {
+        assertFalse(serviceHashMapDAO.getAll().isEmpty());
     }
 }
