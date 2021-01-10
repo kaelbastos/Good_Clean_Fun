@@ -6,7 +6,7 @@ import org.kaelbastos.Domain.entities.Worker.Worker;
 import org.kaelbastos.Domain.entities.utils.Address;
 import org.kaelbastos.Domain.entities.utils.Observation;
 import org.kaelbastos.Domain.entities.utils.ObservationType;
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -29,84 +29,81 @@ class WorkerHashMapDAOTest {
 
     @Test
     void saveWorker() {
-        workerHashMapDAO.save(worker);
+        assertTrue(workerHashMapDAO.save(worker));
     }
 
     @Test
     void saveSameWorkerTwice() {
-        workerHashMapDAO.save(worker);
-        workerHashMapDAO.save(worker);
+        assertTrue(workerHashMapDAO.save(worker));
+        assertFalse(workerHashMapDAO.save(worker));
     }
 
     @Test
     void saveNullWorker() {
-        workerHashMapDAO.save(null);
+        assertFalse(workerHashMapDAO.save(null));
     }
 
     @Test
     void updateWorker() {
+        assertTrue(workerHashMapDAO.save(worker));
         worker.setEmail("test@test.com");
-        workerHashMapDAO.update(worker);
+        assertTrue(workerHashMapDAO.update(worker));
     }
 
     @Test
     void deleteWorker() {
-        workerHashMapDAO.delete("12345678910");
+        assertTrue(workerHashMapDAO.save(worker));
+        assertTrue(workerHashMapDAO.delete("12345678910"));
     }
 
     @Test
     void deleteSameWorkerTwice() {
-        workerHashMapDAO.delete("12345678910");
-        workerHashMapDAO.delete("12345678910");
+        assertTrue(workerHashMapDAO.save(worker));
+        assertTrue(workerHashMapDAO.delete("12345678910"));
+        assertFalse(workerHashMapDAO.delete("12345678910"));
     }
 
     @Test
-    void getAllWorkers() {
-        workerHashMapDAO.save(worker);
-        workerHashMapDAO.getAll();
+    void getAllWorkersWithoutWorkersSaved() {
+        assertTrue(workerHashMapDAO.getAll().get().isEmpty());
     }
 
     @Test
-    void getNullFromAllWorkers() {
-        workerHashMapDAO.getAll();
+    void getNoWorkersFromAllWorkers() {
+        assertFalse(workerHashMapDAO.getAll().isEmpty());
     }
 
     @Test
-    void getOneWorker() {
-        workerHashMapDAO.getOne("12345678910");
+    void getOneWorkerWithNullKey() {
+        assertFalse(workerHashMapDAO.getOne(null).isPresent());
     }
 
     @Test
-    void getNullWorker() {
-        workerHashMapDAO.getOne("00000000000");
-    }
-
-    @Test
-    void getOneWorkerNullParameter() {
-        workerHashMapDAO.getOne("");
+    void getNonExistingWorker() {
+        assertFalse(workerHashMapDAO.getOne("0").isPresent());
     }
 
     @Test
     void getOneWorkerBlankParameter() {
-        workerHashMapDAO.getOne(" ");
+        assertFalse(workerHashMapDAO.getOne("      ").isPresent());
     }
 
     @Test
     void getObservationsFromWorker() {
-        workerHashMapDAO.save(worker);
+        assertTrue(workerHashMapDAO.save(worker));
         Observation observation = new Observation(ObservationType.Comment, "Comment", worker);
         worker.addObservation(observation);
-        workerHashMapDAO.getObservationsFromWorker("12345678910");
+        assertTrue(workerHashMapDAO.getObservationsFromWorker("12345678910").isPresent());
     }
 
     @Test
-    void getgetDayOfWeekRestrictionFromWorker() {
+    void getDayOfWeekRestrictionFromWorker() {
         LocalDateTime start = LocalDateTime.now();
         LocalDateTime end = LocalDateTime.of(LocalDate.ofYearDay(2021, 200), LocalTime.NOON);
-        workerHashMapDAO.save(worker);
+        assertTrue(workerHashMapDAO.save(worker));
         DayOfWeekRestriction dayOfWeekRestriction = new DayOfWeekRestriction(start, end);
         worker.addDayOfWeekRestrictions(dayOfWeekRestriction);
-        workerHashMapDAO.getDayOfWeekRestrictionFromWorker("12345678910");
+        assertTrue(workerHashMapDAO.getDayOfWeekRestrictionFromWorker("12345678910").isPresent());
     }
 
 }
