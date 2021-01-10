@@ -14,7 +14,8 @@ public class ClientHashMapDAO extends CLientDAO {
     public boolean save(Client client) {
 
         if (client != null && !map.containsKey(client.getCpf())){
-            //if(PersistenceFacade.getInstance().getOneWorker(client.getCpf()).isPresent())
+            if(PersistenceFacade.getInstance().getOneWorker(client.getCpf()).isPresent())
+                return false;
             map.put(client.getCpf(), client);
             return true;
         } else
@@ -47,6 +48,8 @@ public class ClientHashMapDAO extends CLientDAO {
 
     @Override
     public Optional<ArrayList<Observation>> getObservationsFromClient(String clientId) {
+        if(map.get(clientId) == null)
+            return Optional.empty();
         return Optional.ofNullable(map.get(clientId).getObservations());
     }
 }
