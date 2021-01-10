@@ -13,8 +13,7 @@ public class AlterClient {
         PersistenceFacade persistenceFacade = PersistenceFacade.getInstance();
         if(notification.hasErrors())
             throw new IllegalArgumentException(notification.getMessage());
-        else if(persistenceFacade.getOneClient(client.getCpf()).isPresent() ||
-                persistenceFacade.getOneWorker(client.getCpf()).isPresent())
+        else if(persistenceFacade.getOneClient(client.getCpf()).isEmpty())
             throw new IllegalArgumentException("Client does not exists");
 
         return persistenceFacade.updateClient(client);
