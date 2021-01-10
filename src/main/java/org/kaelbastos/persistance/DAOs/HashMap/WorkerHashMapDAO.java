@@ -5,6 +5,7 @@ import org.kaelbastos.Domain.entities.Worker.DayOfWeekRestriction;
 import org.kaelbastos.Domain.entities.Worker.Worker;
 import org.kaelbastos.Domain.entities.utils.Observation;
 import org.kaelbastos.Domain.entities.utils.Person;
+import org.kaelbastos.persistance.PersistenceFacade;
 import org.kaelbastos.persistance.Utils.CLientDAO;
 import org.kaelbastos.persistance.Utils.DAO;
 import org.kaelbastos.persistance.Utils.WorkerDAO;
@@ -19,7 +20,8 @@ public class WorkerHashMapDAO extends WorkerDAO {
     public boolean save(Worker worker) {
 
         if (worker != null && !map.containsKey(worker.getCpf())){
-            //if(PersistenceFacade.getInstance().getOneWorker(client.getCpf()).isPresent())
+            if(PersistenceFacade.getInstance().getOneClient(worker.getCpf()).isPresent())
+                return false;
             map.put(worker.getCpf(), worker);
             return true;
         } else

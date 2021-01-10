@@ -3,24 +3,20 @@ package org.kaelbastos.Domain.useCases;
 import org.kaelbastos.Domain.entities.Client.Client;
 import org.kaelbastos.Domain.entities.Client.ClientValidator;
 import org.kaelbastos.Domain.entities.utils.Notification;
-import org.kaelbastos.Domain.entities.utils.Validator;
 import org.kaelbastos.persistance.PersistenceFacade;
-import org.kaelbastos.persistance.Utils.CLientDAO;
 
 public class CreateClient {
-
-    private CLientDAO clientDAO;
-
     public boolean insert(Client client){
-        Validator<Client> validator = new ClientValidator();
-        Notification notification = validator.validate(client);
+        ClientValidator clientValidator = new ClientValidator();
+        Notification notification = clientValidator.validate(client);
 
+        PersistenceFacade persistenceFacade = PersistenceFacade.getInstance();
         if(notification.hasErrors())
             throw new IllegalArgumentException(notification.getMessage());
+        else if(persistenceFacade.getOneClient(client.getCpf()).isPresent() ||
+                persistenceFacade.getOneWorker(client.getCpf()).isPresent())
+            throw new IllegalArgumentException("CPF already exists");
 
-        String cpf = client.getCpf();
-
-        return true;
+        return persistenceFacade.saveClient(client);
     }
-
 }
