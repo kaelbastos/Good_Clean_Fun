@@ -7,14 +7,8 @@ import org.kaelbastos.Domain.entities.Service.Service;
 import org.kaelbastos.Domain.entities.Worker.DayOfWeekRestriction;
 import org.kaelbastos.Domain.entities.Worker.Worker;
 import org.kaelbastos.Domain.entities.utils.Observation;
-import org.kaelbastos.persistance.DAOs.HashMap.ClientHashMapDAO;
-import org.kaelbastos.persistance.DAOs.HashMap.ProductHashMapDAO;
-import org.kaelbastos.persistance.DAOs.HashMap.ServiceHashMapDAO;
-import org.kaelbastos.persistance.DAOs.HashMap.WorkerHashMapDAO;
-import org.kaelbastos.persistance.Utils.CLientDAO;
-import org.kaelbastos.persistance.Utils.ProductDAO;
-import org.kaelbastos.persistance.Utils.ServiceDAO;
-import org.kaelbastos.persistance.Utils.WorkerDAO;
+import org.kaelbastos.persistance.DAOs.HashMap.*;
+import org.kaelbastos.persistance.Utils.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,9 +67,8 @@ public class PersistenceFacade {
         return productDAO.getOne(product);
     }
 
-    //TODO see
-    public Optional<ArrayList<Kit>> getKitsFromProducts(){
-        return null;
+    public Optional<List<Kit>> getKitsFromProducts(){
+        return productDAO.getKitsFromProducts();
     }
 
     public boolean saveWorker(Worker worker){
