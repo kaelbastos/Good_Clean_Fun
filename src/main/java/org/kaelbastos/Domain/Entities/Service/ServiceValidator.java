@@ -59,9 +59,7 @@ public class ServiceValidator extends Validator<Service> {
             }
 
             ArrayList<Product> serviceProducts = service.getProducts();
-            if(serviceProducts.isEmpty()) {
-                notification.addError("Products is empty.");
-            } else {
+            if(!serviceProducts.isEmpty()) {
                 serviceProducts.stream()
                         .map(product -> new ProductValidator().validate(product))
                         .filter(Notification::hasErrors)
