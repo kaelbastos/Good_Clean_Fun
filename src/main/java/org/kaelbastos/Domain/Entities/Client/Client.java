@@ -14,6 +14,7 @@ public class Client extends Person {
         this.residenceType = residenceType;
     }
 
+
     public ResidenceType getResidenceType() {
         return residenceType;
     }
