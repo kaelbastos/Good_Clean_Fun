@@ -1,5 +1,9 @@
 package org.kaelbastos;
 
+import org.kaelbastos.view.CLI.*;
+
+import java.io.IOException;
+
 /**
  * This is the code, enjoy it.
  *
@@ -9,7 +13,11 @@ package org.kaelbastos;
 
 public class App {
     public static void main(String[] args) {
-
-
+        MainCLI.menu();
+        //ServiceCLI.menu();
+        ClientCLI.menu();
+        //WorkerCLI.menu();
+        //ProductCLI.menu();
+        //ServiceCLI.addService();
     }
 }
