@@ -53,4 +53,15 @@ public class Product {
     public void setPurchasePrice(float purchasePrice) {
         this.purchasePrice = purchasePrice;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salePrice=" + salePrice +
+                ", purchasePrice=" + purchasePrice +
+                ", category=" + category +
+                '}';
+    }
 }

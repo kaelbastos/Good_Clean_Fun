@@ -184,4 +184,22 @@ public class Service {
     public ArrayList<Product> getProducts() {
         return products;
     }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "\nid=" + id +
+                ", \nstart=" + start +
+                ", \nend=" + end +
+                ", \nservicePrice=" + servicePrice +
+                ", \nworkerPercentage=" + workerPercentage +
+                ", \nstatus=" + status +
+                ", \ncategory=" + category +
+                ", \nserviceEvaluation=" + serviceEvaluation +
+                ", \npayed=" + payed +
+                ", \nclient=" + client +
+                ", \nworkers=" + workers +
+                ", \nproducts=" + products +
+                '}';
+    }
 }
