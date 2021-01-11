@@ -13,6 +13,7 @@ public class FinishService {
             throw new IllegalArgumentException("Service does not exists.");
         else
             optionalService.get().setStatus(ServiceStatus.Done);
+            optionalService.get().setPayed(true);
         return true;
     }
 }
