@@ -31,19 +31,19 @@ public class ServiceCLI {
         Service service = new Service(id, start, end, servicePrice, workerPercentage, status , category, client, product, worker);
 
 
-        System.out.println("Schedule Service\n");
+        System.out.println("\nSchedule Service\n");
 
-        System.out.println(service.toString() + "\n");
         scheduleService(service);
+        System.out.println(service.toString());
 
 
-        System.out.println("Cancel Service\n");
+        System.out.println("\nCancel Service\n");
 
         cancelSchedule(service.getId());
-        System.out.println(service.toString() + "\n\n");
+        System.out.println(service.toString());
 
 
-        System.out.println("Finish Service\n");
+        System.out.println("\nFinish Service\n");
 
         finishService(service.getId());
         System.out.println(service.toString() + "\n\n");

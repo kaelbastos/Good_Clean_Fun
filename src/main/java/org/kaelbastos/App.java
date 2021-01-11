@@ -13,11 +13,9 @@ import java.io.IOException;
 
 public class App {
     public static void main(String[] args) {
-        MainCLI.menu();
-        //ServiceCLI.menu();
-        ClientCLI.menu();
-        //WorkerCLI.menu();
-        //ProductCLI.menu();
-        //ServiceCLI.addService();
+        ServiceCLI.run();
+        //ClientCLI.menu();
+        WorkerCLI.run();
+        //ProductCLI.run();
     }
 }
