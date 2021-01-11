@@ -16,6 +16,7 @@ public class Service {
     private ServiceStatus status;
     private ServiceCategory category;
     private ServiceEvaluation serviceEvaluation;
+    private boolean payed = false;
     private final Client client;
     private final ArrayList<Worker> workers = new ArrayList<>();
     private final ArrayList<Product> products = new ArrayList<>();
@@ -162,6 +163,14 @@ public class Service {
 
     public ServiceEvaluation getServiceEvaluation(){
         return serviceEvaluation;
+    }
+
+    public boolean isPayed() {
+        return payed;
+    }
+
+    public void setPayed(boolean payed) {
+        this.payed = payed;
     }
 
     public Client getClient() {
