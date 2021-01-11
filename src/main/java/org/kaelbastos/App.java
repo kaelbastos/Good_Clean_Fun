@@ -14,8 +14,8 @@ import java.io.IOException;
 public class App {
     public static void main(String[] args) {
         ServiceCLI.run();
-        //ClientCLI.menu();
+        ClientCLI.run();
         WorkerCLI.run();
-        //ProductCLI.run();
+        ProductCLI.run();
     }
 }

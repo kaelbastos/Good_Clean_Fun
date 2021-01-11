@@ -58,4 +58,15 @@ public class Worker extends Person {
     public boolean removeObservation(Observation observation){
         return observations.remove(observation);
     }
+
+    @Override
+    public String toString() {
+        return "Worker{" +
+                super.toString() +
+                "secondaryPhone='" + secondaryPhone + '\'' +
+                ", active=" + active +
+                ", observations=" + observations +
+                ", dayOfWeekRestrictions=" + dayOfWeekRestrictions +
+                '}';
+    }
 }

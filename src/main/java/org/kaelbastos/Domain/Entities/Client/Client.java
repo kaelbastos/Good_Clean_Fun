@@ -30,4 +30,13 @@ public class Client extends Person {
     public void addObservation(Observation observation){
         observations.add(observation);
     }
+
+    @Override
+    public String toString() {
+        return "Client{" +
+                super.toString() +
+                "residenceType=" + residenceType +
+                ", observations=" + observations +
+                '}';
+    }
 }

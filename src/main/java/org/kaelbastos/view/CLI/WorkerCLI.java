@@ -17,16 +17,16 @@ public class WorkerCLI {
         System.out.println("\nInsert Worker");
         Worker worker = new Worker("72952145008", "Mariah Simone", "35789988889", "36365512340", "maria.simone@gmail.com", new Address("Travessa Barão de Itararé", "Santo André", "São Leopoldo", "RS", "484", "93044045",""));
         WorkerCLI.insertWorker(worker);
-        System.out.println(persistenceFacade.getOneWorker("72952145008").toString());
+        System.out.println(worker);
 
         System.out.println("\nAlter Worker");
         Worker workerAlter =new Worker("72952145008", "Mariah Simone", "35789988889", "36365512340", "maria.simone@gmail.com", new Address("Bomfim Paulista", "Centro", "Ribeirão Preto", "SP", "100", "14110222","Casa"));
         WorkerCLI.alterWorker(workerAlter);
-        System.out.println(persistenceFacade.getOneWorker("72952145008").toString());
+        System.out.println(workerAlter);
 
         System.out.println("\nDeactivate Worker");
         WorkerCLI.deactivateWorker("72952145008");
-        System.out.println(persistenceFacade.getOneWorker("72952145008").toString());
+        System.out.println(worker);
     }
 
     public static void insertWorker(Worker worker){

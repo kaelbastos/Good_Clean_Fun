@@ -20,11 +20,11 @@ public class ProductCLI {
 
         System.out.println("\nInsert ProductKit");
         insertProductKit(product);
-        System.out.println(persistenceFacade.getOneProduct(1).toString());
+        System.out.println(product);
 
         System.out.println("\nAlter ProductKit");
         alterProductKit(product2);
-        System.out.println(persistenceFacade.getOneProduct(1).toString());
+        System.out.println(product2);
 
     }
 

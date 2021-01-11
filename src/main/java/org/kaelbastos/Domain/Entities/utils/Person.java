@@ -70,12 +70,10 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "cpf='" + cpf + '\'' +
+        return  "cpf='" + cpf + '\'' +
                 ", name='" + name + '\'' +
                 ", telephone='" + telephone + '\'' +
                 ", email='" + email + '\'' +
-                ", " + address.toString() +
-                '}';
+                ", " + address.toString();
     }
 }
