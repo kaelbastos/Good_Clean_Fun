@@ -14,7 +14,7 @@ public class ClientCLI {
         PersistenceFacade persistenceFacade = PersistenceFacade.getInstance();
 
         System.out.println("\nInsert Client");
-        Client client = new Client("72952145333", "Ana Julia", "35789988889", "email@email.com", new Address("Bomfim Paulista", "Centro", "Ribeirão Preto", "SP", "100", "14110222","Casa"), ResidenceType.House);
+        Client client = new Client("72952145333", "Ana Julia", "35789988889", "email@email.com", new Address("Bomfim Paulista", "Centro", "Ribeirão Preto", "SP", "100", "14110222",""), ResidenceType.House);
         System.out.println(client.toString());
         insertClient(client);
 

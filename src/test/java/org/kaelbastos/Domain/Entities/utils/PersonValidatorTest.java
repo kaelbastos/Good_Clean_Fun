@@ -106,7 +106,6 @@ class PersonValidatorTest {
                 Arguments.of("", "", "", "", new Address("", "", "", "", "", "", "")),
                 Arguments.of(" ", " ", " ", " ", new Address(" ", " ", " ", " ", " ", " ", " ")),
                 Arguments.of(null, null, null, null, null)
-
         );
     }
 

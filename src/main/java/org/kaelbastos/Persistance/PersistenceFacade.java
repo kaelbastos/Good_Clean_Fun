@@ -122,5 +122,3 @@ public class PersistenceFacade {
         return clientDAO.getObservationsFromClient(clientId);
     }
 }
-
-

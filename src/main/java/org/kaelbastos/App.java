@@ -10,7 +10,6 @@ import java.io.IOException;
  *
  * Do or do not, there is no try... Master Yoda.
  */
-
 public class App {
     public static void main(String[] args) {
         ServiceCLI.run();
