@@ -1,4 +1,4 @@
-package org.kaelbastos.Persistance.Utils;
+package org.kaelbastos.Persistance.DAOs;
 
 import org.kaelbastos.Domain.Entities.Worker.DayOfWeekRestriction;
 import org.kaelbastos.Domain.Entities.Worker.Worker;

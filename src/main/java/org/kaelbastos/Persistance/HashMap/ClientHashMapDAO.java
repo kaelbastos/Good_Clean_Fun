@@ -1,9 +1,9 @@
-package org.kaelbastos.Persistance.DAOs.HashMap;
+package org.kaelbastos.Persistance.HashMap;
 
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.utils.Observation;
 import org.kaelbastos.Persistance.PersistenceFacade;
-import org.kaelbastos.Persistance.Utils.CLientDAO;
+import org.kaelbastos.Persistance.DAOs.CLientDAO;
 
 import java.util.*;
 

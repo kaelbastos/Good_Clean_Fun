@@ -1,10 +1,10 @@
-package org.kaelbastos.Persistance.DAOs.HashMap;
+package org.kaelbastos.Persistance.HashMap;
 
 import org.kaelbastos.Domain.Entities.Worker.DayOfWeekRestriction;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Observation;
 import org.kaelbastos.Persistance.PersistenceFacade;
-import org.kaelbastos.Persistance.Utils.WorkerDAO;
+import org.kaelbastos.Persistance.DAOs.WorkerDAO;
 
 import java.util.*;
 

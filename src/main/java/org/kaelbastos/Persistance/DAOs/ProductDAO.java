@@ -1,4 +1,4 @@
-package org.kaelbastos.Persistance.Utils;
+package org.kaelbastos.Persistance.DAOs;
 
 import org.kaelbastos.Domain.Entities.Product.Kit;
 import org.kaelbastos.Domain.Entities.Product.Product;

@@ -1,4 +1,4 @@
-package org.kaelbastos.Persistance.DAOs.HashMap;
+package org.kaelbastos.Persistance.HashMap;
 
 import org.junit.jupiter.api.Test;
 import org.kaelbastos.Domain.Entities.Worker.DayOfWeekRestriction;
