@@ -1,5 +1,6 @@
 package org.kaelbastos.Domain.UseCases;
 
+import org.kaelbastos.Domain.CustomExceptions.EntityAlreadyExistsException;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.Worker.WorkerValidator;
 import org.kaelbastos.Domain.Entities.utils.Notification;
@@ -15,7 +16,7 @@ public class InsertWorker {
             throw new IllegalArgumentException(notification.getMessage());
         else if(persistenceFacade.getOneWorker(worker.getCpf()).isPresent() ||
                 persistenceFacade.getOneClient(worker.getCpf()).isPresent())
-            throw new IllegalArgumentException("CPF already exists");
+            throw new EntityAlreadyExistsException("Person");
 
         return persistenceFacade.saveWorker(worker);
     }

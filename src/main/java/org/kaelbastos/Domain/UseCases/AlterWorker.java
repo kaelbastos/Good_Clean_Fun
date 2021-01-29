@@ -1,7 +1,6 @@
 package org.kaelbastos.Domain.UseCases;
 
-import org.kaelbastos.Domain.Entities.Client.Client;
-import org.kaelbastos.Domain.Entities.Client.ClientValidator;
+import org.kaelbastos.Domain.CustomExceptions.EntityDoesNotExistsException;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.Worker.WorkerValidator;
 import org.kaelbastos.Domain.Entities.utils.Notification;
@@ -16,7 +15,7 @@ public class AlterWorker {
         if(notification.hasErrors())
             throw new IllegalArgumentException(notification.getMessage());
         else if(persistenceFacade.getOneWorker(worker.getCpf()).isEmpty())
-            throw new IllegalArgumentException("Worker does not exists");
+            throw new EntityDoesNotExistsException("Worker");
 
         return persistenceFacade.updateWorker(worker);
     }

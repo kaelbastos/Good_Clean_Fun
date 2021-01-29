@@ -1,5 +1,6 @@
 package org.kaelbastos.Domain.UseCases;
 
+import org.kaelbastos.Domain.CustomExceptions.EntityDoesNotExistsException;
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Product.ProductValidator;
 import org.kaelbastos.Domain.Entities.utils.Notification;
@@ -14,7 +15,7 @@ public class AlterProductKit {
         if(notification.hasErrors())
             throw new IllegalArgumentException(notification.getMessage());
         else if(persistenceFacade.getOneProduct(product.getId()).isEmpty())
-            throw new IllegalArgumentException("Product does not exists");
+            throw new EntityDoesNotExistsException("Product");
 
         return persistenceFacade.updateProduct(product);
     }

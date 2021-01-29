@@ -1,5 +1,6 @@
 package org.kaelbastos.Domain.UseCases;
 
+import org.kaelbastos.Domain.CustomExceptions.EntityDoesNotExistsException;
 import org.kaelbastos.Domain.Entities.Service.Service;
 import org.kaelbastos.Domain.Entities.Service.ServiceStatus;
 import org.kaelbastos.Persistance.PersistenceFacade;
@@ -12,7 +13,7 @@ public class CancelScheduledService {
         Optional<Service> optionalService = PersistenceFacade.getInstance()
                 .getOneService(serviceId);
         if(optionalService.isEmpty())
-            throw new IllegalArgumentException("Service does not exists.");
+            throw new EntityDoesNotExistsException("Service");
         else
             optionalService.get().setStatus(ServiceStatus.Canceled);
         return true;

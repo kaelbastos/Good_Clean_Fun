@@ -1,5 +1,6 @@
 package org.kaelbastos.Domain.UseCases;
 
+import org.kaelbastos.Domain.CustomExceptions.EntityAlreadyExistsException;
 import org.kaelbastos.Domain.Entities.Service.Service;
 import org.kaelbastos.Domain.Entities.Service.ServiceValidator;
 import org.kaelbastos.Domain.Entities.utils.Notification;
@@ -26,6 +27,12 @@ public class ScheduleService {
                 if(persistenceFacade.getOneProduct(product.getId()).isEmpty())
                     notification.addError("Product does not exists.");
             });
+
+            if(persistenceFacade.getOneService(service.getId()).isPresent())
+                notification.addError("Service Already Exists");
+
+            if(notification.hasErrors())
+                throw new RuntimeException(notification.getMessage());
         }
         return persistenceFacade.saveService(service);
     }

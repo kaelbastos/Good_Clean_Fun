@@ -1,5 +1,6 @@
 package org.kaelbastos.Domain.UseCases;
 
+import org.kaelbastos.Domain.CustomExceptions.EntityDoesNotExistsException;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Client.ClientValidator;
 import org.kaelbastos.Domain.Entities.utils.Notification;
@@ -14,7 +15,7 @@ public class AlterClient {
         if(notification.hasErrors())
             throw new IllegalArgumentException(notification.getMessage());
         else if(persistenceFacade.getOneClient(client.getCpf()).isEmpty())
-            throw new IllegalArgumentException("Client does not exists");
+            throw new EntityDoesNotExistsException("Client");
 
         return persistenceFacade.updateClient(client);
     }
