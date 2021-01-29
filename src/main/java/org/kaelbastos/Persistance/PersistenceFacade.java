@@ -7,7 +7,7 @@ import org.kaelbastos.Domain.Entities.Service.Service;
 import org.kaelbastos.Domain.Entities.Worker.DayOfWeekRestriction;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Observation;
-import org.kaelbastos.Persistance.DAOs.HashMap.*;
+//import org.kaelbastos.Persistance.DAOs.HashMap.*;
 import org.kaelbastos.Persistance.HashMap.ClientHashMapDAO;
 import org.kaelbastos.Persistance.HashMap.ProductHashMapDAO;
 import org.kaelbastos.Persistance.HashMap.ServiceHashMapDAO;
@@ -68,6 +68,10 @@ public class PersistenceFacade {
 
     public Optional<Product> getOneProduct(Integer product){
         return productDAO.getOne(product);
+    }
+
+    public Optional<List<Product>> getAllProducts(){
+        return productDAO.getAll();
     }
 
     public Optional<List<Kit>> getKitsFromProducts(){
