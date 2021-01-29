@@ -12,17 +12,18 @@ import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Address;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ServiceHashMapDAOTest {
     Service service = new Service(1,
             LocalDateTime.of(2020,1,5,8,30),
-            LocalDateTime.of(2020,1,5,10,30),
             80.00F,
             30,
             ServiceStatus.Done,
-            ServiceCategory.Complete,
+            new ServiceCategory(0, "name", 1.5),
             new Client(
                     "45649283842",
                     "Antonio Souza",
@@ -37,12 +38,12 @@ class ServiceHashMapDAOTest {
                             "13568420",
                             "Perto do Bar do Luiz"),
                             ResidenceType.House),
-                    new Product(
+            new ArrayList<Product>(List.of(new Product(
                             1,
                             "Detergente",
                             8.00F,
-                            ProductCategory.Chemical),
-                            new Worker("12345678910",
+                            ProductCategory.Chemical))),
+            new ArrayList<Worker>(List.of(new Worker("12345678910",
                                     "Julia Rodrigues",
                                     "12345678910",
                                     "12345678910",
@@ -52,7 +53,7 @@ class ServiceHashMapDAOTest {
                                             "City", "State",
                                             "10",
                                             "12",
-                                            "")));
+                                            "")))));
 
         ServiceHashMapDAO serviceHashMapDAO = new ServiceHashMapDAO();
 
@@ -88,11 +89,10 @@ class ServiceHashMapDAOTest {
     void updateNotExistService() {
         assertFalse(serviceHashMapDAO.update(new Service(0,
                 LocalDateTime.of(2020,1,5,8,30),
-                LocalDateTime.of(2020,1,5,10,30),
                 80.00F,
                 30,
                 ServiceStatus.Done,
-                ServiceCategory.Complete,
+                new ServiceCategory(1, "name", 2.5),
                 new Client(
                         "45649283842",
                         "Antonio Souza",
@@ -107,12 +107,12 @@ class ServiceHashMapDAOTest {
                                 "13568420",
                                 "Perto do Bar do Luiz"),
                         ResidenceType.House),
-                new Product(
+                new ArrayList<Product>(List.of(new Product(
                         1,
                         "Detergente",
                         8.00F,
-                        ProductCategory.Chemical),
-                new Worker("12345678910",
+                        ProductCategory.Chemical))),
+                new ArrayList<Worker>(List.of(new Worker("12345678910",
                         "Julia Rodrigues",
                         "12345678910",
                         "12345678910",
@@ -122,7 +122,7 @@ class ServiceHashMapDAOTest {
                                 "City", "State",
                                 "10",
                                 "12",
-                                "")))));
+                                "")))))));
     }
 
     @Test

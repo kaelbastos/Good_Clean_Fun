@@ -19,8 +19,7 @@ public class MakeProfitReport {
         Optional<List<Service>> allServices = PersistenceFacade.getInstance().getAllServices();
         Optional<Float> totalProfit = allServices.get().stream()
                 .filter(service -> {
-                    return service.getStart().getMonthValue() == month ||
-                            service.getEnd().getMonthValue() == month;
+                    return service.getStart().getMonthValue() == month;
                 }).map(service -> service.getServicePrice() * ((100 - service.getWorkerPercentage())/100))
                 .reduce(Float::sum);
         if(totalProfit.isPresent())

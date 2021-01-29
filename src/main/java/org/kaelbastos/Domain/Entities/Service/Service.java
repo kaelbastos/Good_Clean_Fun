@@ -10,7 +10,6 @@ import java.util.Optional;
 public class Service {
     private final int id;
     private LocalDateTime start;
-    private LocalDateTime end;
     private float servicePrice;
     private int workerPercentage;
     private ServiceStatus status;
@@ -24,7 +23,6 @@ public class Service {
     public Service(
             int id,
             LocalDateTime start,
-            LocalDateTime end,
             float servicePrice,
             int workerPercentage,
             ServiceStatus status,
@@ -34,7 +32,6 @@ public class Service {
             ArrayList<Worker> workers) {
         this.id = id;
         this.start = start;
-        this.end = end;
         this.servicePrice = servicePrice;
         this.workerPercentage = workerPercentage;
         this.status = status;
@@ -42,52 +39,6 @@ public class Service {
         this.client = client;
         this.products.addAll(products);
         this.workers.addAll(workers);
-    }
-
-    public Service(
-            int id,
-            LocalDateTime start,
-            LocalDateTime end,
-            float servicePrice,
-            int workerPercentage,
-            ServiceStatus status,
-            ServiceCategory category,
-            Client client,
-            Product product,
-            Worker worker) {
-        this.id = id;
-        this.start = start;
-        this.end = end;
-        this.servicePrice = servicePrice;
-        this.workerPercentage = workerPercentage;
-        this.status = status;
-        this.category = category;
-        this.client = client;
-        this.products.add(product);
-        this.workers.add(worker);
-    }
-
-    public Service(
-            int id,
-            LocalDateTime start,
-            LocalDateTime end,
-            float servicePrice,
-            int workerPercentage,
-            ServiceStatus status,
-            ServiceCategory category,
-            Client client,
-            ArrayList<Product> products,
-            Worker worker) {
-        this.id = id;
-        this.start = start;
-        this.end = end;
-        this.servicePrice = servicePrice;
-        this.workerPercentage = workerPercentage;
-        this.status = status;
-        this.category = category;
-        this.client = client;
-        this.products.addAll(products);
-        this.workers.add(worker);
     }
 
     public Integer getId() {
@@ -100,14 +51,6 @@ public class Service {
 
     public void setStart(LocalDateTime start) {
         this.start = start;
-    }
-
-    public LocalDateTime getEnd() {
-        return end;
-    }
-
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
     }
 
     public float getServicePrice() {
@@ -190,11 +133,10 @@ public class Service {
         return "Service{" +
                 "\nid=" + id +
                 ", \nstart=" + start +
-                ", \nend=" + end +
                 ", \nservicePrice=" + servicePrice +
                 ", \nworkerPercentage=" + workerPercentage +
                 ", \nstatus=" + status +
-                ", \ncategory=" + category +
+                ",\n" + category +
                 ", \nserviceEvaluation=" + serviceEvaluation +
                 ", \npayed=" + payed +
                 ", \nclient=" + client +

@@ -7,21 +7,25 @@ import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Product.ProductCategory;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ServiceTest {
     int id = 0;
     LocalDateTime start = LocalDateTime.of(2021, 1, 6, 22 , 14);
-    LocalDateTime end = LocalDateTime.of(2021, 1, 6, 22 , 24);
     float servicePrice = 100F;
     int workerPercentage = 50;
     ServiceStatus status = ServiceStatus.Scheduled;
-    ServiceCategory category = ServiceCategory.kitchenCleansing;
+    ServiceCategory category = new ServiceCategory(0, "name", 2.0);
     Client client = new Client("00000000000", "Name", "00000000000", "client@client.com", null, ResidenceType.House);
-    Product product = new Product(1, "broom", 10F, ProductCategory.Utensil);
+    Product product = new Product(1, "broom", 10F,ProductCategory.Utensil);
+    ArrayList<Product> products = new ArrayList<>(List.of(product));
     Worker worker = new Worker("00000000000", "Name", "00000000000", "11111111111","client@client.com", null);
+    ArrayList<Worker> workers = new ArrayList<>(List.of(worker));
 
-    Service service = new Service(id, start, end, servicePrice, workerPercentage, status , category, client, product, worker);
+    Service service = new Service(id, start, servicePrice, workerPercentage, status , category, client, products, workers);
     ServiceEvaluation serviceEvaluation = new ServiceEvaluation("comment", 5, client);
 
     @Test
@@ -41,17 +45,6 @@ class ServiceTest {
         assertEquals(newStart, service.getStart());
     }
 
-    @Test
-    void getEnd() {
-        assertEquals(end, service.getEnd());
-    }
-
-    @Test
-    void setEnd() {
-        LocalDateTime newEnd = LocalDateTime.of(2021, 1, 6, 0 , 14);
-        service.setEnd(newEnd);
-        assertEquals(newEnd, service.getEnd());
-    }
 
     @Test
     void getServicePrice() {
@@ -101,7 +94,7 @@ class ServiceTest {
 
     @Test
     void setCategory() {
-        ServiceCategory newCategory = ServiceCategory.Complete;
+        ServiceCategory newCategory = new ServiceCategory(2, "new category", 3.5);
         service.setCategory(newCategory);
         assertEquals(newCategory, service.getCategory());
     }

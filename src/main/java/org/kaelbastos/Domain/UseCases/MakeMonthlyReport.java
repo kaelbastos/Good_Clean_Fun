@@ -20,8 +20,7 @@ public class MakeMonthlyReport {
         Optional<List<Service>> allServices = PersistenceFacade.getInstance().getAllServices();
         if (allServices.isPresent()) {
             String services = (String) allServices.get().stream()
-                    .filter(service -> service.getStart().getMonthValue() == month ||
-                                service.getEnd().getMonthValue() == month)
+                    .filter(service -> service.getStart().getMonthValue() == month)
                     .map(Service::toString)
                     .collect(Collectors.joining("\n"));
             return "Services {" + services + "};\n";

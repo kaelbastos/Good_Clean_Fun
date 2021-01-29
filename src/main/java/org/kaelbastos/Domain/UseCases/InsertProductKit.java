@@ -19,4 +19,3 @@ public class InsertProductKit {
         return persistenceFacade.saveProduct(product);
     }
 }
-

@@ -25,16 +25,6 @@ public class ServiceValidator extends Validator<Service> {
             if (isNull(serviceStart))
                 notification.addError("Start is null.");
 
-            LocalDateTime serviceEnd = service.getEnd();
-            if(isNull(serviceEnd))
-                notification.addError("End is null.");
-
-            if(serviceStart.isAfter(serviceEnd))
-                notification.addError("Start is after End.");
-
-            if(serviceStart.equals(serviceEnd))
-                notification.addError("Start and end are at the same time.");
-
             float servicePrice = service.getServicePrice();
             if(servicePrice < 0)
                 notification.addError("Service Price is invalid.");
@@ -44,8 +34,9 @@ public class ServiceValidator extends Validator<Service> {
                 notification.addError("Worker percentage is invalid.");
 
             ServiceCategory serviceCategory = service.getCategory();
-            if(isNull(serviceCategory))
-                notification.addError("Category is null.");
+            Notification serviceCategoryNotification = new ServiceCategoryValidator().validate(serviceCategory);
+            if(serviceCategoryNotification.hasErrors())
+                notification.addError(serviceCategoryNotification.getMessage());
 
             ServiceStatus serviceStatus = service.getStatus();
             if(isNull(serviceStatus))

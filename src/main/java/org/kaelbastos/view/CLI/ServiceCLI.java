@@ -14,21 +14,24 @@ import org.kaelbastos.Domain.UseCases.FinishService;
 import org.kaelbastos.Domain.UseCases.ScheduleService;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ServiceCLI {
     public static void run(){
         int id = 0;
         LocalDateTime start = LocalDateTime.of(2021, 1, 6, 22 , 14);
-        LocalDateTime end = LocalDateTime.of(2021, 1, 6, 22 , 24);
         float servicePrice = 100F;
         int workerPercentage = 50;
         ServiceStatus status = ServiceStatus.Scheduled;
-        ServiceCategory category = ServiceCategory.kitchenCleansing;
+        ServiceCategory category = new ServiceCategory(0, "name", 1.5);
         Client client = new Client("00000000000", "Name", "00000000000", "client@client.com", new Address("rua dos bobos", "neighborhood", "city", "state", "0", "2", null), ResidenceType.House);
-        Product product = new Product(1, "broom", 10F, ProductCategory.Utensil);
-        Worker worker = new Worker("00000000000", "Name", "00000000000", "11111111111","client@client.com", new Address("rua dos bobos", "neighborhood", "city", "state", "0", "2", null));
+        Product product = new Product(1, "broom", 10F,ProductCategory.Utensil);
+        ArrayList<Product> products = new ArrayList<>(List.of(product));
+        Worker worker = new Worker("00000000000", "Name", "00000000000", "11111111111","client@client.com", null);
+        ArrayList<Worker> workers = new ArrayList<>(List.of(worker));
 
-        Service service = new Service(id, start, end, servicePrice, workerPercentage, status , category, client, product, worker);
+        Service service = new Service(id, start, servicePrice, workerPercentage, status , category, client, products, workers);
 
 
         System.out.println("\nSchedule Service\n");
