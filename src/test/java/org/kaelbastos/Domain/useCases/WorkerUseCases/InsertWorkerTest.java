@@ -1,4 +1,4 @@
-package org.kaelbastos.Domain.UseCases;
+package org.kaelbastos.Domain.useCases.WorkerUseCases;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -6,6 +6,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Address;
+import org.kaelbastos.Domain.UseCases.WorkerUseCases.InsertWorker;
 
 import java.util.stream.Stream;
 
@@ -45,7 +46,7 @@ class InsertWorkerTest {
     @ParameterizedTest
     @MethodSource("provideArgsForInsertWorkerWithExceptionThrow")
     public void insertWorkerExceptionThrow(Worker worker) {
-        assertThrows(IllegalArgumentException.class, () -> {insertWorker.insert(worker);});
+        assertThrows(IllegalArgumentException.class, () -> insertWorker.insert(worker));
     }
 
 
@@ -285,6 +286,6 @@ class InsertWorkerTest {
                         null)
         );
         assertTrue(insertWorker.insert(worker1));
-        assertThrows(IllegalArgumentException.class, () -> {insertWorker.insert(worker1);});
+        assertThrows(IllegalArgumentException.class, () -> insertWorker.insert(worker1));
     }
 }

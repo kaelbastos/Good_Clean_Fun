@@ -2,9 +2,9 @@ package org.kaelbastos.view.CLI;
 
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Address;
-import org.kaelbastos.Domain.UseCases.AlterWorker;
-import org.kaelbastos.Domain.UseCases.DeactivateWorker;
-import org.kaelbastos.Domain.UseCases.InsertWorker;
+import org.kaelbastos.Domain.UseCases.WorkerUseCases.AlterWorker;
+import org.kaelbastos.Domain.UseCases.WorkerUseCases.DeactivateWorker;
+import org.kaelbastos.Domain.UseCases.WorkerUseCases.InsertWorker;
 import org.kaelbastos.Persistance.PersistenceFacade;
 
 public class WorkerCLI {

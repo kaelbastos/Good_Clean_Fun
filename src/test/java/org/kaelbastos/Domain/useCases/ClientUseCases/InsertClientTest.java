@@ -1,4 +1,4 @@
-package org.kaelbastos.Domain.useCases;
+package org.kaelbastos.Domain.useCases.ClientUseCases;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.NullSource;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Client.ResidenceType;
 import org.kaelbastos.Domain.Entities.utils.Address;
-import org.kaelbastos.Domain.UseCases.InsertClient;
+import org.kaelbastos.Domain.UseCases.ClientUseCases.InsertClient;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -55,9 +55,7 @@ class InsertClientTest {
     @NullSource
     @MethodSource("provideArgsForMultipleErrorsTest")
     public void validateWithMultipleErrors(Client client) {
-        assertThrows(IllegalArgumentException.class, () -> {
-           insertClient.insert(client);
-        });
+        assertThrows(IllegalArgumentException.class, () -> insertClient.insert(client));
     }
 
     private static Stream<Arguments> provideArgsForMultipleErrorsTest() {

@@ -1,11 +1,10 @@
 package org.kaelbastos.view.CLI;
 
 
-import org.kaelbastos.Domain.Entities.Product.Kit;
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Product.ProductCategory;
-import org.kaelbastos.Domain.UseCases.AlterProductKit;
-import org.kaelbastos.Domain.UseCases.InsertProductKit;
+import org.kaelbastos.Domain.UseCases.ProductsUseCases.AlterProductKit;
+import org.kaelbastos.Domain.UseCases.ProductsUseCases.InsertProductKit;
 import org.kaelbastos.Persistance.PersistenceFacade;
 
 public class ProductCLI {

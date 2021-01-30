@@ -9,9 +9,9 @@ import org.kaelbastos.Domain.Entities.Service.ServiceCategory;
 import org.kaelbastos.Domain.Entities.Service.ServiceStatus;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Address;
-import org.kaelbastos.Domain.UseCases.CancelScheduledService;
-import org.kaelbastos.Domain.UseCases.FinishService;
-import org.kaelbastos.Domain.UseCases.ScheduleService;
+import org.kaelbastos.Domain.UseCases.ServiceUseCases.CancelScheduledService;
+import org.kaelbastos.Domain.UseCases.ServiceUseCases.FinishService;
+import org.kaelbastos.Domain.UseCases.ServiceUseCases.ScheduleService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

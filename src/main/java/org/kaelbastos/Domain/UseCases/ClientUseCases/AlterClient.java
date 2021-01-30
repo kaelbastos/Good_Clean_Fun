@@ -1,4 +1,4 @@
-package org.kaelbastos.Domain.UseCases;
+package org.kaelbastos.Domain.UseCases.ClientUseCases;
 
 import org.kaelbastos.Domain.CustomExceptions.EntityDoesNotExistsException;
 import org.kaelbastos.Domain.Entities.Client.Client;

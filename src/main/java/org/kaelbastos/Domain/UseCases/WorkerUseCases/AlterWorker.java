@@ -1,23 +1,22 @@
-package org.kaelbastos.Domain.UseCases;
+package org.kaelbastos.Domain.UseCases.WorkerUseCases;
 
-import org.kaelbastos.Domain.CustomExceptions.EntityAlreadyExistsException;
+import org.kaelbastos.Domain.CustomExceptions.EntityDoesNotExistsException;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.Worker.WorkerValidator;
 import org.kaelbastos.Domain.Entities.utils.Notification;
 import org.kaelbastos.Persistance.PersistenceFacade;
 
-public class InsertWorker {
-    public boolean insert(Worker worker){
+public class AlterWorker {
+    public boolean alter(Worker worker){
         WorkerValidator workerValidator = new WorkerValidator();
         Notification notification = workerValidator.validate(worker);
 
         PersistenceFacade persistenceFacade = PersistenceFacade.getInstance();
         if(notification.hasErrors())
             throw new IllegalArgumentException(notification.getMessage());
-        else if(persistenceFacade.getOneWorker(worker.getCpf()).isPresent() ||
-                persistenceFacade.getOneClient(worker.getCpf()).isPresent())
-            throw new EntityAlreadyExistsException("Person");
+        else if(persistenceFacade.getOneWorker(worker.getCpf()).isEmpty())
+            throw new EntityDoesNotExistsException("Worker");
 
-        return persistenceFacade.saveWorker(worker);
+        return persistenceFacade.updateWorker(worker);
     }
 }

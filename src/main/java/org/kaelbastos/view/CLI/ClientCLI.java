@@ -3,8 +3,8 @@ package org.kaelbastos.view.CLI;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Client.ResidenceType;
 import org.kaelbastos.Domain.Entities.utils.Address;
-import org.kaelbastos.Domain.UseCases.AlterClient;
-import org.kaelbastos.Domain.UseCases.InsertClient;
+import org.kaelbastos.Domain.UseCases.ClientUseCases.AlterClient;
+import org.kaelbastos.Domain.UseCases.ClientUseCases.InsertClient;
 import org.kaelbastos.Persistance.PersistenceFacade;
 
 public class ClientCLI {

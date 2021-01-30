@@ -1,6 +1,5 @@
-package org.kaelbastos.Domain.UseCases;
+package org.kaelbastos.Domain.UseCases.ServiceUseCases;
 
-import org.kaelbastos.Domain.CustomExceptions.EntityAlreadyExistsException;
 import org.kaelbastos.Domain.Entities.Service.Service;
 import org.kaelbastos.Domain.Entities.Service.ServiceValidator;
 import org.kaelbastos.Domain.Entities.utils.Notification;
