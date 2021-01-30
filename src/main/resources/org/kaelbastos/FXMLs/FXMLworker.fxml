@@ -17,7 +17,7 @@
             </Label>
             <ImageView fitHeight="118.0" fitWidth="123.0" layoutX="18.0" layoutY="123.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../resources/org/kaelbastos/images/profileLogin.png" />
+                  <Image url="@../images/profileLogin.png" />
                </image></ImageView>
          </children>
          <opaqueInsets>

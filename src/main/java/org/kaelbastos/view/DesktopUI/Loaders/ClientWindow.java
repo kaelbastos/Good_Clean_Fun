@@ -15,7 +15,7 @@ public class ClientWindow {
         FXMLLoader loader = new FXMLLoader();
 
         try {
-            Pane graph = loader.load(getClass().getResource("../FXMLs/FXMLclient.fxml").openStream());
+            Pane graph = loader.load(getClass().getResource("FXMLs/FXMLclient.fxml").openStream());
             Scene scene = new Scene(graph, 310, 280);
             ClientController ctrl = loader.getController();
             ctrl.init();
