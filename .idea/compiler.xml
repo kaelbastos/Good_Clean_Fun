@@ -7,9 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Good Clean Fun" />
         <module name="good-clean-fun" />
         <module name="Good_Clean_Fun" />
-        <module name="Good Clean Fun" />
       </profile>
     </annotationProcessing>
   </component>

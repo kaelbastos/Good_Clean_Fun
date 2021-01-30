@@ -2,6 +2,7 @@ package org.kaelbastos.view.DesktopUI.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -11,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Persistance.PersistenceFacade;
+import org.kaelbastos.view.CLI.WorkerCLI;
 import org.kaelbastos.view.DesktopUI.Windows.*;
 
 import java.util.ArrayList;
@@ -27,18 +29,17 @@ public class AdministrationController {
     @FXML private TableColumn<Worker, String> nameWorkersColumn;
     @FXML private TableColumn<Worker, String> emailWorkersColumn;
     @FXML private TableColumn<Worker, String> cpfWorkersColumn;
+    @FXML private TableColumn<Worker, String> statusWorkersColumn;
 
-    @FXML private Button btnAdd;
-    @FXML private Button btnRemove;
-    @FXML private Button btnDetails;
-    @FXML private Button btnProducts;
-    @FXML private Button btnServices;
-    @FXML private ComboBox<String> selectChoice;
+    @FXML private Button btnAddClient, btnAddWorker, btnDetailsClient, btnDetailsWorker;
+    @FXML private Button btnDeactivate, btnActive;
 
     private static List<Client> clientList = new ArrayList<>();
     private static List<Worker> workerList = new ArrayList<>();
 
     public void init() {
+        clientList.clear();
+        workerList.clear();
         if(PersistenceFacade.getInstance().getAllClient().isPresent())
             clientList.addAll(PersistenceFacade.getInstance().getAllClient().get());
         if(PersistenceFacade.getInstance().getAllWorkers().isPresent())
@@ -55,36 +56,61 @@ public class AdministrationController {
         nameWorkersColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailWorkersColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         cpfWorkersColumn.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-        clientsTable.setItems(FXCollections.observableArrayList(clientList));
-
-        ObservableList<String> optionCB = FXCollections.observableArrayList();
-        optionCB.addAll("Client", "Worker");
-        selectChoice.setItems(optionCB);
+        statusWorkersColumn.setCellValueFactory(new PropertyValueFactory<>("active"));
+        workersTable.setItems(FXCollections.observableArrayList(workerList));
     }
 
-    public void addPerson(){
-        if(selectChoice.getSelectionModel().getSelectedItem().equals("Client")){
-            ClientWindow clientControl = new ClientWindow();
-            clientControl.showAndWait();
-        }else if(selectChoice.getSelectionModel().getSelectedItem().equals("Worker")){
-            WorkerWindow workerControl = new WorkerWindow();
-            workerControl.showAndWait();
-        }
+    public void addWorker() {
+        WorkerWindow workerControl = new WorkerWindow();
+        workerControl.showAndWait();
+        init();
         clientsTable.refresh();
         workersTable.refresh();
     }
 
-    public void viewDetail(){
+    public void addClient() {
+        ClientWindow clientControl = new ClientWindow();
+        clientControl.showAndWait();
+        init();
+        clientsTable.refresh();
+        workersTable.refresh();
+    }
+
+    public void viewDetailClient() {
         DetailWindow detailControl = new DetailWindow();
-        if(selectChoice.getSelectionModel().getSelectedItem().equals("Client")){
-            detailControl.showAndWait(clientsTable.getSelectionModel().getSelectedItem(),"Client");
-        }else if(selectChoice.getSelectionModel().getSelectedItem().equals("Worker")){
-            detailControl.showAndWait(workersTable.getSelectionModel().getSelectedItem(),"Worker");
-        }
+        detailControl.showAndWait(clientsTable.getSelectionModel().getSelectedItem(),"Client");
+        init();
         clientsTable.refresh();
         workersTable.refresh();
     }
 
+    public void viewDetailWorker() {
+        DetailWindow detailControl = new DetailWindow();
+        detailControl.showAndWait(workersTable.getSelectionModel().getSelectedItem(),"Worker");
+        init();
+        clientsTable.refresh();
+        workersTable.refresh();
+    }
+
+    public void deactivateWorker() {
+        if(workersTable.getSelectionModel().getSelectedCells()!=null){
+            WorkerCLI.deactivateWorker(workersTable.getSelectionModel().getSelectedItem().getCpf());
+            init();
+            clientsTable.refresh();
+            workersTable.refresh();
+        }
+    }
+
+    public void activeWorker() {
+        if(workersTable.getSelectionModel().getSelectedCells()!=null){
+            //WorkerCLI.activeWorker(workersTable.getSelectionModel().getSelectedItem().getCpf());
+            init();
+            clientsTable.refresh();
+            workersTable.refresh();
+        }
+    }
+
+    /*
     public void viewProduct() {
         ProductWindow productControl = new ProductWindow();
         productControl.showAndWait();
@@ -94,4 +120,12 @@ public class AdministrationController {
         ServiceWindow serviceControl = new ServiceWindow();
         serviceControl.showAndWait();
     }
+
+    public void listenerChoice(){
+        if(selectChoice.getSelectionModel().getSelectedItem().equals("Client")){
+            btnRemove.setText("REMOVE");
+        }else if(selectChoice.getSelectionModel().getSelectedItem().equals("Worker")){
+            btnRemove.setText("DEACTIVATE");
+        }
+    }*/
 }

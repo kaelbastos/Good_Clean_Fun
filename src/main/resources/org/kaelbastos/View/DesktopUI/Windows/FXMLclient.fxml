@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #5b5b5b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.ClientController">
    <Pane prefHeight="400.0" prefWidth="153.0" style="-fx-background-color: #494949;">
@@ -16,9 +20,6 @@
             <Font name="Roboto Black" size="28.0" />
          </font>
       </Label>
-      <ImageView fitHeight="138.0" fitWidth="162.0" layoutX="7.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="../images/clientLogo.png" />
-      </ImageView>
    </Pane>
    <TextField fx:id="inputName" layoutX="175.0" layoutY="54.0" prefHeight="25.0" prefWidth="182.0" promptText="Name" style="-fx-background-color: #545454; -fx-border-color: #494949; -fx-border-width: 0 0 2 0; -fx-border-radius: 0 0 0 0;">
       <font>

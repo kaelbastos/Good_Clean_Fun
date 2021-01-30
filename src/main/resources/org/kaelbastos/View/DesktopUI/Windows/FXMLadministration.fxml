@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="379.0" prefWidth="766.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.AdministrationController">
-   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="766.0" style="-fx-background-color: #3f3f3f;" text="ADMINISTRATION" textAlignment="CENTER" textFill="WHITE">
+<AnchorPane prefHeight="379.0" prefWidth="824.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.AdministrationController">
+   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="824.0" style="-fx-background-color: #3f3f3f;" text="ADMINISTRATION" textAlignment="CENTER" textFill="WHITE">
       <font>
          <Font name="Roboto Black" size="20.0" />
       </font>
@@ -20,21 +20,6 @@
          <TableColumn prefWidth="133.0" style="-fx-background-color: a8a8a8;" text="Email" />
       </columns>
    </TableView>
-   <Button fx:id="btnDetails" layoutX="403.0" layoutY="323.0" mnemonicParsing="false" onAction="#viewDetail" prefHeight="42.0" prefWidth="107.0" style="-fx-background-color: #829cdd;" text="DETAILS" textFill="WHITE">
-      <font>
-         <Font name="Roboto Black" size="12.0" />
-      </font>
-   </Button>
-   <Button fx:id="btnAdd" layoutX="263.0" layoutY="323.0" mnemonicParsing="false" onAction="#addPerson" prefHeight="42.0" prefWidth="107.0" style="-fx-background-color: #96d38e;" text="ADD NEW" textFill="WHITE">
-      <font>
-         <Font name="Roboto Black" size="12.0" />
-      </font>
-   </Button>
-   <Button fx:id="btnRemove" layoutX="142.0" layoutY="323.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="107.0" style="-fx-background-color: #f87979;" text="REMOVE" textFill="WHITE">
-      <font>
-         <Font name="Roboto Black" size="12.0" />
-      </font>
-   </Button>
    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="63.0" prefHeight="32.0" prefWidth="372.0" text="CLIENTS" textAlignment="CENTER" textFill="WHITE">
       <font>
          <Font name="Roboto Black" size="15.0" />
@@ -45,23 +30,40 @@
          <Font name="Roboto Black" size="15.0" />
       </font>
    </Label>
-   <ComboBox fx:id="selectChoice" layoutX="14.0" layoutY="323.0" prefHeight="42.0" prefWidth="116.0" style="-fx-background-color: #2f2f2f;" />
-   <TableView fx:id="workersTable" layoutX="394.0" layoutY="95.0" prefHeight="200.0" prefWidth="356.0" style="-fx-background-color: e5e5e5; -fx-background-insets: 1;">
+   <TableView fx:id="workersTable" layoutX="394.0" layoutY="95.0" prefHeight="200.0" prefWidth="418.0" style="-fx-background-color: e5e5e5; -fx-background-insets: 1;">
       <columns>
-         <TableColumn fx:id="nameWorkersColumn" prefWidth="169.0" style="-fx-background-color: a8a8a8;" text="Name" />
-         <TableColumn fx:id="emailWorkersColumn" prefWidth="90.0" style="-fx-background-color: a8a8a8;" text="Email" />
-         <TableColumn fx:id="cpfWorkersColumn" prefWidth="122.0" style="-fx-background-color: a8a8a8;" text="CPF" />
-         <TableColumn prefWidth="100.0" style="-fx-background-color: a8a8a8;" text="Name" />
-         <TableColumn prefWidth="124.0" style="-fx-background-color: a8a8a8;" text="Name" />
-         <TableColumn prefWidth="133.0" style="-fx-background-color: a8a8a8;" text="Email" />
+         <TableColumn fx:id="nameWorkersColumn" prefWidth="96.0" style="-fx-background-color: a8a8a8;" text="Name" />
+         <TableColumn fx:id="emailWorkersColumn" prefWidth="78.0" style="-fx-background-color: a8a8a8;" text="Email" />
+         <TableColumn fx:id="cpfWorkersColumn" prefWidth="126.0" style="-fx-background-color: a8a8a8;" text="CPF" />
+         <TableColumn fx:id="statusWorkersColumn" prefWidth="117.0" style="-fx-background-color: a8a8a8;" text="Status" />
       </columns>
    </TableView>
-   <Button fx:id="btnProducts" layoutX="523.0" layoutY="323.0" mnemonicParsing="false" onAction="#viewProduct" prefHeight="42.0" prefWidth="107.0" style="-fx-background-color: #8b66e8;" text="PRODUCTS" textFill="WHITE">
+   <Button fx:id="btnAddClient" layoutX="14.0" layoutY="323.0" mnemonicParsing="false" onAction="#addClient" prefHeight="42.0" prefWidth="129.0" style="-fx-background-color: #96d38e;" text="ADD NEW CLIENT" textFill="WHITE">
       <font>
          <Font name="Roboto Black" size="12.0" />
       </font>
    </Button>
-   <Button fx:id="btnServices" layoutX="642.0" layoutY="323.0" mnemonicParsing="false" onAction="#viewServices" prefHeight="42.0" prefWidth="107.0" style="-fx-background-color: #a749cf;" text="SERVICES" textFill="WHITE">
+   <Button fx:id="btnDeactivate" layoutX="631.0" layoutY="323.0" mnemonicParsing="false" onAction="#deactivateWorker" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: #f87979;" text="DEACTIVATE" textFill="WHITE">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnDetailsClient" layoutX="151.0" layoutY="323.0" mnemonicParsing="false" onAction="#viewDetailClient" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #829cdd;" text="DETAILS" textFill="WHITE">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnAddWorker" layoutX="393.0" layoutY="323.0" mnemonicParsing="false" onAction="#addWorker" prefHeight="42.0" prefWidth="129.0" style="-fx-background-color: #96d38e;" text="ADD NEW WORKER" textFill="WHITE">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnDetailsWorker" layoutX="532.0" layoutY="323.0" mnemonicParsing="false" onAction="#viewDetailWorker" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: #829cdd;" text="DETAILS" textFill="WHITE">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnActive" layoutX="730.0" layoutY="323.0" mnemonicParsing="false" onAction="#activeWorker" prefHeight="42.0" prefWidth="79.0" style="-fx-background-color: #e1aa67;" text="ACTIVE" textFill="WHITE">
       <font>
          <Font name="Roboto Black" size="12.0" />
       </font>

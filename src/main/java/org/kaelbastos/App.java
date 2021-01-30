@@ -6,6 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.kaelbastos.view.DesktopUI.Controllers.AdministrationController;
+import org.kaelbastos.view.DesktopUI.Windows.AdministrationWindow;
+import org.kaelbastos.view.DesktopUI.Windows.ServiceWindow;
 
 /**
  * This is the code, enjoy it.
@@ -20,12 +22,8 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws Exception{
-        FXMLLoader loader = new FXMLLoader();
-        Pane pane = loader.load(getClass().getResource("View/DesktopUI/FXMLadministration.fxml").openStream());
-        AdministrationController ctrl = loader.getController();
-        ctrl.init();
-        stage.setScene(new Scene(pane));
-        stage.setTitle("Admnistration Window");
-        stage.show();
+        ServiceWindow window = new ServiceWindow();
+        window.showAndWait();
     }
 }
+

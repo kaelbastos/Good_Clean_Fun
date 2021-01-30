@@ -12,11 +12,15 @@ import org.kaelbastos.Domain.Entities.Service.ServiceCategory;
 import org.kaelbastos.Domain.Entities.Service.ServiceStatus;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Persistance.PersistenceFacade;
+import org.kaelbastos.view.DesktopUI.Windows.AdministrationWindow;
+import org.kaelbastos.view.DesktopUI.Windows.ClientWindow;
+import org.kaelbastos.view.DesktopUI.Windows.ProductWindow;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ServiceController {
     @FXML private TableView<Service> tableServices;
@@ -25,8 +29,9 @@ public class ServiceController {
     @FXML private ComboBox<ServiceStatus> choiceStatus;
     @FXML private ComboBox<ServiceCategory> choiceCategory;
     @FXML private ComboBox<Product> choiceProduct;
-    @FXML private ComboBox<Client> choiceClient;
+    @FXML private ComboBox<String> choiceClient;
     @FXML private ComboBox<Worker> choiceWorker;
+    @FXML private DatePicker dataPicker;
 
     @FXML private Button addService, removeService,finishService;
 
@@ -41,6 +46,8 @@ public class ServiceController {
     private List<ServiceCategory> serviceCategoryList = new ArrayList<ServiceCategory>(Arrays.asList(ServiceCategory.values()));
 
     public void init() {
+        clientList.clear();
+        workerList.clear();
         if (PersistenceFacade.getInstance().getAllServices().isPresent() &&
                 PersistenceFacade.getInstance().getAllClient().isPresent() &&
                 PersistenceFacade.getInstance().getAllWorkers().isPresent() &&
@@ -69,7 +76,13 @@ public class ServiceController {
     private void loadTable() {
         choiceStatus.setItems(FXCollections.observableArrayList(serviceStatusList));
         choiceCategory.setItems(FXCollections.observableArrayList(serviceCategoryList));
-        choiceClient.setItems(FXCollections.observableArrayList(clientList));
+        //choiceClient.setItems(FXCollections.observableArrayList(clientList));
+
+        choiceClient.setItems(FXCollections.observableArrayList(clientList.stream()
+                .map(Client::getName)
+                .collect(Collectors.toList())
+        ));
+
         choiceWorker.setItems(FXCollections.observableArrayList(workerList));
         choiceProduct.setItems(FXCollections.observableArrayList(productList));
         tableServices.setItems(FXCollections.observableArrayList(serviceList));
@@ -80,6 +93,16 @@ public class ServiceController {
         choiceWorker.getSelectionModel().selectFirst();
         choiceProduct.getSelectionModel().selectFirst();
         tableServices.getSelectionModel().selectFirst();
+    }
+
+    public void administrationWindow(){
+        AdministrationWindow administrationWindow = new AdministrationWindow();
+        administrationWindow.showAndWait();
+    }
+
+    public void productWindow(){
+        ProductWindow productWindow = new ProductWindow();
+        productWindow.showAndWait();
     }
 
     public void addService(){
