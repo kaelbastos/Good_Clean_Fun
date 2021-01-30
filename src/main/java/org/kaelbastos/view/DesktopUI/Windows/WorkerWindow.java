@@ -14,7 +14,7 @@ public class WorkerWindow {
         FXMLLoader loader = new FXMLLoader();
 
         try {
-            Pane graph = loader.load(getClass().getResource("../FXMLs/FXMLworker.fxml").openStream());
+            Pane graph = loader.load(getClass().getResource("FXMLworker.fxml").openStream());
             Scene scene = new Scene(graph, 310, 280);
             WorkerController ctrl = loader.getController();
             Stage stage = new Stage();

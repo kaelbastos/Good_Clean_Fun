@@ -16,7 +16,7 @@ public class DetailWindow {
         FXMLLoader loader = new FXMLLoader();
 
         try {
-            Pane graph = loader.load(getClass().getResource("../FXMLs/FXMLdetail.fxml").openStream());
+            Pane graph = loader.load(getClass().getResource("FXMLdetail.fxml").openStream());
             Scene scene = new Scene(graph, 310, 280);
             DetailController ctrl = loader.getController();
             if(viewModel.equals("Client")){

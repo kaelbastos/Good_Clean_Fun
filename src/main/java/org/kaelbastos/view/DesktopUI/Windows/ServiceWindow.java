@@ -14,7 +14,7 @@ public class ServiceWindow {
         FXMLLoader loader = new FXMLLoader();
 
         try {
-            Pane graph = loader.load(getClass().getResource("../FXMLs/FXMLservice.fxml").openStream());
+            Pane graph = loader.load(getClass().getResource("FXMLservice.fxml").openStream());
             Scene scene = new Scene(graph, 310, 280);
             ServiceController ctrl = loader.getController();
             ctrl.init();
