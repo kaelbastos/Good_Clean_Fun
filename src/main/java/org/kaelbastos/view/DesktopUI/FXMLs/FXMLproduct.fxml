@@ -24,7 +24,7 @@
             </Label>
             <ImageView fitHeight="130.0" fitWidth="125.0" layoutX="14.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/box.png" />
+                  <Image url="@../../../../../../resources/org/kaelbastos/images/box.png" />
                </image></ImageView>
          </children>
          <opaqueInsets>
