@@ -1,4 +1,4 @@
-package org.kaelbastos.view.DesktopUI.Loaders;
+package org.kaelbastos.view.DesktopUI.Windows;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -6,7 +6,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.kaelbastos.Domain.Entities.utils.Person;
-import org.kaelbastos.view.DesktopUI.Controllers.ClientController;
 import org.kaelbastos.view.DesktopUI.Controllers.DetailController;
 
 import java.io.IOException;

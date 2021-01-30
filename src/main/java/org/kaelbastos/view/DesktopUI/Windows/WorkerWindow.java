@@ -1,27 +1,25 @@
-package org.kaelbastos.view.DesktopUI.Loaders;
+package org.kaelbastos.view.DesktopUI.Windows;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.kaelbastos.view.DesktopUI.Controllers.ProductController;
-import org.kaelbastos.view.DesktopUI.Controllers.ServiceController;
+import org.kaelbastos.view.DesktopUI.Controllers.WorkerController;
 
 import java.io.IOException;
 
-public class ProductWindow {
+public class WorkerWindow {
     public void showAndWait(){
         FXMLLoader loader = new FXMLLoader();
 
         try {
-            Pane graph = loader.load(getClass().getResource("../FXMLs/FXMLproduct.fxml").openStream());
+            Pane graph = loader.load(getClass().getResource("../FXMLs/FXMLworker.fxml").openStream());
             Scene scene = new Scene(graph, 310, 280);
-            ProductController ctrl = loader.getController();
-            ctrl.init();
+            WorkerController ctrl = loader.getController();
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("Products");
+            stage.setTitle("New Worker");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
         } catch (IOException e) {

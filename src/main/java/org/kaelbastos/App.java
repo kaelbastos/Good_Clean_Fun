@@ -21,7 +21,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         FXMLLoader loader = new FXMLLoader();
-        Pane pane = loader.load(getClass().getResource("FXMLs/FXMLadministration.fxml").openStream());
+        Pane pane = loader.load(getClass().getResource("View/DesktopUI/FXMLadministration.fxml").openStream());
         AdministrationController ctrl = loader.getController();
         ctrl.init();
         stage.setScene(new Scene(pane));

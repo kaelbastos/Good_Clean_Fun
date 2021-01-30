@@ -17,7 +17,7 @@
          </font>
       </Label>
       <ImageView fitHeight="138.0" fitWidth="162.0" layoutX="7.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
-         <Image url="@../images/clientLogo.png" />
+         <Image url="../images/clientLogo.png" />
       </ImageView>
    </Pane>
    <TextField fx:id="inputName" layoutX="175.0" layoutY="54.0" prefHeight="25.0" prefWidth="182.0" promptText="Name" style="-fx-background-color: #545454; -fx-border-color: #494949; -fx-border-width: 0 0 2 0; -fx-border-radius: 0 0 0 0;">
