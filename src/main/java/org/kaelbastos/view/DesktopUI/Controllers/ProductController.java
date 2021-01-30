@@ -34,6 +34,8 @@ public class ProductController {
     private List<ProductCategory> productCategoryList = new ArrayList<ProductCategory>(Arrays.asList(ProductCategory.values()));
 
     public void init() {
+        productList.clear();
+        kitList.clear();
         if (PersistenceFacade.getInstance().getAllProducts().isPresent() &&
                 PersistenceFacade.getInstance().getKitsFromProducts().isPresent()){
             productList.addAll(PersistenceFacade.getInstance().getAllProducts().get());
@@ -69,12 +71,14 @@ public class ProductController {
         }else{
             PersistenceFacade.getInstance().saveProduct(new Product(productList.size()+1, inputName.getText(), Float.parseFloat(inputSalePrice.getText()), Float.parseFloat(inputPurchasePrice.getText()), choiceCategory.getSelectionModel().getSelectedItem()));
         }
+        init();
         tableProducts.refresh();
     }
 
     public void removeProduct() {
         PersistenceFacade.getInstance().deleteProduct(tableProducts.getSelectionModel().getSelectedItem().getId());
         productList.remove(tableProducts.getSelectionModel().getSelectedItem());
+        init();
         tableProducts.refresh();
     }
 

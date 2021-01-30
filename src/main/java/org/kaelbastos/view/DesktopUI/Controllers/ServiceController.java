@@ -2,6 +2,7 @@ package org.kaelbastos.view.DesktopUI.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -12,6 +13,7 @@ import org.kaelbastos.Domain.Entities.Service.ServiceCategory;
 import org.kaelbastos.Domain.Entities.Service.ServiceStatus;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Persistance.PersistenceFacade;
+import org.kaelbastos.view.DesktopUI.Windows.AboutWindow;
 import org.kaelbastos.view.DesktopUI.Windows.AdministrationWindow;
 import org.kaelbastos.view.DesktopUI.Windows.ClientWindow;
 import org.kaelbastos.view.DesktopUI.Windows.ProductWindow;
@@ -134,4 +136,8 @@ public class ServiceController {
         PersistenceFacade.getInstance().getOneService(tableServices.getSelectionModel().getSelectedItem().getId()).get().setStatus(ServiceStatus.Done);
     }
 
+    public void openAbout() {
+        AboutWindow window = new AboutWindow();
+        window.showAndWait();
+    }
 }
