@@ -9,6 +9,7 @@ import org.kaelbastos.Persistance.SQLite.Utils.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,12 +114,65 @@ public class WorkerSQLiteDAO extends WorkerDAO {
 
     @Override
     public Optional<Worker> getOne(String s) {
+        PreparedStatement statement;
+        try(Connection connection = ConnectionFactory.getConnection()){
+            String sql = "SELECT * FROM worker WHERE cpf = ?";
+            assert connection != null;
+            statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String cpf = resultSet.getString("cpf");
+                String name = resultSet.getString("name");
+                String telephone = resultSet.getString("telephone");
+                String secundaryTelephone = resultSet.getString("secundaryTelephone");
+                String email = resultSet.getString("email");
+                String street = resultSet.getString("street");
+                String neighborhood = resultSet.getString("neighborhood");
+                String city = resultSet.getString("city");
+                String state = resultSet.getString("state");
+                String number = resultSet.getString("number");
+                String postalCode = resultSet.getString("postalCode");
+                String complement = resultSet.getString("complement");
+                Worker worker = new Worker(cpf, name, telephone, secundaryTelephone, email,
+                        new Address(street, neighborhood, city, state,number, postalCode, complement));
+                return Optional.of(worker);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
 
     @Override
     public Optional<List<Worker>> getAll() {
-        return Optional.empty();
+        List<Worker> list = new ArrayList<>();
+        PreparedStatement statement;
+        try(Connection connection = ConnectionFactory.getConnection()){
+            String sql = "SELECT * FROM worker";
+            assert connection != null;
+            statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                String cpf = resultSet.getString("cpf");
+                String name = resultSet.getString("name");
+                String telephone = resultSet.getString("telephone");
+                String secundaryTelephone = resultSet.getString("secundaryTelephone");
+                String email = resultSet.getString("email");
+                String street = resultSet.getString("street");
+                String neighborhood = resultSet.getString("neighborhood");
+                String city = resultSet.getString("city");
+                String state = resultSet.getString("state");
+                String number = resultSet.getString("number");
+                String postalCode = resultSet.getString("postalCode");
+                String complement = resultSet.getString("complement");
+                Worker worker = new Worker(cpf, name, telephone, secundaryTelephone, email,
+                        new Address(street, neighborhood, city, state,number, postalCode, complement));
+                list.add(worker);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return Optional.of(list);
     }
 
     @Override

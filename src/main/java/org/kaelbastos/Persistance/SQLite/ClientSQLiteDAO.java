@@ -121,7 +121,7 @@ public class ClientSQLiteDAO extends CLientDAO {
             assert connection != null;
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()) {
+            if (resultSet.next()) {
                 String cpf = resultSet.getString("cpf");
                 String name = resultSet.getString("name");
                 String telephone = resultSet.getString("telephone");
@@ -133,16 +133,15 @@ public class ClientSQLiteDAO extends CLientDAO {
                 String number = resultSet.getString("number");
                 String postalCode = resultSet.getString("postalCode");
                 String complement = resultSet.getString("complement");
-                /*String residenceType = resultSet.getString("residenceType");*/
                 Client client = new Client(cpf, name, telephone, email,
                         new Address(street, neighborhood, city, state,number, postalCode, complement),
-                        /*new ResidenceType("1","sjaijsi")*/;
-                        ;
+                        ResidenceType.valueOf(resultSet.getString("residenceType")));
+                return Optional.of(client);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.ofNullable();
+        return Optional.empty();
     }
 
     @Override
@@ -166,10 +165,9 @@ public class ClientSQLiteDAO extends CLientDAO {
                 String number = resultSet.getString("number");
                 String postalCode = resultSet.getString("postalCode");
                 String complement = resultSet.getString("complement");
-                /*String residenceType = resultSet.getString("residenceType");*/
                 Client client = new Client(cpf, name, telephone, email,
                         new Address(street, neighborhood, city, state,number, postalCode, complement),
-                        /*new ResidenceType("1","sjaijsi")*/;
+                        ResidenceType.valueOf(resultSet.getString("residenceType")));
                 list.add(client);
             }
         } catch (SQLException e) {
