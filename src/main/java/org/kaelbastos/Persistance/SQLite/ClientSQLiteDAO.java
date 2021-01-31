@@ -4,7 +4,9 @@ import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Client.ResidenceType;
 import org.kaelbastos.Domain.Entities.utils.Address;
 import org.kaelbastos.Domain.Entities.utils.Observation;
+import org.kaelbastos.Domain.Entities.utils.Person;
 import org.kaelbastos.Persistance.DAOs.CLientDAO;
+import org.kaelbastos.Persistance.PersistenceFacade;
 import org.kaelbastos.Persistance.SQLite.Utils.ConnectionFactory;
 
 import java.sql.Connection;
@@ -16,169 +18,133 @@ import java.util.List;
 import java.util.Optional;
 
 public class ClientSQLiteDAO extends CLientDAO {
-
     @Override
-    public Optional<ArrayList<Observation>> getObservationsFromClient(String clientId) {
+    public Optional<ArrayList<Observation>> getObservationsFromClient(String clienteCPF) {
+        List<Observation> list = new ArrayList<>();
+        getObservationsFromClient(clienteCPF);
+
         return Optional.empty();
     }
 
     @Override
     public boolean save(Client client) {
-        PreparedStatement stmt = null;
-        Connection conn = null;
+        PreparedStatement stmt;
         try {
-            conn = ConnectionFactory.getConnection();
+            createTableIfNotExists();
+            if(!PersistenceFacade.getInstance().savePerson(client))
+                return false;
+            Connection conn = ConnectionFactory.getConnection();
 
-            String sqlTable = "CREATE TABLE IF NOT EXISTS client(\n" +
-                    "cpf text NOT NULL,\n"+
-                    "name text NOT NULL,\n" +
-                    "telephone text,\n" +
-                    "email text,\n" +
-                    "street text,\n" +
-                    "neighborhood text,\n" +
-                    "city text,\n" +
-                    "state text,\n" +
-                    "number text,\n" +
-                    "postalCode text,\n" +
-                    "complement text,\n" +
-                    "residenceType text,\n" +
-                    "FOREIGN KEY('cpf') REFERENCES ClientDAO('cpf')\n"+
-                    ");";
-            assert conn != null;
-            stmt = conn.prepareStatement(sqlTable);
-            stmt.execute();
-
-            String sql = "INSERT INTO client (cpf, name, telephone, email, street, neighborhood, city, state," +
-                    "number, postalCode, complement, residenceType) values (?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO client (cpf, residenceType) values (?,?)";
+            if (conn == null) throw new AssertionError();
             stmt = conn.prepareStatement(sql);
 
             stmt.setString(1, client.getCpf());
-            stmt.setString(2, client.getName());
-            stmt.setString(3, client.getTelephone());
-            stmt.setString(4, client.getEmail());
-            stmt.setString(5, client.getAddress().getStreet());
-            stmt.setString(6, client.getAddress().getNeighborhood());
-            stmt.setString(7, client.getAddress().getCity());
-            stmt.setString(8, client.getAddress().getState());
-            stmt.setString(9, client.getAddress().getNumber());
-            stmt.setString(10, client.getAddress().getPostalCode());
-            stmt.setString(11, client.getAddress().getComplement());
-            stmt.setString(12, client.getResidenceType().value);
+            stmt.setString(2, client.getResidenceType().value);
             stmt.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return true;
 
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+        } catch (SQLException e) {
+            return false;
         }
-        return false;
     }
 
     @Override
     public boolean update(Client client) {
-        String sql = "UPDATE client SET name = ?, telephone = ?, email = ?, street = ?, neighborhood = ?, city = ?, " +
-                "state = ?, number = ?, postalCode = ?, complement = ?, residenceType = ? WHERE cpf = ?";
+        String sql = "UPDATE client SET residenceType = ? WHERE cpf = ?";
         try (Connection conn = ConnectionFactory.getConnection()) {
             assert conn != null;
+            PersistenceFacade.getInstance().updatePerson(client);
+
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setString(1, client.getCpf());
-                stmt.setString(2, client.getName());
-                stmt.setString(3, client.getTelephone());
-                stmt.setString(4, client.getEmail());
-                stmt.setString(5, client.getAddress().getStreet());
-                stmt.setString(6, client.getAddress().getNeighborhood());
-                stmt.setString(7, client.getAddress().getCity());
-                stmt.setString(8, client.getAddress().getState());
-                stmt.setString(9, client.getAddress().getNumber());
-                stmt.setString(10, client.getAddress().getPostalCode());
-                stmt.setString(11, client.getAddress().getComplement());
-                stmt.setString(12, client.getResidenceType().value);
+                stmt.setString(2, client.getCpf());
+                stmt.setString(1, client.getResidenceType().value);
                 stmt.executeUpdate();
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }return false;
+            return false;
+        }
     }
 
     @Override
-    public Optional<Client> getOne(String s) {
-        PreparedStatement statement = null;
-        try(Connection connection = ConnectionFactory.getConnection()){
-            String sql = "SELECT * FROM client WHERE cpf = ?";
-            assert connection != null;
-            statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String cpf = resultSet.getString("cpf");
-                String name = resultSet.getString("name");
-                String telephone = resultSet.getString("telephone");
-                String email = resultSet.getString("email");
-                String street = resultSet.getString("street");
-                String neighborhood = resultSet.getString("neighborhood");
-                String city = resultSet.getString("city");
-                String state = resultSet.getString("state");
-                String number = resultSet.getString("number");
-                String postalCode = resultSet.getString("postalCode");
-                String complement = resultSet.getString("complement");
-                Client client = new Client(cpf, name, telephone, email,
-                        new Address(street, neighborhood, city, state,number, postalCode, complement),
-                        ResidenceType.valueOf(resultSet.getString("residenceType")));
-                return Optional.of(client);
+    public Optional<Client> getOne(String clienteCPF) {
+        Optional<Person> person = PersistenceFacade.getInstance().getOnePerson(clienteCPF);
+        if (person.isPresent()) {
+            PreparedStatement statement;
+            try (Connection connection = ConnectionFactory.getConnection()) {
+                String sql = "SELECT * FROM client WHERE cpf = ?";
+                assert connection != null;
+                statement = connection.prepareStatement(sql);
+                statement.setString(1, clienteCPF);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    String cpf = resultSet.getString("cpf");
+                    String name = person.get().getName();
+                    String telephone = person.get().getTelephone();
+                    String email = person.get().getEmail();
+                    String street = person.get().getAddress().getStreet();
+                    String neighborhood = person.get().getAddress().getNeighborhood();
+                    String city = person.get().getAddress().getCity();
+                    String state = person.get().getAddress().getState();
+                    String number = person.get().getAddress().getNumber();
+                    String postalCode = person.get().getAddress().getPostalCode();
+                    String complement = person.get().getAddress().getComplement();
+                    Client client = new Client(cpf, name, telephone, email,
+                            new Address(street, neighborhood, city, state, number, postalCode, complement),
+                            ResidenceType.valueOf(resultSet.getString("residenceType")));
+                    return Optional.of(client);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return Optional.empty();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return Optional.empty();
+        }return Optional.empty();
     }
 
     @Override
     public Optional<List<Client>> getAll() {
-        List<Client> list = new ArrayList<>();
-        PreparedStatement statement = null;
-        try(Connection connection = ConnectionFactory.getConnection()){
+        PreparedStatement statement;
+        try (Connection connection = ConnectionFactory.getConnection()) {
             String sql = "SELECT * FROM client";
             assert connection != null;
             statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
-            while(resultSet.next()) {
+            List<Client> list = new ArrayList<>();
+            while (resultSet.next()) {
                 String cpf = resultSet.getString("cpf");
-                String name = resultSet.getString("name");
-                String telephone = resultSet.getString("telephone");
-                String email = resultSet.getString("email");
-                String street = resultSet.getString("street");
-                String neighborhood = resultSet.getString("neighborhood");
-                String city = resultSet.getString("city");
-                String state = resultSet.getString("state");
-                String number = resultSet.getString("number");
-                String postalCode = resultSet.getString("postalCode");
-                String complement = resultSet.getString("complement");
-                Client client = new Client(cpf, name, telephone, email,
-                        new Address(street, neighborhood, city, state,number, postalCode, complement),
-                        ResidenceType.valueOf(resultSet.getString("residenceType")));
-                list.add(client);
+                String residenceType = resultSet.getString("residenceType");
+                Optional<Person> person = PersistenceFacade.getInstance().getOnePerson(cpf);
+                person.ifPresent(person1 -> {
+                    String name = person.get().getName();
+                    String telephone = person.get().getTelephone();
+                    String email = person.get().getEmail();
+                    String street = person.get().getAddress().getStreet();
+                    String neighborhood = person.get().getAddress().getNeighborhood();
+                    String city = person.get().getAddress().getCity();
+                    String state = person.get().getAddress().getState();
+                    String number = person.get().getAddress().getNumber();
+                    String postalCode = person.get().getAddress().getPostalCode();
+                    String complement = person.get().getAddress().getComplement();
+                    Client client = new Client(cpf, name, telephone, email,
+                            new Address(street, neighborhood, city, state, number, postalCode, complement),
+                            ResidenceType.valueOf(residenceType));
+                    list.add(client);
+                });
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+            return Optional.of(list);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
-        return Optional.of(list);
+        return Optional.empty();
     }
+
 
     @Override
     public boolean delete(String cpf) {
         String sql = "DELETE FROM client WHERE cpf = ?";
+        PersistenceFacade.getInstance().deletePerson(cpf);
         try (Connection conn = ConnectionFactory.getConnection()) {
             assert conn != null;
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -187,6 +153,23 @@ public class ClientSQLiteDAO extends CLientDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }return false;
+        }
+        return false;
+    }
+
+    private void createTableIfNotExists() throws SQLException {
+        PreparedStatement statement = null;
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sqlTable = "CREATE TABLE IF NOT EXISTS client(\n" +
+                    "cpf text NOT NULL,\n" +
+                    "residenceType text\n" +
+                    ");";
+            statement = connection.prepareStatement(sqlTable);
+            statement.execute();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
     }
 }

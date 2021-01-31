@@ -20,6 +20,8 @@ public class ProductSQLiteDAO extends ProductDAO {
         PreparedStatement stmt = null;
         Connection conn = null;
         try {
+            ProductSQLiteDAO productDAO = new ProductSQLiteDAO();
+            productDAO.save(product);
             conn = ConnectionFactory.getConnection();
 
             String sqlTable = "CREATE TABLE IF NOT EXISTS product(\n" +
@@ -28,7 +30,6 @@ public class ProductSQLiteDAO extends ProductDAO {
                     "salePrice float,\n" +
                     "purchasePrice float,\n" +
                     "productCategory text,\n" +
-                    "FOREIGN KEY('cpf') REFERENCES ProductDAO('id')\n"+
                     ");";
             assert conn != null;
             stmt = conn.prepareStatement(sqlTable);
@@ -71,6 +72,8 @@ public class ProductSQLiteDAO extends ProductDAO {
             "UPDATE product SET name = ?, saleprice = ?, purchasePrice = ?, " +
             "category = ? WHERE id = ?";
         try (Connection conn = ConnectionFactory.getConnection()) {
+            ProductSQLiteDAO productDAO = new ProductSQLiteDAO();
+            productDAO.update(product);
             assert conn != null;
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, product.getId());
@@ -87,7 +90,7 @@ public class ProductSQLiteDAO extends ProductDAO {
 
     @Override
     public Optional<Product> getOne(Integer integer) {
-        PreparedStatement statement = null;
+        PreparedStatement statement;
         try(Connection connection = ConnectionFactory.getConnection()){
             String sql = "SELECT * FROM product WHERE id = ?";
             assert connection != null;
@@ -135,6 +138,8 @@ public class ProductSQLiteDAO extends ProductDAO {
     @Override
     public boolean delete(Integer integer) {
         String sql = "DELETE FROM product WHERE id = ?";
+        ProductSQLiteDAO productDAO = new ProductSQLiteDAO();
+        productDAO.delete(integer);
         try (Connection conn = ConnectionFactory.getConnection()) {
             assert conn != null;
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {

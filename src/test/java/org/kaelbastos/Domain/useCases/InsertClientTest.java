@@ -8,11 +8,13 @@ import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Client.ResidenceType;
 import org.kaelbastos.Domain.Entities.utils.Address;
 import org.kaelbastos.Domain.UseCases.InsertClient;
+import org.kaelbastos.Persistance.SQLite.ClientSQLiteDAO;
+
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InsertClientTest {
+class InsertClientTest extends ClientSQLiteDAO {
     InsertClient insertClient = new InsertClient();
 
     @ParameterizedTest
