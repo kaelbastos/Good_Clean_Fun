@@ -15,7 +15,7 @@ public class ProductWindow {
 
         try {
             Pane graph = loader.load(getClass().getResource("FXMLproduct.fxml").openStream());
-            Scene scene = new Scene(graph, 310, 280);
+            Scene scene = new Scene(graph, 690, 400);
             ProductController ctrl = loader.getController();
             ctrl.init();
             Stage stage = new Stage();

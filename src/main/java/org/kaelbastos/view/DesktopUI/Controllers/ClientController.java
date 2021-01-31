@@ -32,7 +32,12 @@ public class ClientController {
 
     public void saveClient(){
         Client client = new Client(inputCpf.getText(), inputName.getText(), inputPhone.getText(), inputEmail.getText(), new Address(inputStreet.getText(), inputHood.getText(), inputCity.getText(), inputState.getText(), inputNumber.getText(), inputPostal.getText(),inputComplement.getText()), residenceType.getSelectionModel().getSelectedItem());
-        ClientCLI.insertClient(client);
+        InsertClient insertClient = new InsertClient();
+        try {
+            System.out.println(insertClient.insert(client));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         cancel();
     }
 

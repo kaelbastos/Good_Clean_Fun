@@ -11,12 +11,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
+import org.kaelbastos.Domain.UseCases.DeactivateWorker;
 import org.kaelbastos.Persistance.PersistenceFacade;
 import org.kaelbastos.view.CLI.WorkerCLI;
 import org.kaelbastos.view.DesktopUI.Windows.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class AdministrationController {
 
@@ -40,10 +42,13 @@ public class AdministrationController {
     public void init() {
         clientList.clear();
         workerList.clear();
-        if(PersistenceFacade.getInstance().getAllClient().isPresent())
-            clientList.addAll(PersistenceFacade.getInstance().getAllClient().get());
-        if(PersistenceFacade.getInstance().getAllWorkers().isPresent())
-            workerList.addAll(PersistenceFacade.getInstance().getAllWorkers().get());
+
+        Optional<List<Client>> optionalClientList = PersistenceFacade.getInstance().getAllClient();
+        optionalClientList.ifPresent(clients -> clientList.addAll(clients));
+
+        Optional<List<Worker>> optionalWorkerList = PersistenceFacade.getInstance().getAllWorkers();
+        optionalWorkerList.ifPresent(workers -> workerList.addAll(workers));
+
         bindTable();
     }
 
@@ -94,7 +99,12 @@ public class AdministrationController {
 
     public void deactivateWorker() {
         if(workersTable.getSelectionModel().getSelectedCells()!=null){
-            WorkerCLI.deactivateWorker(workersTable.getSelectionModel().getSelectedItem().getCpf());
+            DeactivateWorker deactivateWorker = new DeactivateWorker();
+            try {
+                System.out.println(deactivateWorker.deactivate(workersTable.getSelectionModel().getSelectedItem().getCpf()));
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
             init();
             clientsTable.refresh();
             workersTable.refresh();
@@ -103,7 +113,7 @@ public class AdministrationController {
 
     public void activeWorker() {
         if(workersTable.getSelectionModel().getSelectedCells()!=null){
-            //WorkerCLI.activeWorker(workersTable.getSelectionModel().getSelectedItem().getCpf());
+            //Active Worker
             init();
             clientsTable.refresh();
             workersTable.refresh();

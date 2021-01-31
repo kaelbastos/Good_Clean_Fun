@@ -24,8 +24,8 @@ public class ProductController {
     @FXML private TableView<Kit> tableKits;
     @FXML private TableColumn<Kit, String> nameKitColumn, salePriceKitColumn, purchaseKitColumn;
 
-    @FXML private TextField inputName, inputSalePrice, inputPurchasePrice;
-    @FXML private ComboBox<ProductCategory> choiceCategory;
+    @FXML private TextField inputName, inputSalePrice, inputPurchasePrice, inputNameKit;
+    @FXML private ComboBox<ProductCategory> choiceCategory, choiceCategoryKit;
 
     @FXML private Button addProduct, removeProduct,addKit, removeKit;
 
@@ -57,9 +57,11 @@ public class ProductController {
 
     private void loadTable() {
         choiceCategory.setItems(FXCollections.observableArrayList(productCategoryList));
+        choiceCategoryKit.setItems(FXCollections.observableArrayList(productCategoryList));
         tableProducts.setItems(FXCollections.observableArrayList(productList));
         tableKits.setItems(FXCollections.observableArrayList(kitList));
 
+        choiceCategoryKit.getSelectionModel().selectFirst();
         choiceCategory.getSelectionModel().selectFirst();
         tableProducts.getSelectionModel().selectFirst();
         tableKits.getSelectionModel().selectFirst();
@@ -72,6 +74,9 @@ public class ProductController {
             PersistenceFacade.getInstance().saveProduct(new Product(productList.size()+1, inputName.getText(), Float.parseFloat(inputSalePrice.getText()), Float.parseFloat(inputPurchasePrice.getText()), choiceCategory.getSelectionModel().getSelectedItem()));
         }
         init();
+        inputName.setText("");
+        inputSalePrice.setText("");
+        inputPurchasePrice.setText("");
         tableProducts.refresh();
     }
 
@@ -83,7 +88,10 @@ public class ProductController {
     }
 
     public void addKit() {
-        tableKits.refresh();
+        //PersistenceFacade.getInstance().saveKit(new Kit(kitList.size()+1, inputNameKit.getText(), choiceCategoryKit.getSelectionModel().getSelectedItem()));
+        inputNameKit.setText("");
+        init();
+        tableProducts.refresh();
     }
 
     public void removeKit() {

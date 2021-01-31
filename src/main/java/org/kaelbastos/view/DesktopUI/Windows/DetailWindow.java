@@ -17,7 +17,7 @@ public class DetailWindow {
 
         try {
             Pane graph = loader.load(getClass().getResource("FXMLdetail.fxml").openStream());
-            Scene scene = new Scene(graph, 310, 280);
+            Scene scene = new Scene(graph, 600, 400);
             DetailController ctrl = loader.getController();
             if(viewModel.equals("Client")){
                 ctrl.initClient(person);

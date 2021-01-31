@@ -22,6 +22,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ServiceController {
@@ -50,15 +51,21 @@ public class ServiceController {
     public void init() {
         clientList.clear();
         workerList.clear();
-        if (PersistenceFacade.getInstance().getAllServices().isPresent() &&
-                PersistenceFacade.getInstance().getAllClient().isPresent() &&
-                PersistenceFacade.getInstance().getAllWorkers().isPresent() &&
-                PersistenceFacade.getInstance().getKitsFromProducts().isPresent()){
-            serviceList.addAll(PersistenceFacade.getInstance().getAllServices().get());
-            clientList.addAll(PersistenceFacade.getInstance().getAllClient().get());
-            workerList.addAll(PersistenceFacade.getInstance().getAllWorkers().get());
-            productList.addAll(PersistenceFacade.getInstance().getKitsFromProducts().get());
-        }
+        serviceList.clear();
+        productList.clear();
+
+        Optional<List<Client>> optionalClientList = PersistenceFacade.getInstance().getAllClient();
+        optionalClientList.ifPresent(clients -> clientList.addAll(clients));
+
+        Optional<List<Worker>> optionalWorkerList = PersistenceFacade.getInstance().getAllWorkers();
+        optionalWorkerList.ifPresent(workers -> workerList.addAll(workers));
+
+        Optional<List<Service>> optionalServiceList = PersistenceFacade.getInstance().getAllServices();
+        optionalServiceList.ifPresent(services -> serviceList.addAll(services));
+
+        Optional<List<Product>> optionalProductList = PersistenceFacade.getInstance().getAllProducts();
+        optionalProductList.ifPresent(products -> productList.addAll(products));
+
         bindTable();
         loadTable();
     }
@@ -78,7 +85,6 @@ public class ServiceController {
     private void loadTable() {
         choiceStatus.setItems(FXCollections.observableArrayList(serviceStatusList));
         choiceCategory.setItems(FXCollections.observableArrayList(serviceCategoryList));
-        //choiceClient.setItems(FXCollections.observableArrayList(clientList));
 
         choiceClient.setItems(FXCollections.observableArrayList(clientList.stream()
                 .map(Client::getName)
@@ -100,6 +106,8 @@ public class ServiceController {
     public void administrationWindow(){
         AdministrationWindow administrationWindow = new AdministrationWindow();
         administrationWindow.showAndWait();
+        //choiceClient.valueProperty().set(null);
+        init();
     }
 
     public void productWindow(){

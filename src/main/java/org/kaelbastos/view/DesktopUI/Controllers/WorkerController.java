@@ -11,6 +11,7 @@ import org.kaelbastos.Domain.Entities.Client.ResidenceType;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Address;
 import org.kaelbastos.Domain.UseCases.InsertClient;
+import org.kaelbastos.Domain.UseCases.InsertWorker;
 import org.kaelbastos.view.CLI.WorkerCLI;
 
 import java.util.ArrayList;
@@ -22,7 +23,12 @@ public class WorkerController {
 
     public void saveWorker(){
         Worker worker = new Worker(inputCpf.getText(), inputName.getText(), inputPhone.getText(), inputPhone2.getText(), inputEmail.getText(), new Address(inputStreet.getText(), inputHood.getText(), inputCity.getText(), inputState.getText(), inputNumber.getText(), inputPostal.getText(),inputComplement.getText()));
-        WorkerCLI.insertWorker(worker);
+        InsertWorker insertWorker = new InsertWorker();
+        try {
+            System.out.println(insertWorker.insert(worker));
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         cancel();
     }
 

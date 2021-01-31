@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="643.0" style="-fx-background-color: #5b5b5b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="199.0" prefWidth="643.0" style="-fx-background-color: #8c8c8c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" layoutX="1.0" prefHeight="70.0" prefWidth="643.0" style="-fx-background-color: #353535;">
+      <HBox alignment="CENTER" prefHeight="78.0" prefWidth="643.0" style="-fx-background-color: #353535;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GOOD CLEAN FUN" textAlignment="CENTER" wrappingWidth="334.0">
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GOOD CLEAN FUN" textAlignment="CENTER" wrappingWidth="642.0">
                <font>
                   <Font name="Impact" size="42.0" />
                </font>
             </Text>
          </children>
       </HBox>
-      <VBox layoutX="1.0" layoutY="70.0" prefHeight="330.0" prefWidth="600.0" spacing="20.0">
+      <VBox layoutX="1.0" layoutY="77.0" prefHeight="346.0" prefWidth="642.0" spacing="20.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0">
          <children>
             <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="A cleaning services management for the administrators.This project is a class acessment that is shaped in two parts.The first is the requisite elicitation part, done by interviewing the teacher." wrappingWidth="601.13671875">
                <font>
@@ -49,4 +49,4 @@
          </padding>
       </VBox>
    </children>
-</Pane>
+</AnchorPane>

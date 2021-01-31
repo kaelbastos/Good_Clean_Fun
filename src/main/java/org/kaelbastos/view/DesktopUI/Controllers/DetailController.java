@@ -12,6 +12,8 @@ import org.kaelbastos.Domain.Entities.Client.ResidenceType;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Address;
 import org.kaelbastos.Domain.Entities.utils.Person;
+import org.kaelbastos.Domain.UseCases.AlterClient;
+import org.kaelbastos.Domain.UseCases.AlterWorker;
 import org.kaelbastos.view.CLI.ClientCLI;
 import org.kaelbastos.view.CLI.WorkerCLI;
 
@@ -71,10 +73,20 @@ public class DetailController {
     public void update(){
         if(PersonType.equals("Client")){
             Client client = new Client(inputCpf.getText(), inputName.getText(), inputPhone.getText(), inputEmail.getText(), new Address(inputStreet.getText(), inputHood.getText(), inputCity.getText(), inputState.getText(), inputNumber.getText(), inputPostal.getText(),inputComplement.getText()), residenceType.getSelectionModel().getSelectedItem());
-            ClientCLI.alterClient(client);
+            AlterClient alterClient = new AlterClient();
+            try {
+                System.out.println(alterClient.alter(client));
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }else if(PersonType.equals("Worker")){
             Worker worker = new Worker(inputCpf.getText(), inputName.getText(), inputPhone.getText(), inputPhone2.getText(), inputEmail.getText(), new Address(inputStreet.getText(), inputHood.getText(), inputCity.getText(), inputState.getText(), inputNumber.getText(), inputPostal.getText(),inputComplement.getText()));
-            WorkerCLI.alterWorker(worker);
+            AlterWorker alterWorker = new AlterWorker();
+            try {
+                System.out.println(alterWorker.alter(worker));
+            } catch (Exception e){
+                System.out.println(e.getMessage());
+            }
         }
         cancel();
     }
