@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Service.Service;
@@ -21,6 +22,8 @@ import org.kaelbastos.view.DesktopUI.Windows.ClientWindow;
 import org.kaelbastos.view.DesktopUI.Windows.ProductWindow;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -40,6 +43,7 @@ public class ServiceController {
     @FXML private ComboBox<String> choiceClient;
     @FXML private ComboBox<String> choiceWorker;
     @FXML private DatePicker dataPicker;
+    @FXML private ImageView imageWindow;
 
     @FXML private Button addService, removeService,finishService;
 
