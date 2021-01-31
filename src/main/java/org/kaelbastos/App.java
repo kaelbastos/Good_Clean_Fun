@@ -24,6 +24,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception{
         ServiceWindow window = new ServiceWindow();
         window.showAndWait();
+        System.out.println("Au revoir my little friend!!!");
     }
 }
 
