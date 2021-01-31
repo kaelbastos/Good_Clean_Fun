@@ -20,7 +20,8 @@ public class AdministrationWindow {
             Stage stage = new Stage();
             stage.setScene(new Scene(pane));
             stage.setTitle("Admnistration Window");
-            stage.show();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Product.Product;
@@ -18,7 +20,10 @@ import org.kaelbastos.view.DesktopUI.Windows.AdministrationWindow;
 import org.kaelbastos.view.DesktopUI.Windows.ClientWindow;
 import org.kaelbastos.view.DesktopUI.Windows.ProductWindow;
 
+import java.awt.*;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +38,7 @@ public class ServiceController {
     @FXML private ComboBox<ServiceCategory> choiceCategory;
     @FXML private ComboBox<Product> choiceProduct;
     @FXML private ComboBox<String> choiceClient;
-    @FXML private ComboBox<Worker> choiceWorker;
+    @FXML private ComboBox<String> choiceWorker;
     @FXML private DatePicker dataPicker;
 
     @FXML private Button addService, removeService,finishService;
@@ -91,7 +96,11 @@ public class ServiceController {
                 .collect(Collectors.toList())
         ));
 
-        choiceWorker.setItems(FXCollections.observableArrayList(workerList));
+        choiceWorker.setItems(FXCollections.observableArrayList(workerList.stream()
+                .map(Worker::getName)
+                .collect(Collectors.toList())
+        ));
+
         choiceProduct.setItems(FXCollections.observableArrayList(productList));
         tableServices.setItems(FXCollections.observableArrayList(serviceList));
 
@@ -106,7 +115,6 @@ public class ServiceController {
     public void administrationWindow(){
         AdministrationWindow administrationWindow = new AdministrationWindow();
         administrationWindow.showAndWait();
-        //choiceClient.valueProperty().set(null);
         init();
     }
 
@@ -116,22 +124,30 @@ public class ServiceController {
     }
 
     public void addService(){
+        LocalDateTime dateTime;
+        try{
+            dateTime = LocalDateTime.of(dataPicker.getValue(), LocalTime.of(Integer.parseInt(inputStart.getText()), 0));
+            inputStart.setStyle("-fx-background-color: #545454");
+        }catch (Exception e){
+            inputStart.setStyle("-fx-background-color: #f77474");
+        }
         /*
         Service newSchedule = new Service(serviceList.size()+1,
-                startColumn.getText(),
-                endColumn.getText(),
-                priceColumn.getText(),
-                porcentageColumn.getText(),
-                statusColumn.getText(),
-                categoryColumn.getText(),
-                clientColumn.getText(),
-                workerColumn.getText(),
-                productColumn.getText()
-        );
+                LocalDateTime.now(),
+                //LocalDateTime(dataPicker.getValue(), Integer.parseInt(inputStart.getText())),
+                Float.parseFloat(priceColumn.getText()),
+                Integer.parseInt(porcentageColumn.getText()),
+                ServiceStatus.valueOf(statusColumn.getText()),
+                ServiceCategory.valueOf(categoryColumn.getText()),
+                PersistenceFacade.getInstance().getOneClient(choiceClient.getSelectionModel().getSelectedItem()),
+                PersistenceFacade.getInstance().getOneWorker(choiceWorker.getSelectionModel().getSelectedItem()),
+                PersistenceFacade.getInstance().getOneProduct(choiceProduct.getSelectionModel().getSelectedIndex())
+        );*/
 
-        PersistenceFacade.getInstance().saveService(newSchedule);
+        //PersistenceFacade.getInstance().saveService(newSchedule);
+        init();
         tableServices.refresh();
-        */
+
     }
 
     public void removeService(){
