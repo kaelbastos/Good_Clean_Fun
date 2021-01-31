@@ -2,8 +2,6 @@ package org.kaelbastos;
 
 import org.kaelbastos.view.CLI.*;
 
-import java.io.IOException;
-
 /**
  * This is the code, enjoy it.
  *

@@ -28,7 +28,7 @@ public class ServiceCLI {
         Client client = new Client("00000000000", "Name", "00000000000", "client@client.com", new Address("rua dos bobos", "neighborhood", "city", "state", "0", "2", null), ResidenceType.House);
         Product product = new Product(1, "broom", 10F,ProductCategory.Utensil);
         ArrayList<Product> products = new ArrayList<>(List.of(product));
-        Worker worker = new Worker("00000000000", "Name", "00000000000", "11111111111","client@client.com", null);
+        Worker worker = new Worker("00000000000", "Name", "00000000000", "11111111111","client@client.com", new Address("rua dos bobos", "neighborhood", "city", "state", "0", "2", null));
         ArrayList<Worker> workers = new ArrayList<>(List.of(worker));
 
         Service service = new Service(id, start, servicePrice, workerPercentage, status , category, client, products, workers);
