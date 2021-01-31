@@ -7,7 +7,7 @@ import org.kaelbastos.Domain.Entities.utils.Notification;
 import org.kaelbastos.Persistance.PersistenceFacade;
 
 public class AlterWorker {
-    public boolean alter(Worker worker){
+    public boolean alter(Worker worker) throws Exception{
         WorkerValidator workerValidator = new WorkerValidator();
         Notification notification = workerValidator.validate(worker);
 

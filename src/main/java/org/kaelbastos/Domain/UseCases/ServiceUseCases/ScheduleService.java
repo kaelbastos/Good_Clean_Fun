@@ -6,7 +6,7 @@ import org.kaelbastos.Domain.Entities.utils.Notification;
 import org.kaelbastos.Persistance.PersistenceFacade;
 
 public class ScheduleService {
-    public boolean schedule(Service service){
+    public boolean schedule(Service service) throws Exception{
         ServiceValidator serviceValidator = new ServiceValidator();
         Notification notification = serviceValidator.validate(service);
 

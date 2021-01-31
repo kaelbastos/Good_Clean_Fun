@@ -6,7 +6,7 @@ import org.kaelbastos.Persistance.PersistenceFacade;
 import java.util.Optional;
 
 public class DeactivateWorker {
-    public boolean deactivate(String workerId){
+    public boolean deactivate(String workerId) throws Exception{
         Optional<Worker> optionalWorker = PersistenceFacade.getInstance()
                 .getOneWorker(workerId);
         if(optionalWorker.isEmpty())

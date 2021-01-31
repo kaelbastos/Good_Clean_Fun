@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class AllocateWorker {
-    public Worker allocate(ArrayList<Worker> serviceWorkers){
+    public Worker allocate(ArrayList<Worker> serviceWorkers) throws Exception{
         Random random = new Random();
         AtomicReference<Worker> worker = new AtomicReference<>();
 

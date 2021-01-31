@@ -7,7 +7,7 @@ import org.kaelbastos.Domain.Entities.utils.Notification;
 import org.kaelbastos.Persistance.PersistenceFacade;
 
 public class AlterProductKit {
-    public boolean alter(Product product){
+    public boolean alter(Product product) throws Exception{
         ProductValidator productValidator = new ProductValidator();
         Notification notification =  productValidator.validate(product);
 

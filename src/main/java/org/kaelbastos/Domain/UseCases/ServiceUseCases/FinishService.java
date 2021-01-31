@@ -7,7 +7,7 @@ import org.kaelbastos.Persistance.PersistenceFacade;
 import java.util.Optional;
 
 public class FinishService {
-    public boolean finish(int serviceId){
+    public boolean finish(int serviceId) throws Exception{
         Optional<Service> optionalService = PersistenceFacade.getInstance()
                 .getOneService(serviceId);
         if(optionalService.isEmpty())

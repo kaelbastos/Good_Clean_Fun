@@ -7,7 +7,7 @@ import org.kaelbastos.Domain.Entities.utils.Notification;
 import org.kaelbastos.Persistance.PersistenceFacade;
 
 public class AlterClient {
-    public boolean alter(Client client){
+    public boolean alter(Client client) throws Exception{
         ClientValidator clientValidator = new ClientValidator();
         Notification notification = clientValidator.validate(client);
 
