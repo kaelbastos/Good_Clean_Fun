@@ -15,10 +15,10 @@ public class ServiceCategoryController {
     @FXML private TableColumn<ServiceCategory, String> nameColumn;
     @FXML private TextField inputName;
 
-    private List<ServiceCategory> serviceCategories = new ArrayList<ServiceCategory>(Arrays.asList(ServiceCategory.values()));
+    //private List<ServiceCategory> serviceCategories = new ArrayList<ServiceCategory>(Arrays.asList(ServiceCategory.values()));
 
     public void init() {
-        serviceCategories.clear();
+        //serviceCategories.clear();
         //serviceCategories.addAll(ServiceCategory.values());
         bindTable();
         loadTable();
@@ -26,7 +26,7 @@ public class ServiceCategoryController {
 
     private void bindTable() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-        tableCategory.setItems(FXCollections.observableArrayList(serviceCategories));
+        //tableCategory.setItems(FXCollections.observableArrayList(serviceCategories));
     }
 
     private void loadTable() {
