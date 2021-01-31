@@ -4,18 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Client.ResidenceType;
 import org.kaelbastos.Domain.Entities.utils.Address;
-import org.kaelbastos.Domain.UseCases.InsertClient;
-import org.kaelbastos.view.CLI.ClientCLI;
-
+import org.kaelbastos.Domain.UseCases.ClientUseCases.InsertClient;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class ClientController {
     @FXML private ComboBox<ResidenceType> residenceType;

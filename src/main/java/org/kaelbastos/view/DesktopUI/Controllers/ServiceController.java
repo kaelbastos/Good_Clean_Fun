@@ -51,7 +51,7 @@ public class ServiceController {
     private static List<Product> productList = new ArrayList<>();
 
     private List<ServiceStatus> serviceStatusList = new ArrayList<ServiceStatus>(Arrays.asList(ServiceStatus.values()));
-    private List<ServiceCategory> serviceCategoryList = new ArrayList<ServiceCategory>(Arrays.asList(ServiceCategory.values()));
+    //private List<ServiceCategory> serviceCategoryList = new ArrayList<ServiceCategory>(Arrays.asList(ServiceCategory.values()));
 
     public void init() {
         clientList.clear();
@@ -89,7 +89,7 @@ public class ServiceController {
 
     private void loadTable() {
         choiceStatus.setItems(FXCollections.observableArrayList(serviceStatusList));
-        choiceCategory.setItems(FXCollections.observableArrayList(serviceCategoryList));
+        //choiceCategory.setItems(FXCollections.observableArrayList(serviceCategoryList));
 
         choiceClient.setItems(FXCollections.observableArrayList(clientList.stream()
                 .map(Client::getName)

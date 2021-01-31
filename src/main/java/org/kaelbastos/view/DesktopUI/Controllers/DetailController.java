@@ -12,10 +12,8 @@ import org.kaelbastos.Domain.Entities.Client.ResidenceType;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.Entities.utils.Address;
 import org.kaelbastos.Domain.Entities.utils.Person;
-import org.kaelbastos.Domain.UseCases.AlterClient;
-import org.kaelbastos.Domain.UseCases.AlterWorker;
-import org.kaelbastos.view.CLI.ClientCLI;
-import org.kaelbastos.view.CLI.WorkerCLI;
+import org.kaelbastos.Domain.UseCases.ClientUseCases.AlterClient;
+import org.kaelbastos.Domain.UseCases.WorkerUseCases.AlterWorker;
 
 import java.util.ArrayList;
 import java.util.Arrays;

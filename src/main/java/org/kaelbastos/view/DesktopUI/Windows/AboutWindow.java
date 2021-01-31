@@ -2,6 +2,7 @@ package org.kaelbastos.view.DesktopUI.Windows;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.kaelbastos.view.DesktopUI.Controllers.AdministrationController;
@@ -15,6 +16,7 @@ public class AboutWindow {
             Pane pane = loader.load(getClass().getResource("FXMLabout.fxml").openStream());
             Stage stage = new Stage();
             stage.setScene(new Scene(pane));
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
             stage.setTitle("About");
             stage.show();
         } catch (IOException e) {

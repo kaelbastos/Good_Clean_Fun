@@ -65,6 +65,8 @@ public class ProductController {
         choiceCategory.getSelectionModel().selectFirst();
         tableProducts.getSelectionModel().selectFirst();
         tableKits.getSelectionModel().selectFirst();
+
+        tableProducts.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void addProduct() {

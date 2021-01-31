@@ -2,6 +2,7 @@ package org.kaelbastos.view.DesktopUI.Windows;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -21,6 +22,7 @@ public class ClientWindow {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("New Client");
+            stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
         } catch (IOException e) {

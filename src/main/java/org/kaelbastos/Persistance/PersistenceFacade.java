@@ -69,6 +69,10 @@ public class PersistenceFacade {
         return productDAO.getOne(product);
     }
 
+    public Optional<List<Product>> getAllProducts(){
+        return productDAO.getAll();
+    }
+
     public Optional<List<Kit>> getKitsFromProducts(){
         return productDAO.getKitsFromProducts();
     }
