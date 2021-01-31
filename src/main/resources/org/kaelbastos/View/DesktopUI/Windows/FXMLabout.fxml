@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="199.0" prefWidth="643.0" style="-fx-background-color: #8c8c8c;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox alignment="CENTER" prefHeight="78.0" prefWidth="643.0" style="-fx-background-color: #353535;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="GOOD CLEAN FUN" textAlignment="CENTER" wrappingWidth="642.0">
+               <font>
+                  <Font name="Impact" size="42.0" />
+               </font>
+            </Text>
+         </children>
+      </HBox>
+      <VBox layoutX="1.0" layoutY="77.0" prefHeight="346.0" prefWidth="642.0" spacing="20.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="77.0">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="A cleaning services management for the administrators.This project is a class acessment that is shaped in two parts.The first is the requisite elicitation part, done by interviewing the teacher." wrappingWidth="601.13671875">
+               <font>
+                  <Font name="Roboto" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This first half of the acessment is made by other group and have the objecitve to produce a document with the system design.The second part is the implementation, where different groups exchange documents, to code somebody else's system." wrappingWidth="598.13671875">
+               <font>
+                  <Font name="Roboto" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="10.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thist project has the main goal to improve the cleaning services management by offering schedule, resources and financial organization. The system is made for administrators so far, but it is extendable for allowing service providers and clients to interact with the system.Data persistence is made with an local storage, we used an DataBase for that, changing to cloud based storage is not hard, if you want." wrappingWidth="598.13671875">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="10.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="The main goal for us, the authors, was implementing Clean Architecture in a real software production, using new frameworks as lombok and challenging ourselfs to improve our code and social skills during the process." wrappingWidth="598.13671875">
+               <font>
+                  <Font name="Roboto" size="15.0" />
+               </font>
+            </Text>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

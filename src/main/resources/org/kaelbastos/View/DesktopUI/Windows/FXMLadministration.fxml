@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="379.0" prefWidth="824.0" style="-fx-background-color: #444444;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.AdministrationController">
+   <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="53.0" prefWidth="824.0" style="-fx-background-color: #3f3f3f;" text="ADMINISTRATION" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <font>
+         <Font name="Roboto Black" size="20.0" />
+      </font>
+   </Label>
+   <TableView fx:id="clientsTable" layoutX="15.0" layoutY="95.0" prefHeight="200.0" prefWidth="356.0" style="-fx-background-color: e5e5e5; -fx-background-insets: 1;" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="95.0">
+      <columns>
+         <TableColumn fx:id="nameClientsColumn" prefWidth="159.0" style="-fx-background-color: a8a8a8;" text="Name" />
+         <TableColumn fx:id="emailClientsColumn" prefWidth="100.0" style="-fx-background-color: a8a8a8;" text="Email" />
+         <TableColumn fx:id="cpfClientsColumn" prefWidth="122.0" style="-fx-background-color: a8a8a8;" text="CPF" />
+         <TableColumn prefWidth="100.0" style="-fx-background-color: a8a8a8;" text="Name" />
+         <TableColumn prefWidth="124.0" style="-fx-background-color: a8a8a8;" text="Name" />
+         <TableColumn prefWidth="133.0" style="-fx-background-color: a8a8a8;" text="Email" />
+      </columns>
+   </TableView>
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="7.0" layoutY="63.0" prefHeight="32.0" prefWidth="372.0" text="CLIENTS" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="63.0">
+      <font>
+         <Font name="Roboto Black" size="15.0" />
+      </font>
+   </Label>
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="394.0" layoutY="63.0" prefHeight="32.0" prefWidth="418.0" text="WORKERS" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="63.0">
+      <font>
+         <Font name="Roboto Black" size="15.0" />
+      </font>
+   </Label>
+   <TableView fx:id="workersTable" layoutX="394.0" layoutY="95.0" prefHeight="200.0" prefWidth="418.0" style="-fx-background-color: e5e5e5; -fx-background-insets: 1;" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="394.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="95.0">
+      <columns>
+         <TableColumn fx:id="nameWorkersColumn" prefWidth="96.0" style="-fx-background-color: a8a8a8;" text="Name" />
+         <TableColumn fx:id="emailWorkersColumn" prefWidth="78.0" style="-fx-background-color: a8a8a8;" text="Email" />
+         <TableColumn fx:id="cpfWorkersColumn" prefWidth="126.0" style="-fx-background-color: a8a8a8;" text="CPF" />
+         <TableColumn fx:id="statusWorkersColumn" prefWidth="117.0" style="-fx-background-color: a8a8a8;" text="Status" />
+      </columns>
+   </TableView>
+   <Button fx:id="btnAddClient" layoutX="14.0" layoutY="323.0" mnemonicParsing="false" onAction="#addClient" prefHeight="42.0" prefWidth="129.0" style="-fx-background-color: #96d38e;" text="ADD NEW CLIENT" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnDeactivate" layoutX="631.0" layoutY="323.0" mnemonicParsing="false" onAction="#deactivateWorker" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: #f87979;" text="DEACTIVATE" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="103.0">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnDetailsClient" layoutX="151.0" layoutY="323.0" mnemonicParsing="false" onAction="#viewDetailClient" prefHeight="42.0" prefWidth="100.0" style="-fx-background-color: #829cdd;" text="DETAILS" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="151.0">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnAddWorker" layoutX="393.0" layoutY="323.0" mnemonicParsing="false" onAction="#addWorker" prefHeight="42.0" prefWidth="129.0" style="-fx-background-color: #96d38e;" text="ADD NEW WORKER" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="302.0">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnDetailsWorker" layoutX="532.0" layoutY="323.0" mnemonicParsing="false" onAction="#viewDetailWorker" prefHeight="42.0" prefWidth="90.0" style="-fx-background-color: #829cdd;" text="DETAILS" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="202.0">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+   <Button fx:id="btnActive" layoutX="730.0" layoutY="323.0" mnemonicParsing="false" onAction="#activeWorker" prefHeight="42.0" prefWidth="79.0" style="-fx-background-color: #e1aa67;" text="ACTIVE" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="15.0">
+      <font>
+         <Font name="Roboto Black" size="12.0" />
+      </font>
+   </Button>
+</AnchorPane>

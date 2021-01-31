@@ -25,7 +25,7 @@ public class ClientCLI {
 
     }
 
-    private static void insertClient(Client client){
+    public static void insertClient(Client client){
         InsertClient insertClient = new InsertClient();
         try {
             System.out.println(insertClient.insert(client));
@@ -34,7 +34,7 @@ public class ClientCLI {
         }
     }
 
-    private static void alterClient(Client client){
+    public static void alterClient(Client client){
         AlterClient alterClient = new AlterClient();
         try {
             System.out.println(alterClient.alter(client));
