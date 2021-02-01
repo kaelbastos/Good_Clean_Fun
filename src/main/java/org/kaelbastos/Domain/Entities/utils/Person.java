@@ -9,7 +9,6 @@ public class Person {
     private String email;
     private Address address;
 
-
     public Person(String cpf,
                   String name,
                   String telephone,
