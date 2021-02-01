@@ -20,9 +20,6 @@ import java.util.Optional;
 public class ClientSQLiteDAO extends CLientDAO {
     @Override
     public Optional<ArrayList<Observation>> getObservationsFromClient(String clienteCPF) {
-        List<Observation> list = new ArrayList<>();
-        getObservationsFromClient(clienteCPF);
-
         return Optional.empty();
     }
 
