@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="854.0" style="-fx-background-color: #5b5b5b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.ServiceController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="854.0" style="-fx-background-color: #5b5b5b;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.ServiceController">
    <children>
       <Pane prefHeight="545.0" prefWidth="153.0" style="-fx-background-color: #494949;">
          <children>
@@ -31,6 +31,7 @@
                     <MenuItem mnemonicParsing="false" onAction="#administrationWindow" text="Administration" />
                         <MenuItem mnemonicParsing="false" onAction="#productWindow" text="Products and Kits" />
                         <MenuItem mnemonicParsing="false" onAction="#categoryWindow" text="Service Category" />
+                        <MenuItem mnemonicParsing="false" onAction="#monthProfitReport" text="Month Profit Report" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" onAction="#openAbout" text="About">
