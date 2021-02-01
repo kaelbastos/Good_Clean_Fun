@@ -5,12 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Service.ServiceCategory;
-import org.kaelbastos.Domain.Entities.utils.Address;
-import org.kaelbastos.Domain.UseCases.ClientUseCases.InsertClient;
+import org.kaelbastos.Domain.UseCases.ServiceUseCases.CreateServiceCategory;
 import org.kaelbastos.Persistance.PersistenceFacade;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,14 +39,14 @@ public class ServiceCategoryController {
 
     public void addCategory(ActionEvent actionEvent) {
         ServiceCategory serviceCategory = new ServiceCategory(serviceCategories.size()+1, inputName.getText(), Double.parseDouble(inputDuration.getText()));
-        //InsertServiceCategory insertServiceCategory = new InsertServiceCategory();
+        CreateServiceCategory createServiceCategory = new CreateServiceCategory();
         try {
-            //System.out.println(insertCategory.insert(serviceCategory));
+            System.out.println(createServiceCategory.create(serviceCategory));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
-        inputName.setText("");
-        inputDuration.setText("");
+        inputName.clear();
+        inputDuration.clear();
         init();
     }
 

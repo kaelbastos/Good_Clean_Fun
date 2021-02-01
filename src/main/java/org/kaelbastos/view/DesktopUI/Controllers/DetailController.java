@@ -14,7 +14,6 @@ import org.kaelbastos.Domain.Entities.utils.Address;
 import org.kaelbastos.Domain.Entities.utils.Person;
 import org.kaelbastos.Domain.UseCases.ClientUseCases.AlterClient;
 import org.kaelbastos.Domain.UseCases.WorkerUseCases.AlterWorker;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -77,7 +76,7 @@ public class DetailController {
             } catch (Exception e){
                 System.out.println(e.getMessage());
             }
-        }else if(PersonType.equals("Worker")){
+        }else {
             Worker worker = new Worker(inputCpf.getText(), inputName.getText(), inputPhone.getText(), inputPhone2.getText(), inputEmail.getText(), new Address(inputStreet.getText(), inputHood.getText(), inputCity.getText(), inputState.getText(), inputNumber.getText(), inputPostal.getText(),inputComplement.getText()));
             AlterWorker alterWorker = new AlterWorker();
             try {

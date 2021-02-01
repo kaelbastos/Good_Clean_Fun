@@ -20,8 +20,7 @@ public class ClientController {
 
     public void init() {
         residenceType.setItems(
-                FXCollections.observableArrayList(
-                new ArrayList<ResidenceType>(Arrays.asList(ResidenceType.values()))
+                FXCollections.observableArrayList(new ArrayList<>(Arrays.asList(ResidenceType.values()))
         ));
         residenceType.getSelectionModel().selectFirst();
     }

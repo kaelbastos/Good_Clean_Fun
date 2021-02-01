@@ -7,6 +7,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.kaelbastos.Domain.Entities.Product.Kit;
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Product.ProductCategory;
+import org.kaelbastos.Domain.UseCases.ProductsUseCases.DeleteProductKit;
+import org.kaelbastos.Domain.UseCases.ProductsUseCases.InsertProductKit;
 import org.kaelbastos.Persistance.PersistenceFacade;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,35 +65,51 @@ public class ProductController {
     }
 
     public void addProduct() {
+        Product product;
         if(inputPurchasePrice.getText().isEmpty()){
-            PersistenceFacade.getInstance().saveProduct(new Product(productList.size()+1, inputName.getText(), Float.parseFloat(inputSalePrice.getText()), choiceCategory.getSelectionModel().getSelectedItem()));
+            product = new Product(productList.size()+1, inputName.getText(), Float.parseFloat(inputSalePrice.getText()), choiceCategory.getSelectionModel().getSelectedItem());
         }else{
-            PersistenceFacade.getInstance().saveProduct(new Product(productList.size()+1, inputName.getText(), Float.parseFloat(inputSalePrice.getText()), Float.parseFloat(inputPurchasePrice.getText()), choiceCategory.getSelectionModel().getSelectedItem()));
+            product = new Product(productList.size()+1, inputName.getText(), Float.parseFloat(inputSalePrice.getText()), Float.parseFloat(inputPurchasePrice.getText()), choiceCategory.getSelectionModel().getSelectedItem());
         }
-        init();
-        inputName.setText("");
-        inputSalePrice.setText("");
-        inputPurchasePrice.setText("");
+
+        InsertProductKit insertProductKit = new InsertProductKit();
+        try {
+            insertProductKit.insert(product);
+            init();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        inputName.clear();
+        inputSalePrice.clear();
+        inputPurchasePrice.clear();
         tableProducts.refresh();
     }
 
     public void removeProduct() {
-        PersistenceFacade.getInstance().deleteProduct(tableProducts.getSelectionModel().getSelectedItem().getId());
-        productList.remove(tableProducts.getSelectionModel().getSelectedItem());
-        init();
-        tableProducts.refresh();
+        DeleteProductKit deleteProductKit = new DeleteProductKit();
+        try {
+            deleteProductKit.delete(tableProducts.getSelectionModel().getSelectedItem().getId());
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        tableKits.refresh();
     }
 
     public void addKit() {
         //PersistenceFacade.getInstance().saveKit(new Kit(kitList.size()+1, inputNameKit.getText(), choiceCategoryKit.getSelectionModel().getSelectedItem()));
-        inputNameKit.setText("");
+        inputNameKit.clear();
         init();
         tableProducts.refresh();
     }
 
     public void removeKit() {
-        PersistenceFacade.getInstance().deleteProduct(tableKits.getSelectionModel().getSelectedItem().getId());
-        kitList.remove(tableKits.getSelectionModel().getSelectedItem());
+        DeleteProductKit deleteProductKit = new DeleteProductKit();
+        try {
+            deleteProductKit.delete(tableKits.getSelectionModel().getSelectedItem().getId());
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         tableKits.refresh();
     }
 }

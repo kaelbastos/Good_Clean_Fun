@@ -2,7 +2,6 @@ package org.kaelbastos.view.DesktopUI.Controllers;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -11,7 +10,6 @@ import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.UseCases.WorkerUseCases.DeactivateWorker;
 import org.kaelbastos.Persistance.PersistenceFacade;
 import org.kaelbastos.view.DesktopUI.Windows.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,21 +27,18 @@ public class AdministrationController {
     @FXML private TableColumn<Worker, String> cpfWorkersColumn;
     @FXML private TableColumn<Worker, String> statusWorkersColumn;
 
-    @FXML private Button btnAddClient, btnAddWorker, btnDetailsClient, btnDetailsWorker;
-    @FXML private Button btnDeactivate, btnActive;
-
-    private static List<Client> clientList = new ArrayList<>();
-    private static List<Worker> workerList = new ArrayList<>();
+    private static final List<Client> clientList = new ArrayList<>();
+    private static final List<Worker> workerList = new ArrayList<>();
 
     public void init() {
         clientList.clear();
         workerList.clear();
 
         Optional<List<Client>> optionalClientList = PersistenceFacade.getInstance().getAllClient();
-        optionalClientList.ifPresent(clients -> clientList.addAll(clients));
+        optionalClientList.ifPresent(clientList::addAll);
 
         Optional<List<Worker>> optionalWorkerList = PersistenceFacade.getInstance().getAllWorkers();
-        optionalWorkerList.ifPresent(workers -> workerList.addAll(workers));
+        optionalWorkerList.ifPresent(workerList::addAll);
 
         bindTable();
     }
@@ -106,32 +101,4 @@ public class AdministrationController {
             workersTable.refresh();
         }
     }
-
-    public void activeWorker() {
-        if(workersTable.getSelectionModel().getSelectedCells()!=null){
-            //Active Worker
-            init();
-            clientsTable.refresh();
-            workersTable.refresh();
-        }
-    }
-
-    /*
-    public void viewProduct() {
-        ProductWindow productControl = new ProductWindow();
-        productControl.showAndWait();
-    }
-
-    public void viewServices() {
-        ServiceWindow serviceControl = new ServiceWindow();
-        serviceControl.showAndWait();
-    }
-
-    public void listenerChoice(){
-        if(selectChoice.getSelectionModel().getSelectedItem().equals("Client")){
-            btnRemove.setText("REMOVE");
-        }else if(selectChoice.getSelectionModel().getSelectedItem().equals("Worker")){
-            btnRemove.setText("DEACTIVATE");
-        }
-    }*/
 }
