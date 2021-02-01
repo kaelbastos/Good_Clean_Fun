@@ -16,12 +16,11 @@ import org.kaelbastos.Domain.UseCases.ServiceUseCases.FinishService;
 import org.kaelbastos.Domain.UseCases.ServiceUseCases.ScheduleService;
 import org.kaelbastos.Persistance.PersistenceFacade;
 import org.kaelbastos.view.DesktopUI.Windows.*;
+
+import java.security.Provider;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ServiceController {
@@ -57,7 +56,10 @@ public class ServiceController {
         optionalWorkerList.ifPresent(workerList::addAll);
 
         Optional<List<Service>> optionalServiceList = PersistenceFacade.getInstance().getAllServices();
-        optionalServiceList.ifPresent(serviceList::addAll);
+        if(optionalServiceList.isPresent()){
+            List<Service> services = (List<Service>) optionalServiceList.get().stream().filter(service -> service.getStatus() != ServiceStatus.Done);
+            serviceList.addAll(services);
+        }
 
         Optional<List<Product>> optionalProductList = PersistenceFacade.getInstance().getAllProducts();
         optionalProductList.ifPresent(productList::addAll);
