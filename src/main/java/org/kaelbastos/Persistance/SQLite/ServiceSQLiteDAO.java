@@ -32,7 +32,7 @@ public class ServiceSQLiteDAO extends ServiceDAO {
             stmt.setString(2, service.getStart().toString());
             stmt.setFloat(3, service.getWorkerPercentage());
             stmt.setString(4, service.getStatus().value);
-            stmt.setString(5, service.getCategory().value);
+            stmt.setString(5, service.getCategory().toString());
             stmt.setString(6, service.getClient().getCpf());
             stmt.execute();
             return true;
@@ -51,7 +51,7 @@ public class ServiceSQLiteDAO extends ServiceDAO {
 
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(5, service.getId());
-                stmt.setString(4, service.getCategory().value);
+                stmt.setString(4, service.getCategory().toString());
                 stmt.setString(3, service.getStatus().value);
                 stmt.setFloat(2, service.getWorkerPercentage());
                 stmt.setString(1, service.getStart().toString());
@@ -130,6 +130,13 @@ public class ServiceSQLiteDAO extends ServiceDAO {
 
     @Override
     public Optional<ArrayList<Product>> getProductsFromService(Integer serviceId) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<List<Service>> getServicesByWorker(String workerCpf) {
+
+
         return Optional.empty();
     }
 }

@@ -57,7 +57,7 @@ public class ServiceController {
         optionalWorkerList.ifPresent(workerList::addAll);
 
         Optional<List<Service>> optionalServiceList = PersistenceFacade.getInstance().getAllServices();
-        if(optionalServiceList.isPresent()){
+        if(optionalServiceList.isPresent() && !optionalServiceList.get().isEmpty()){
             List<Service> services = (List<Service>) optionalServiceList.get().stream().filter(service -> service.getStatus() != ServiceStatus.Done);
             serviceList.addAll(services);
         }

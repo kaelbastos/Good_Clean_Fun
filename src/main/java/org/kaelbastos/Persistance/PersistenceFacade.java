@@ -23,10 +23,10 @@ import java.util.Optional;
 public class PersistenceFacade {
     private static PersistenceFacade instance;
 
-    CLientDAO clientDAO = new ClientSQLiteDAO();
-    ProductDAO productDAO = new ProductSQLiteDAO();
-    ServiceDAO serviceDAO = new ServiceSQLiteDAO();
-    WorkerDAO workerDAO = new WorkerSQLiteDAO();
+    CLientDAO clientDAO = new ClientHashMapDAO();
+    ProductDAO productDAO = new ProductHashMapDAO();
+    ServiceDAO serviceDAO = new ServiceHashMapDAO();
+    WorkerDAO workerDAO = new WorkerHashMapDAO();
     PersonDAO personDAO = new PersonSQLiteDAO();
 
     private PersistenceFacade() {}
