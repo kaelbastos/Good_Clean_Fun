@@ -1,29 +1,23 @@
 package org.kaelbastos.view.DesktopUI.Controllers;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Service.Service;
 import org.kaelbastos.Domain.Entities.Service.ServiceCategory;
 import org.kaelbastos.Domain.Entities.Service.ServiceStatus;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
+import org.kaelbastos.Domain.UseCases.ServiceUseCases.CancelScheduledService;
+import org.kaelbastos.Domain.UseCases.ServiceUseCases.FinishService;
+import org.kaelbastos.Domain.UseCases.ServiceUseCases.ScheduleService;
 import org.kaelbastos.Persistance.PersistenceFacade;
 import org.kaelbastos.view.DesktopUI.Windows.*;
-
-import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,19 +34,15 @@ public class ServiceController {
     @FXML private ComboBox<String> choiceClient;
     @FXML private ComboBox<String> choiceWorker;
     @FXML private DatePicker dataPicker;
-    @FXML private ImageView imageWindow;
+    @FXML private TextField inputStart;
 
-    @FXML private Button addService, removeService,finishService;
+    private static final List<Service> serviceList = new ArrayList<>();
+    private static final List<Client> clientList = new ArrayList<>();
+    private static final List<Worker> workerList = new ArrayList<>();
+    private static final List<Product> productList = new ArrayList<>();
 
-    @FXML private TextField inputStart, inputEnd, inputPrice, inputPorcentage;
-
-    private static List<Service> serviceList = new ArrayList<>();
-    private static List<Client> clientList = new ArrayList<>();
-    private static List<Worker> workerList = new ArrayList<>();
-    private static List<Product> productList = new ArrayList<>();
-
-    private List<ServiceStatus> serviceStatusList = new ArrayList<ServiceStatus>(Arrays.asList(ServiceStatus.values()));
-    //private List<ServiceCategory> serviceCategoryList = new ArrayList<ServiceCategory>(Arrays.asList(ServiceCategory.values()));
+    private final List<ServiceStatus> serviceStatusList = new ArrayList<>(Arrays.asList(ServiceStatus.values()));
+    //private List<ServiceCategory> serviceCategoryList = new ArrayList<>(Arrays.asList(ServiceCategory.values()));
 
     public void init() {
         clientList.clear();
@@ -61,16 +51,16 @@ public class ServiceController {
         productList.clear();
 
         Optional<List<Client>> optionalClientList = PersistenceFacade.getInstance().getAllClient();
-        optionalClientList.ifPresent(clients -> clientList.addAll(clients));
+        optionalClientList.ifPresent(clientList::addAll);
 
         Optional<List<Worker>> optionalWorkerList = PersistenceFacade.getInstance().getAllWorkers();
-        optionalWorkerList.ifPresent(workers -> workerList.addAll(workers));
+        optionalWorkerList.ifPresent(workerList::addAll);
 
         Optional<List<Service>> optionalServiceList = PersistenceFacade.getInstance().getAllServices();
-        optionalServiceList.ifPresent(services -> serviceList.addAll(services));
+        optionalServiceList.ifPresent(serviceList::addAll);
 
         Optional<List<Product>> optionalProductList = PersistenceFacade.getInstance().getAllProducts();
-        optionalProductList.ifPresent(products -> productList.addAll(products));
+        optionalProductList.ifPresent(productList::addAll);
 
         bindTable();
         loadTable();
@@ -125,40 +115,54 @@ public class ServiceController {
     }
 
     public void addService(){
-        LocalDateTime dateTime;
+        /*LocalDateTime dateTime;
         try{
             dateTime = LocalDateTime.of(dataPicker.getValue(), LocalTime.of(Integer.parseInt(inputStart.getText()), 0));
             inputStart.setStyle("-fx-background-color: #545454");
         }catch (Exception e){
             inputStart.setStyle("-fx-background-color: #f77474");
         }
-        /*
+
         Service newSchedule = new Service(serviceList.size()+1,
                 LocalDateTime.now(),
                 //LocalDateTime(dataPicker.getValue(), Integer.parseInt(inputStart.getText())),
                 Float.parseFloat(priceColumn.getText()),
                 Integer.parseInt(porcentageColumn.getText()),
                 ServiceStatus.valueOf(statusColumn.getText()),
-                ServiceCategory.valueOf(categoryColumn.getText()),
+                ,
                 PersistenceFacade.getInstance().getOneClient(choiceClient.getSelectionModel().getSelectedItem()),
                 PersistenceFacade.getInstance().getOneWorker(choiceWorker.getSelectionModel().getSelectedItem()),
                 PersistenceFacade.getInstance().getOneProduct(choiceProduct.getSelectionModel().getSelectedIndex())
-        );*/
+        );
 
-        //PersistenceFacade.getInstance().saveService(newSchedule);
+        ScheduleService scheduleService = new ScheduleService();
+        try {
+            scheduleService.schedule(newSchedule);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }*/
         init();
         tableServices.refresh();
 
     }
 
     public void removeService(){
-        PersistenceFacade.getInstance().deleteService(tableServices.getSelectionModel().getSelectedItem().getId());
-        PersistenceFacade.getInstance().getOneService(tableServices.getSelectionModel().getSelectedItem().getId()).get().setStatus(ServiceStatus.Canceled);
+        CancelScheduledService cancelScheduledService = new CancelScheduledService();
+        try {
+            cancelScheduledService.cancel(tableServices.getSelectionModel().getSelectedItem().getId());
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
         tableServices.refresh();
     }
 
     public void finishService(){
-        PersistenceFacade.getInstance().getOneService(tableServices.getSelectionModel().getSelectedItem().getId()).get().setStatus(ServiceStatus.Done);
+        FinishService finishService = new FinishService();
+        try{
+            finishService.finish(tableServices.getSelectionModel().getSelectedItem().getId());
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public void openAbout() {
@@ -166,7 +170,7 @@ public class ServiceController {
         window.showAndWait();
     }
 
-    public void categoryWindow(ActionEvent actionEvent) {
+    public void categoryWindow() {
         ServiceCategoryWindow window = new ServiceCategoryWindow();
         window.showAndWait();
     }

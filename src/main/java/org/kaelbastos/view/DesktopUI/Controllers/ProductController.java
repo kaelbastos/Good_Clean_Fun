@@ -1,18 +1,13 @@
 package org.kaelbastos.view.DesktopUI.Controllers;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.kaelbastos.Domain.Entities.Product.Kit;
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Product.ProductCategory;
-import org.kaelbastos.Domain.Entities.Service.Service;
-import org.kaelbastos.Domain.Entities.Service.ServiceStatus;
-import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Persistance.PersistenceFacade;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,11 +22,9 @@ public class ProductController {
     @FXML private TextField inputName, inputSalePrice, inputPurchasePrice, inputNameKit;
     @FXML private ComboBox<ProductCategory> choiceCategory, choiceCategoryKit;
 
-    @FXML private Button addProduct, removeProduct,addKit, removeKit;
-
-    private static List<Product> productList = new ArrayList<>();
-    private static List<Kit> kitList = new ArrayList<>();
-    private List<ProductCategory> productCategoryList = new ArrayList<ProductCategory>(Arrays.asList(ProductCategory.values()));
+    private static final List<Product> productList = new ArrayList<>();
+    private static final List<Kit> kitList = new ArrayList<>();
+    private final List<ProductCategory> productCategoryList = new ArrayList<>(Arrays.asList(ProductCategory.values()));
 
     public void init() {
         productList.clear();
