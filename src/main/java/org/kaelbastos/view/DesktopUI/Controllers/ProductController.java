@@ -97,10 +97,15 @@ public class ProductController {
     }
 
     public void addKit() {
-        //PersistenceFacade.getInstance().saveKit(new Kit(kitList.size()+1, inputNameKit.getText(), choiceCategoryKit.getSelectionModel().getSelectedItem()));
-        inputNameKit.clear();
+        Kit newKit = new Kit(kitList.size()+1, inputNameKit.getText(), choiceCategoryKit.getSelectionModel().getSelectedItem());
+        for (Product p:tableProducts.getSelectionModel().getSelectedItems()){
+            newKit.addProduct(p);
+        }
+        PersistenceFacade.getInstance().saveProduct(newKit);
+        
         init();
-        tableProducts.refresh();
+        inputNameKit.setText("");
+        tableKits.refresh();
     }
 
     public void removeKit() {
