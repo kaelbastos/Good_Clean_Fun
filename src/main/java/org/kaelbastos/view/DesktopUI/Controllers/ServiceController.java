@@ -35,7 +35,7 @@ public class ServiceController {
     @FXML private DatePicker dataPicker;
     @FXML private TextField inputStart;
 
-    private static final List<Service> serviceList = new ArrayList<>();
+    private static List<Service> serviceList = new ArrayList<>();
     private static final List<Client> clientList = new ArrayList<>();
     private static final List<Worker> workerList = new ArrayList<>();
     private static final List<Product> productList = new ArrayList<>();
@@ -95,6 +95,11 @@ public class ServiceController {
         ));
 
         choiceProduct.setItems(FXCollections.observableArrayList(productList));
+
+        serviceList = serviceList.stream()
+                .filter(service -> service.getStatus() != ServiceStatus.Done)
+                .collect(Collectors.toList());
+
         tableServices.setItems(FXCollections.observableArrayList(serviceList));
 
         choiceStatus.getSelectionModel().selectFirst();
