@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Client.ResidenceType;
@@ -17,8 +19,12 @@ public class ClientController {
     @FXML private ComboBox<ResidenceType> residenceType;
     @FXML private TextField inputName, inputCpf, inputPhone, inputEmail, inputCity, inputStreet, inputState, inputHood, inputNumber, inputPostal, inputComplement;
     @FXML private Button cancelBtn;
+    @FXML private ImageView imageWindow;
 
     public void init() {
+        Image img = new Image(getClass().getResourceAsStream("../images/clientLogo.png"));
+        imageWindow.setImage(img);
+
         residenceType.setItems(
                 FXCollections.observableArrayList(new ArrayList<>(Arrays.asList(ResidenceType.values()))
         ));

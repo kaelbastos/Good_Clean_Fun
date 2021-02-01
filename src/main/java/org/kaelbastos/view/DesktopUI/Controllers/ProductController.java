@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.kaelbastos.Domain.Entities.Product.Kit;
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Product.ProductCategory;
@@ -24,11 +26,16 @@ public class ProductController {
     @FXML private TextField inputName, inputSalePrice, inputPurchasePrice, inputNameKit;
     @FXML private ComboBox<ProductCategory> choiceCategory, choiceCategoryKit;
 
+    @FXML private ImageView imageWindow;
+
     private static final List<Product> productList = new ArrayList<>();
     private static final List<Kit> kitList = new ArrayList<>();
     private final List<ProductCategory> productCategoryList = new ArrayList<>(Arrays.asList(ProductCategory.values()));
 
     public void init() {
+        Image img = new Image(getClass().getResourceAsStream("../images/box.png"));
+        imageWindow.setImage(img);
+
         productList.clear();
         kitList.clear();
         if (PersistenceFacade.getInstance().getAllProducts().isPresent() &&

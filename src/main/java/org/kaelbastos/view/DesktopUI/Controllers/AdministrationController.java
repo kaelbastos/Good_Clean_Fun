@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Domain.UseCases.WorkerUseCases.DeactivateWorker;
@@ -27,12 +29,18 @@ public class AdministrationController {
     @FXML private TableColumn<Worker, String> cpfWorkersColumn;
     @FXML private TableColumn<Worker, String> statusWorkersColumn;
 
+    @FXML private ImageView imageWindow;
+
     private static final List<Client> clientList = new ArrayList<>();
     private static final List<Worker> workerList = new ArrayList<>();
 
     public void init() {
         clientList.clear();
         workerList.clear();
+
+        Image img = new Image(getClass().getResourceAsStream("../images/handShake.png"));
+        imageWindow.setImage(img);
+
 
         Optional<List<Client>> optionalClientList = PersistenceFacade.getInstance().getAllClient();
         optionalClientList.ifPresent(clientList::addAll);

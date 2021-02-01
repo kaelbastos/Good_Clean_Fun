@@ -18,6 +18,7 @@ public class WorkerWindow {
             Pane graph = loader.load(getClass().getResource("FXMLworker.fxml").openStream());
             Scene scene = new Scene(graph, 600, 400);
             WorkerController ctrl = loader.getController();
+            ctrl.init();
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.getIcons().add(new Image(getClass().getResourceAsStream("../images/logo.png")));
