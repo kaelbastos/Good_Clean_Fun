@@ -2,9 +2,11 @@ package org.kaelbastos.Persistance.HashMap;
 
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Service.Service;
+import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Persistance.DAOs.ServiceDAO;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ServiceHashMapDAO extends ServiceDAO {
     private final HashMap<Integer, Service> map = new HashMap<>();
@@ -45,5 +47,13 @@ public class ServiceHashMapDAO extends ServiceDAO {
     @Override
     public Optional<ArrayList<Product>> getProductsFromService(Integer serviceId) {
         return Optional.ofNullable(map.get(serviceId).getProducts());
+    }
+
+    @Override
+    public Optional<List<Service>> getServicesByWorker(String workerCpf) {
+        return Optional.of(map.values().stream()
+                .filter(service -> {
+                    return service.getWorkers().stream().map(Worker::getCpf).anyMatch(cpf -> cpf.equals(workerCpf));
+                }).collect(Collectors.toList()));
     }
 }

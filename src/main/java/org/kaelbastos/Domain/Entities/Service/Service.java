@@ -70,6 +70,16 @@ public class Service {
         return productsPrice.get() + servicePrice;
     }
 
+    public float getProfit(){
+        float profit = (getTotalPrice() * workerPercentage)/10;
+        Optional<Float> productsCost = products.stream()
+                .map(Product::getPurchasePrice)
+                .reduce(Float::sum);
+        if(productsCost.isPresent())
+            profit -= productsCost.get();
+        return profit;
+    }
+
     public int getWorkerPercentage() {
         return workerPercentage;
     }
