@@ -1,13 +1,15 @@
 package org.kaelbastos.Persistance.SQLite;
 
+import org.kaelbastos.Domain.Entities.utils.Address;
 import org.kaelbastos.Domain.Entities.utils.Person;
 import org.kaelbastos.Persistance.DAOs.PersonDAO;
-import org.kaelbastos.Persistance.PersistenceFacade;
 import org.kaelbastos.Persistance.SQLite.Utils.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,13 +71,67 @@ public class PersonSQLiteDAO extends PersonDAO {
     }
 
     @Override
-    public Optional<Person> getOne(String s) {
-        return Optional.empty();
-    }
+    public Optional<Person> getOne(String cpfPerson) {
+            PreparedStatement statement;
+            try (Connection connection = ConnectionFactory.getConnection()) {
+                String sql = "SELECT * FROM person WHERE cpf = ?";
+                assert connection != null;
+                statement = connection.prepareStatement(sql);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    String cpf = resultSet.getString("cpf");
+                    String name = resultSet.getString("name");
+                    String telephone = resultSet.getString("telephone");
+                    String email = resultSet.getString("email");
+                    String street = resultSet.getString("street");
+                    String neighborhood = resultSet.getString("cpf");
+                    String city = resultSet.getString("city");
+                    String state = resultSet.getString("state");
+                    String number = resultSet.getString("number");
+                    String postalCode = resultSet.getString("postalCode");
+                    String complement = resultSet.getString("complement");
+                    Person person = new Person(cpf, name, telephone, email,
+                            new Address(street, neighborhood, city, state, number, postalCode, complement));
+                    return Optional.of(person);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return Optional.empty();
+            }
+            return Optional.empty();
+        }
 
     @Override
     public Optional<List<Person>> getAll() {
-        return Optional.empty();
+        PreparedStatement statement;
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sql = "SELECT * FROM person";
+            assert connection != null;
+            statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            List<Person> list = new ArrayList<>();
+            while (resultSet.next()) {
+                String cpf = resultSet.getString("cpf");
+                String name = resultSet.getString("name");
+                String telephone = resultSet.getString("telephone");
+                String email = resultSet.getString("email");
+                String street = resultSet.getString("street");
+                String neighborhood = resultSet.getString("cpf");
+                String city = resultSet.getString("city");
+                String state = resultSet.getString("state");
+                String number = resultSet.getString("number");
+                String postalCode = resultSet.getString("postalCode");
+                String complement = resultSet.getString("complement");
+                Person person = new Person(cpf, name, telephone, email,
+                        new Address(street, neighborhood, city, state, number, postalCode, complement));
+                list.add(person);
+            }
+            return Optional.of(list);
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+            return Optional.empty();
+        }
     }
 
     @Override

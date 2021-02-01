@@ -17,21 +17,10 @@ import java.util.Optional;
 public class ObservationSQLiteDAO {
 
     public boolean save(Observation observation,String ownerCpf) {
-        PreparedStatement stmt = null;
-        Connection conn = null;
+        PreparedStatement stmt;
         try {
-            conn = ConnectionFactory.getConnection();
-
-            String sqlTable = "CREATE TABLE observation(\n" +
-                    "observationType NOT NULL,\n" +
-                    "comment text,\n" +
-                    "author text,\n" +
-                    "owner text,\n" +
-                    ");";
-            assert conn != null;
-            stmt = conn.prepareStatement(sqlTable);
-            stmt.execute();
-
+            createTableIfNotExists();
+            Connection conn = ConnectionFactory.getConnection();
             String sql = "INSERT INTO observation (observationType, comment, author, owner) values (?,?,?,?)";
             stmt = conn.prepareStatement(sql);
 
@@ -39,26 +28,11 @@ public class ObservationSQLiteDAO {
             stmt.setString(2, observation.getComment());
             stmt.setString(3, observation.getAuthor().getCpf());
             stmt.setString(4, ownerCpf);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            return false;
         }
-        return false;
     }
 
     public Optional<List<Observation>> getAllByAuthor(Person author) {
@@ -121,5 +95,24 @@ public class ObservationSQLiteDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }return false;
+    }
+
+    private void createTableIfNotExists() throws SQLException {
+        PreparedStatement statement = null;
+        Connection conn = null;
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sqlTable = "CREATE TABLE observation(\n" +
+                    "observationType NOT NULL,\n" +
+                    "comment text,\n" +
+                    "author text,\n" +
+                    "owner text,\n" +
+                    ");";
+            statement = conn.prepareStatement(sqlTable);
+            statement.execute();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
     }
 }
