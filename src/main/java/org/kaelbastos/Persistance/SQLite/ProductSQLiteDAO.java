@@ -17,24 +17,10 @@ import java.util.Optional;
 public class ProductSQLiteDAO extends ProductDAO {
     @Override
     public boolean save(Product product) {
-        PreparedStatement stmt = null;
-        Connection conn = null;
+        PreparedStatement stmt;
         try {
-            ProductSQLiteDAO productDAO = new ProductSQLiteDAO();
-            productDAO.save(product);
-            conn = ConnectionFactory.getConnection();
-
-            String sqlTable = "CREATE TABLE IF NOT EXISTS product(\n" +
-                    "id integer NOT NULL,\n"+
-                    "name text NOT NULL,\n" +
-                    "salePrice float,\n" +
-                    "purchasePrice float,\n" +
-                    "productCategory text,\n" +
-                    ");";
-            assert conn != null;
-            stmt = conn.prepareStatement(sqlTable);
-            stmt.execute();
-
+            createTableIfNotExists();
+            Connection conn = ConnectionFactory.getConnection();
             String sql = "INSERT INTO product (id, name, salePrice, purchasePrice, productCategory," +
                     "(?,?,?,?,?)";
             stmt = conn.prepareStatement(sql);
@@ -45,26 +31,11 @@ public class ProductSQLiteDAO extends ProductDAO {
             stmt.setFloat(4, product.getPurchasePrice());
             stmt.setString(5, product.getCategory().value);
             stmt.execute();
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-
-        } finally {
-            if (conn != null) {
-                try {
-                    conn.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
+            return false;
         }
-        return false;
     }
 
     @Override
@@ -72,8 +43,6 @@ public class ProductSQLiteDAO extends ProductDAO {
             "UPDATE product SET name = ?, saleprice = ?, purchasePrice = ?, " +
             "category = ? WHERE id = ?";
         try (Connection conn = ConnectionFactory.getConnection()) {
-            ProductSQLiteDAO productDAO = new ProductSQLiteDAO();
-            productDAO.update(product);
             assert conn != null;
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
                 stmt.setInt(1, product.getId());
@@ -82,10 +51,12 @@ public class ProductSQLiteDAO extends ProductDAO {
                 stmt.setFloat(4, product.getPurchasePrice());
                 stmt.setString(5, product.getCategory().value);
                 stmt.executeUpdate();
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }return false;
+            return false;
+        }
     }
 
     @Override
@@ -154,5 +125,24 @@ public class ProductSQLiteDAO extends ProductDAO {
     @Override
     public Optional<List<Kit>> getKitsFromProducts() {
         return Optional.empty();
+    }
+
+    private void createTableIfNotExists() throws SQLException {
+        PreparedStatement statement = null;
+        try (Connection connection = ConnectionFactory.getConnection()) {
+            String sqlTable = "CREATE TABLE IF NOT EXISTS product(\n" +
+                    "id integer NOT NULL,\n"+
+                    "name text NOT NULL,\n" +
+                    "salePrice float,\n" +
+                    "purchasePrice float,\n" +
+                    "productCategory text,\n" +
+                    ");";
+            statement = connection.prepareStatement(sqlTable);
+            statement.execute();
+        } finally {
+            if (statement != null) {
+                statement.close();
+            }
+        }
     }
 }
