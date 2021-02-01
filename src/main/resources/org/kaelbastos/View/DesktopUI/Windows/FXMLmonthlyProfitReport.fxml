@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #5b5b5b;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.MonthlyProfitReportController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #5b5b5b;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.MonthlyProfitReportController">
     <Pane prefHeight="400.0" prefWidth="153.0" style="-fx-background-color: #494949;">
       <children>
           <Label alignment="CENTER" layoutY="228.0" prefHeight="34.0" prefWidth="153.0" text="MONTH REPORT" textFill="WHITE">
-          </Label>
+            <font>
+               <Font name="System Bold" size="16.0" />
+            </font></Label>
+         <ImageView fx:id="imageWindow" fitHeight="96.0" fitWidth="128.0" layoutX="13.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true" />
       </children></Pane>
    <TableView fx:id="reportTableView" layoutX="163.0" layoutY="49.0" prefHeight="263.0" prefWidth="358.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
      <columns>

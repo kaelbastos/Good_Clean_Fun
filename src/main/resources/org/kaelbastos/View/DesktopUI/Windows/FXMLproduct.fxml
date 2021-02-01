@@ -15,7 +15,7 @@
                   <Font name="Roboto Black" size="25.0" />
                </font>
             </Label>
-            <ImageView fitHeight="95.0" fitWidth="127.0" layoutX="13.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageWindow" fitHeight="95.0" fitWidth="127.0" layoutX="13.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
          </children>
          <opaqueInsets>
             <Insets />

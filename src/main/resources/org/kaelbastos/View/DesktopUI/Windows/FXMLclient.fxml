@@ -16,7 +16,7 @@
             <Font name="Roboto Black" size="28.0" />
          </font>
       </Label>
-      <ImageView fitHeight="85.0" fitWidth="114.0" layoutX="20.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="imageWindow" fitHeight="85.0" fitWidth="114.0" layoutX="20.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true" />
    </Pane>
    <TextField fx:id="inputName" layoutX="175.0" layoutY="54.0" prefHeight="25.0" prefWidth="182.0" promptText="Name" style="-fx-background-color: #545454; -fx-border-color: #494949; -fx-border-width: 0 0 2 0; -fx-border-radius: 0 0 0 0;">
       <font>

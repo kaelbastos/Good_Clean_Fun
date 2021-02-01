@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.kaelbastos.Domain.Entities.Reports.ProfitMonthReport;
 import org.kaelbastos.Domain.UseCases.ReportUseCases.GenerateProfitMonthReport;
 import java.time.Month;
@@ -18,8 +20,13 @@ public class MonthlyProfitReportController {
     @FXML TableColumn<ProfitMonthReport, Month> monthColumn;
     @FXML TableColumn<ProfitMonthReport, Float> profitColumn;
 
+    @FXML private ImageView imageWindow;
+
     List<ProfitMonthReport> report  = new ArrayList<>();
     public void init() {
+        Image img = new Image(getClass().getResourceAsStream("../images/clock.png"));
+        imageWindow.setImage(img);
+
         try{
             report = new GenerateProfitMonthReport().generate();
         } catch (Exception e){

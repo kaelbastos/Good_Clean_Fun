@@ -5,6 +5,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.kaelbastos.Domain.Entities.Service.ServiceCategory;
 import org.kaelbastos.Domain.UseCases.ServiceUseCases.CreateServiceCategory;
 import org.kaelbastos.Persistance.PersistenceFacade;
@@ -18,10 +20,15 @@ public class ServiceCategoryController {
     @FXML private TableColumn<ServiceCategory, String> idColumn, nameColumn, durationColumn;
     @FXML private TextField inputName, inputDuration;
 
+    @FXML private ImageView imageWindow;
+
     private static List<ServiceCategory> serviceCategories = new ArrayList<>();
     //private List<ServiceCategory> serviceCategories = new ArrayList<ServiceCategory>(Arrays.asList(ServiceCategory.values()));
 
     public void init() {
+        Image img = new Image(getClass().getResourceAsStream("../images/category.png"));
+        imageWindow.setImage(img);
+
         serviceCategories.clear();
 
         //Optional<List<ServiceCategory>> optionalServiceCategoryList = PersistenceFacade.getInstance().getAllServiceCategories();
