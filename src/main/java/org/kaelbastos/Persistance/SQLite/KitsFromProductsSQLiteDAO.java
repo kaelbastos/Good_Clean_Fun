@@ -1,7 +1,7 @@
 package org.kaelbastos.Persistance.SQLite;
 
+import org.kaelbastos.Domain.Entities.Product.Kit;
 import org.kaelbastos.Domain.Entities.Product.Product;
-import org.kaelbastos.Persistance.PersistenceFacade;
 import org.kaelbastos.Persistance.SQLite.Utils.ConnectionFactory;
 
 import java.sql.Connection;
@@ -15,20 +15,16 @@ public class KitsFromProductsSQLiteDAO {
         PreparedStatement stmt;
         try {
             createTableIfNotExists();
-            if(!PersistenceFacade.getInstance().saveProduct(kit))
-                return false;
             Connection conn = ConnectionFactory.getConnection();
 
-            String sql = "INSERT INTO kit (id, name, salePrice, productCategory," +
-                    "(?,?,?,?)";
+            String sql = "INSERT INTO kitFromProducts (idKit, idProduct" +
+                    "(?,?)";
             stmt = conn.prepareStatement(sql);
 
             stmt.setInt(1, kit.getId());
-            stmt.setString(2, kit.getName());
-            stmt.setFloat(3, kit.getSalePrice());
-            stmt.setString(4, kit.getCategory().value);
-            stmt.execute();
-
+            for(Product p : ((Kit) kit).getProducts())
+                stmt.setString(2, kit.getId().toString());
+                stmt.execute();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -41,7 +37,7 @@ public class KitsFromProductsSQLiteDAO {
     }
 
     public boolean delete(String idKit) {
-            String sql = "DELETE FROM kit WHERE id = ?";
+            String sql = "DELETE FROM kitFromProducts WHERE idKit = ?";
             try (Connection conn = ConnectionFactory.getConnection()) {
                 assert conn != null;
                 try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -57,12 +53,10 @@ public class KitsFromProductsSQLiteDAO {
     private void createTableIfNotExists() throws SQLException {
         PreparedStatement statement = null;
         try (Connection connection = ConnectionFactory.getConnection()) {
-            String sqlTable = "CREATE TABLE IF NOT EXISTS kit(\n" +
-                    "id integer NOT NULL,\n"+
-                    "name text NOT NULL,\n" +
-                    "salePrice float,\n" +
-                    "productCategory text,\n" +
-                    ");";
+            String sqlTable = "CREATE TABLE IF NOT EXISTS kitFromProducts(\n" +
+                    "idKit integer NOT NULL,\n"+
+                    "idProducts integer NOT NULL,\n"+
+                    "FOREIGN KEY('idKit') REFERENCES kit('id')\n);";
             statement = connection.prepareStatement(sqlTable);
             statement.execute();
         } finally {
