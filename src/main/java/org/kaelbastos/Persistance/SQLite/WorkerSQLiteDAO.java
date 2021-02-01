@@ -151,6 +151,9 @@ public class WorkerSQLiteDAO extends WorkerDAO {
 
     @Override
     public Optional<ArrayList<Observation>> getObservationsFromWorker(String workerId) {
+        List<Observation> list = new ArrayList<>();
+        getObservationsFromWorker(workerId);
+
         return Optional.empty();
     }
 
