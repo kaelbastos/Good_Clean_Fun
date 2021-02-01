@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.kaelbastos.view.DesktopUI.Controllers.MonthlyProfitReportController;
+import org.kaelbastos.view.DesktopUI.Controllers.UnpaidServicesReportController;
 
 import java.io.IOException;
 
@@ -17,7 +18,7 @@ public class UnpaidServicesReportWindow {
         try {
             Pane graph = loader.load(getClass().getResource("FXMLUnpaidServicesReport.fxml").openStream());
             Scene scene = new Scene(graph, 690, 400);
-            MonthlyProfitReportController ctrl = loader.getController();
+            UnpaidServicesReportController ctrl = loader.getController();
             ctrl.init();
             Stage stage = new Stage();
             stage.setScene(scene);

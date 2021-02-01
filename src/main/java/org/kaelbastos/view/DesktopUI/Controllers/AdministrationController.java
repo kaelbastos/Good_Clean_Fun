@@ -29,7 +29,7 @@ public class AdministrationController {
     @FXML private TableColumn<Worker, String> cpfWorkersColumn;
     @FXML private TableColumn<Worker, String> statusWorkersColumn;
 
-    @FXML private ImageView imageWindow;
+    //@FXML private ImageView imageWindow;
 
     private static final List<Client> clientList = new ArrayList<>();
     private static final List<Worker> workerList = new ArrayList<>();
@@ -38,8 +38,8 @@ public class AdministrationController {
         clientList.clear();
         workerList.clear();
 
-        Image img = new Image(getClass().getResourceAsStream("../images/handShake.png"));
-        imageWindow.setImage(img);
+        //Image img = new Image(getClass().getResourceAsStream("../images/handShake.png"));
+        //imageWindow.setImage(img);
 
 
         Optional<List<Client>> optionalClientList = PersistenceFacade.getInstance().getAllClient();
