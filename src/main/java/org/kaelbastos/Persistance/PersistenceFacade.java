@@ -57,6 +57,10 @@ public class PersistenceFacade {
         return serviceDAO.getAll();
     }
 
+    public Optional<List<Service>> getServiceByWorker(String cpf) {
+        return serviceDAO.getServicesByWorker(cpf);
+    }
+
     public boolean saveProduct(Product product){
         return productDAO.save(product);
     }
@@ -71,6 +75,10 @@ public class PersistenceFacade {
 
     public Optional<Product> getOneProduct(Integer product){
         return productDAO.getOne(product);
+    }
+
+    public Optional<List<Product>> getAllProducts() {
+        return productDAO.getAll();
     }
 
     public Optional<List<Kit>> getKitsFromProducts(){

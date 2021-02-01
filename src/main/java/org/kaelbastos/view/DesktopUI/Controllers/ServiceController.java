@@ -1,6 +1,7 @@
 package org.kaelbastos.view.DesktopUI.Controllers;
 
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
@@ -179,6 +180,16 @@ public class ServiceController {
 
     public void categoryWindow() {
         ServiceCategoryWindow window = new ServiceCategoryWindow();
+        window.showAndWait();
+    }
+
+    public void monthProfitReport() {
+        MonthlyProfitReportWindow window = new MonthlyProfitReportWindow();
+        window.showAndWait();
+    }
+
+    public void unpaidServicesReport() {
+        UnpaidServicesReportWindow window = new UnpaidServicesReportWindow();
         window.showAndWait();
     }
 }
