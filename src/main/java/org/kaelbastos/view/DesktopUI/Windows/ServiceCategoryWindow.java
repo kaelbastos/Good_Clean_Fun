@@ -16,7 +16,7 @@ public class ServiceCategoryWindow {
 
         try {
             Pane graph = loader.load(getClass().getResource("FXMLserviceCategory.fxml").openStream());
-            Scene scene = new Scene(graph, 854, 545);
+            Scene scene = new Scene(graph, 421, 357);
             ServiceCategoryController ctrl = loader.getController();
             ctrl.init();
             Stage stage = new Stage();

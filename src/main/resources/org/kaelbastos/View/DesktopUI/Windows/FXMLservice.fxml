@@ -12,7 +12,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
@@ -31,6 +30,7 @@
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#administrationWindow" text="Administration" />
                         <MenuItem mnemonicParsing="false" onAction="#productWindow" text="Products and Kits" />
+                        <MenuItem mnemonicParsing="false" onAction="#categoryWindow" text="Service Category" />
                   </items>
                 </Menu>
                 <Menu mnemonicParsing="false" onAction="#openAbout" text="About">
@@ -40,7 +40,6 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <ImageView fx:id="imageWindow" fitHeight="109.0" fitWidth="117.0" layoutX="18.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" />
          </children>
          <opaqueInsets>
             <Insets />

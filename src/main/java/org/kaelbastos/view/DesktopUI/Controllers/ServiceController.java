@@ -16,10 +16,7 @@ import org.kaelbastos.Domain.Entities.Service.ServiceCategory;
 import org.kaelbastos.Domain.Entities.Service.ServiceStatus;
 import org.kaelbastos.Domain.Entities.Worker.Worker;
 import org.kaelbastos.Persistance.PersistenceFacade;
-import org.kaelbastos.view.DesktopUI.Windows.AboutWindow;
-import org.kaelbastos.view.DesktopUI.Windows.AdministrationWindow;
-import org.kaelbastos.view.DesktopUI.Windows.ClientWindow;
-import org.kaelbastos.view.DesktopUI.Windows.ProductWindow;
+import org.kaelbastos.view.DesktopUI.Windows.*;
 
 import java.awt.*;
 import java.io.File;
@@ -166,6 +163,11 @@ public class ServiceController {
 
     public void openAbout() {
         AboutWindow window = new AboutWindow();
+        window.showAndWait();
+    }
+
+    public void categoryWindow(ActionEvent actionEvent) {
+        ServiceCategoryWindow window = new ServiceCategoryWindow();
         window.showAndWait();
     }
 }
