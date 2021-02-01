@@ -48,7 +48,7 @@ public class ServiceController {
     //private List<ServiceCategory> serviceCategoryList = new ArrayList<>(Arrays.asList(ServiceCategory.values()));
 
     public void init() {
-        Image img = new Image(getClass().getResourceAsStream("../images/clientLogo.png"));
+        Image img = new Image(getClass().getResourceAsStream("../images/handShake.png"));
         imageWindow.setImage(img);
 
         clientList.clear();

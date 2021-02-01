@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="854.0" style="-fx-background-color: #5b5b5b;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.ServiceController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="854.0" style="-fx-background-color: #5b5b5b;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.kaelbastos.view.DesktopUI.Controllers.ServiceController">
    <children>
       <Pane prefHeight="545.0" prefWidth="153.0" style="-fx-background-color: #494949;">
          <children>
@@ -25,7 +25,7 @@
                   <Font name="Roboto Black" size="25.0" />
                </font>
             </Label>
-            <MenuBar prefHeight="25.0" prefWidth="854.0" style="-fx-background-color: #777777;">
+            <MenuBar prefHeight="25.0" prefWidth="854.0">
               <menus>
                 <Menu mnemonicParsing="false" text="File">
                   <items>
@@ -43,7 +43,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <ImageView fx:id="imageWindow" fitHeight="100.0" fitWidth="133.0" layoutX="10.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imageWindow" fitHeight="132.0" fitWidth="172.0" layoutX="11.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
          </children>
          <opaqueInsets>
             <Insets />
@@ -74,7 +74,7 @@
             <Font name="Roboto" size="12.0" />
          </font>
       </TextField>
-      <TextField fx:id="inputPorcentage" layoutX="658.0" layoutY="297.0" prefHeight="25.0" prefWidth="184.0" promptText="Worker Percentage" style="-fx-background-color: #545454; -fx-border-color: #494949; -fx-border-width: 0 0 2 0;">
+      <TextField fx:id="inputPorcentage" layoutX="658.0" layoutY="297.0" prefHeight="25.0" prefWidth="184.0" promptText="Wroker Porcentage" style="-fx-background-color: #545454; -fx-border-color: #494949; -fx-border-width: 0 0 2 0;">
          <font>
             <Font name="Roboto" size="12.0" />
          </font>
