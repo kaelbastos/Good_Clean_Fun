@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import org.kaelbastos.Domain.Entities.Client.Client;
 import org.kaelbastos.Domain.Entities.Product.Product;
 import org.kaelbastos.Domain.Entities.Service.Service;
@@ -35,6 +37,7 @@ public class ServiceController {
     @FXML private ComboBox<String> choiceWorker;
     @FXML private DatePicker dataPicker;
     @FXML private TextField inputStart;
+    @FXML private ImageView imageWindow;
 
     private static List<Service> serviceList = new ArrayList<>();
     private static final List<Client> clientList = new ArrayList<>();
@@ -45,6 +48,9 @@ public class ServiceController {
     //private List<ServiceCategory> serviceCategoryList = new ArrayList<>(Arrays.asList(ServiceCategory.values()));
 
     public void init() {
+        Image img = new Image(getClass().getResourceAsStream("../images/clientLogo.png"));
+        imageWindow.setImage(img);
+
         clientList.clear();
         workerList.clear();
         serviceList.clear();
