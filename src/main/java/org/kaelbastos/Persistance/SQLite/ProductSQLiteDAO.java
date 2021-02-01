@@ -23,6 +23,7 @@ public class ProductSQLiteDAO extends ProductDAO {
             Connection conn = ConnectionFactory.getConnection();
             String sql = "INSERT INTO product (id, name, salePrice, purchasePrice, productCategory," +
                     "(?,?,?,?,?)";
+            assert conn != null;
             stmt = conn.prepareStatement(sql);
 
             stmt.setInt(1, product.getId());
@@ -100,26 +101,27 @@ public class ProductSQLiteDAO extends ProductDAO {
                         ProductCategory.valueOf(resultSet.getString("productCategory")));
                 list.add(product);
             }
+            return Optional.of(list);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Optional.of(list);
+        return Optional.empty();
     }
 
     @Override
-    public boolean delete(Integer integer) {
+    public boolean delete(Integer productId) {
         String sql = "DELETE FROM product WHERE id = ?";
-        ProductSQLiteDAO productDAO = new ProductSQLiteDAO();
-        productDAO.delete(integer);
         try (Connection conn = ConnectionFactory.getConnection()) {
             assert conn != null;
             try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-                stmt.setInt(1, integer);
+                stmt.setInt(1, productId);
                 stmt.execute();
+                return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }return false;
+        }
+        return false;
     }
 
     @Override
@@ -137,6 +139,7 @@ public class ProductSQLiteDAO extends ProductDAO {
                     "purchasePrice float,\n" +
                     "productCategory text,\n" +
                     ");";
+            assert connection != null;
             statement = connection.prepareStatement(sqlTable);
             statement.execute();
         } finally {

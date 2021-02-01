@@ -37,7 +37,7 @@ public class PersistenceFacade {
         return instance;
     }
 
-    public boolean saveService(Service service, String idClient){
+    public boolean saveService(Service service){
         return serviceDAO.save(service);
     }
 
